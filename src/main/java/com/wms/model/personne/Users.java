@@ -38,6 +38,7 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private Collection<Inventaire> inventaires;
 
+
 	
 }
 
