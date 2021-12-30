@@ -1,5 +1,6 @@
 package com.wms.repository;
 
+import com.wms.model.personne.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -9,12 +10,11 @@ import com.wms.model.personne.Users;
 
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Long> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
 
 
-    @Query("SELECT u FROM Users u WHERE u.email = ?1")
-    public Users findByEmail(String email);
+   // @Query("SELECT u FROM Person u WHERE u.name = ?1")
+   // public Users findByEmail(String email);
 
-    @Query("SELECT u FROM Users u WHERE u.Name = ?1")
-    public Users findByName(String name);
+
 }

@@ -1,8 +1,9 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">	
+<html
+ xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<!--begin::Head-->
 	<head><base href="../">
 		<meta charset="utf-8" />
@@ -46,9 +47,9 @@
 								<h3>Sign In To Admin</h3>
 								<p class="opacity-60 font-weight-bold">Enter your details to login to your account:</p>
 							</div>
-							<form class="form" id="kt_login_signin_form">
+							<form th:action="@{/login}" method="post" class="form" id="kt_login_signin_form" >
 								<div class="form-group">
-									<input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="text" placeholder="Email" name="username" autocomplete="off" />
+									<input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="text" placeholder="Mohamed" name="username" autocomplete="off" />
 								</div>
 								<div class="form-group">
 									<input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="password" placeholder="Password" name="password" />
@@ -59,16 +60,17 @@
 										<input type="checkbox" name="remember" />
 										<span></span>Remember me</label>
 									</div>
-									<a href="javascript:;" id="kt_login_forgot" class="text-white font-weight-bold">Forget Password ?</a>
+									<a  id="kt_login_forgot" class="text-white font-weight-bold" th:href="@{/ForgetPassword}">Forget Password ?</a>
 								</div>
 								<div class="form-group text-center mt-10">
-									<button id="kt_login_signin_submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">Sign In</button>
+									<div class="form-group text-center mt-10">
+										<button type="submit" id="kt_login_signin_submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">Sign In</button>
+									</div>
 								</div>
+								<br><br>
+								<p class="mt-5 mb-3 text-muted">&copy; WMS_ENSIAS 2021–2022</p>
 							</form>
-							<div class="mt-10">
-								<span class="opacity-70 mr-4">Don't have an account yet?</span>
-								<a href="javascript:;" id="kt_login_signup" class="text-white font-weight-bold">Sign Up</a>
-							</div>
+
 						</div>
 						<!--end::Login Sign in form-->
 						<!--begin::Login Sign up form-->

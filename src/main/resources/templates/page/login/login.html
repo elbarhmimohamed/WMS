@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        #loginForm {
+            width: 25%;
+            margin: auto;
+            padding-top: 10%;
+        }
+        .form-floating{
+            padding-top: 5%;
+            padding-bottom: 5%;
+        }
+    </style>
+</head>
+
+<body class="text-center">
+    <div id="loginForm">
+
+    <form th:action="@{/login}" method="post" >
+
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating">
+            <input type="text" name="username" class="form-control" id="name" placeholder="Name">
+
+        </div>
+        <div class="form-floating">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            <br>
+            <h7><a th:href="@{/ForgetPassword}">Forget password</a></h7>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; WMS_ENSIAS 2021–2022</p>
+    </form>
+
+    </div>
+
+
+</body>
+</html>
