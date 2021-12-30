@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 
@@ -26,11 +27,11 @@ public class Users {
     @Column(name="password")
     private String password;
     @Column(name="role")
-    private Boolean role;
+    private String role;
     @Column(name="creating_date")
-    private Date creating_date;
+    private LocalDateTime creating_date;
     @Column(name="editing_date")
-    private Date editing_date;
+    private LocalDateTime editing_date;
 
     @OneToMany(mappedBy = "user")
     private Collection<Commande> commandes;
