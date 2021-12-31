@@ -13,8 +13,11 @@ import com.wms.model.personne.Users;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
 
-   // @Query("SELECT u FROM Person u WHERE u.name = ?1")
-   // public Users findByEmail(String email);
+    @Query("SELECT u FROM Person u WHERE u.role = true ")
+    public Iterable<Person> findAllCustomers();
+
+    @Query("SELECT u FROM Person u WHERE u.role = false ")
+    public Iterable<Person> findAllSuppliers();
 
 
 }

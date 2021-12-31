@@ -2,9 +2,11 @@ package com.wms.services;
 
 
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wms.model.personne.Users;
@@ -34,8 +36,12 @@ public class UsersServices {
     }
 
     public Users saveUser(Users user) {
-        Users savedEmployee = usersRepository.save(user);
-        return savedEmployee;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.setCreating_date(LocalDateTime.now());
+        Users savedUser = usersRepository.save(user);
+        return savedUser;
     }
     
     

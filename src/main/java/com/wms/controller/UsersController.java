@@ -88,9 +88,7 @@ public class UsersController {
 			if(role != null) {
 				currentUser.setRole(role);
 			}
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String encodedPassword = passwordEncoder.encode(currentUser.getPassword());
-			currentUser.setPassword(encodedPassword);
+
 			currentUser.setEditing_date(LocalDateTime.now());
 			usersService.saveUser(currentUser);
 			return this.getUsers(model);
@@ -124,13 +122,7 @@ public class UsersController {
 
 	@PostMapping("/process_register")
 	public String processRegister(Users user) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
-
-		user.setCreating_date(LocalDateTime.now());
 		usersService.saveUser(user);
-
 		return "page/login/register_success";
 	}
 	//-------------------------Get users --------------------------//
