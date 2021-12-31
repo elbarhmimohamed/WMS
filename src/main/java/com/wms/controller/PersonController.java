@@ -23,7 +23,7 @@ public class PersonController {
 
     @GetMapping("/customer")
     public String getClients(Model model) {
-        Iterable<Person> clients = personServices.getClients();;
+        Iterable<Person> clients = personServices.getClients();
         model.addAttribute("person",clients);
         model.addAttribute("isCustomer", true);
         return "page/person/person";
