@@ -35,14 +35,18 @@ public class PersonServices {
     public Person saveCustomer(Person customer) {
         customer.setRole(true);
         customer.setStatus(true);
-        Person savedPerson = personRepository.save(customer);
-        return savedPerson;
+        if(personRepository.findPersonByName(customer.getName()) == null){
+            return  personRepository.save(customer);
+        }
+        return customer;
     }
     public Person saveSupplier(Person supplier) {
         supplier.setRole(false);
         supplier.setStatus(true);
-        Person savedPerson = personRepository.save(supplier);
-        return savedPerson;
+        if(personRepository.findPersonByName(supplier.getName()) == null ){
+            return  personRepository.save(supplier);
+        }
+        return supplier;
     }
 
 }

@@ -122,8 +122,16 @@ public class UsersController {
 
 	@PostMapping("/process_register")
 	public String processRegister(Users user) {
+		/*Users user1 = usersService.getUserByName(user.getName());
+		if (user1 == null || !user1.getEmail().equals(user.getEmail())) {
+			usersService.saveUser(user);
+			return "page/login/register_success";
+		}
+		return "/403";
+		*/
 		usersService.saveUser(user);
 		return "page/login/register_success";
+
 	}
 	//-------------------------Get users --------------------------//
 	@GetMapping("/listofUsers")

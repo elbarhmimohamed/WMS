@@ -1,6 +1,7 @@
 package com.wms.model.stock;
 
 
+import com.wms.model.emplacement.Emplacement;
 import com.wms.model.operation.Commande;
 import com.wms.model.operation.Inventaire;
 import lombok.AllArgsConstructor;
@@ -34,7 +35,7 @@ public class Composante {
     @Column(name="quantity")
     private long quantity;
     @Column(name="type")
-    private boolean type;
+    private boolean type;   // type == 0 => matiere 1ere   // type == 1 => produit fini
 
 
     @ManyToOne
@@ -42,13 +43,9 @@ public class Composante {
 
 
 
-    @OneToOne
-    private PlaceInStock placeInStock;
-
     @ManyToMany(mappedBy = "composantes", fetch = FetchType.EAGER)
     private Collection<Commande> commandes = new ArrayList<>() ;
-/*
-    @ManyToMany( fetch = FetchType.EAGER)
-    private Collection<Inventaire> inventaires = new ArrayList<>();
-*/
+
+
+
 }

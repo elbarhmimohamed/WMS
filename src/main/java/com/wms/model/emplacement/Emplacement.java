@@ -1,11 +1,10 @@
 package com.wms.model.emplacement;
 
+import com.wms.model.stock.Composante;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Data
 @Entity
@@ -15,8 +14,9 @@ public class Emplacement {
     private Long id;
     private  String refemplacement;
     private  float tauxOccupation;
-    @OneToOne
-    private  Palette palette;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Composante> composantes;
 
 
 

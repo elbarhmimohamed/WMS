@@ -24,7 +24,7 @@ public class Commande{
     private int id;
     @Column(name="date")
     private Date date;
-    @Column(name="type")
+    @Column(name="type")     // type = false  => commande fournosseur  // type == true => commande client
     private boolean type;
 
 

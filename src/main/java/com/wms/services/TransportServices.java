@@ -28,12 +28,23 @@ public class TransportServices {
         return transportRepository.findAll();
     }
 
+    public  Transport getTransportByMatricule(String matricule){
+        Transport transport = transportRepository.findPersonByMatricule(matricule);
+        if(transport != null){
+            return  transport;
+        }
+        return null;
+    }
+
     public void deletetransport(final Long id) {
         transportRepository.deleteById(id);
     }
 
     public Transport saveTransport(Transport transport) {
-        Transport savedTransport = transportRepository.save(transport);
-        return  savedTransport;
+        Transport transport1 = transportRepository.findPersonByMatricule(transport.getMatricule());
+        if(transport1 == null){
+            return  transportRepository.save(transport);
+        }
+        return transport;
     }
 }

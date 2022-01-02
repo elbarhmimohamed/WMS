@@ -1,9 +1,13 @@
 package com.wms;
 
 
+import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
+import com.wms.model.stock.Composante;
+import com.wms.services.ComposantServices;
 import com.wms.services.PersonServices;
+import com.wms.services.TransportServices;
 import com.wms.services.UsersServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,6 +23,11 @@ public class WmsApplication implements CommandLineRunner {
 	private UsersServices usersServices;
 	@Autowired
 	private PersonServices personServices;
+	@Autowired
+	private TransportServices transportServices;
+
+	@Autowired
+	private ComposantServices composantServices;
 
 
 
@@ -38,13 +47,19 @@ public class WmsApplication implements CommandLineRunner {
 			System.out.println(client);
 		}
 */
-/*
+
 		Users admin = new Users();
+		Users user = new Users();
 		admin.setName("mohamed");
 		admin.setPassword("azerty");
 		admin.setRole("Admin");
-		admin.setEmail("hamza@gmail.com");
+		admin.setEmail("mohamed@gmail.com");
 		usersServices.saveUser(admin);
+
+		//user.setEmail("mohamed5elbarhmi@gmail.com");
+		//usersServices.updateUSer(admin.getId(),user);
+
+		//admin.setRole();
 
 		Person client = new Person()  ;
 		client.setName("SahlTr7el");
@@ -64,6 +79,20 @@ public class WmsApplication implements CommandLineRunner {
 
 
 		personServices.saveSupplier(four);
-*/
+
+		Transport transport = new Transport();
+		transport.setMatricule("AZ123456");
+		transportServices.saveTransport(transport);
+
+		Composante composante = new Composante();
+		composante.setType(false);
+		composante.setName("AZER1234");
+		composante.setQuantity(100);
+		composante.setSeuil(10);
+		composantServices.saveComposante(composante);
 	}
+
+
+
 }
+
