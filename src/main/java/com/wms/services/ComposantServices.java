@@ -1,6 +1,7 @@
 package com.wms.services;
 
 import com.wms.model.emplacement.Emplacement;
+import com.wms.model.personne.Users;
 import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
 import com.wms.repository.CategoriesRepository;
@@ -9,6 +10,7 @@ import com.wms.repository.EmplacementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +30,40 @@ public class ComposantServices {
 
     // -------------   Create
     public Composante saveComposante(Composante composante) {
-        //Optional<Composante> comp = composantRepository.findComposanteByName(composante.getName());
-        //if(comp == null){
+        Optional<Composante> comp = composantRepository.findComposanteByName(composante.getName());
+
+        if(comp.isEmpty()){
             return  composantRepository.save(composante);
+        }
 
-        //return  composante;
+        return  composante;
+    }
+    //------------------- Edit
+    public void updateComposante(final Long id, Composante composante) {
+        Optional<Composante> e = composantRepository.findById( id);
 
+        if(e.isPresent()) {
+            String name = composante.getName();
+                if(name != null) {
+                    composantRepository.updateNameofComposante(id,name);
+                }
+
+            long qte = composante.getQuantity();
+                if(qte != 0) {
+                    composantRepository.updateQuantityofComposante(id,qte);
+                }
+
+            long seuil = composante.getSeuil();
+                if(seuil != 0) {
+                    composantRepository.updateSeuilofComposante(id,seuil);
+                }
+
+            }
+
+        else {
+            System.out.println( "Error de modification ");
+
+        }
 
     }
 }

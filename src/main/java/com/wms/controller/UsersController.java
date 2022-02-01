@@ -68,29 +68,7 @@ public class UsersController {
 	public String updateUserProcess( @PathVariable("id") final Long id, Users user, Model model) {
 		Optional<Users> e = usersService.getUser(id);
 		if(e.isPresent()) {
-			Users currentUser = e.get();
-			
-			
-			String name = user.getName();
-			if(name != null) {
-				currentUser.setName(name);
-			}
-			
-			String mail = user.getEmail();
-			if(mail != null) {
-				currentUser.setEmail(mail);
-			}
-			String password = user.getPassword();
-			if(password != null) {
-				currentUser.setPassword(password);
-			}
-			String role = user.getRole();
-			if(role != null) {
-				currentUser.setRole(role);
-			}
-
-			currentUser.setEditing_date(LocalDateTime.now());
-			usersService.saveUser(currentUser);
+			usersService.updateUser(id,user);
 			return this.getUsers(model);
 		} else {
 			return "page/403";
@@ -122,15 +100,13 @@ public class UsersController {
 
 	@PostMapping("/process_register")
 	public String processRegister(Users user) {
-		/*Users user1 = usersService.getUserByName(user.getName());
-		if (user1 == null || !user1.getEmail().equals(user.getEmail())) {
+		Users user1 = usersService.getUserByName(user.getName());
+		//if (user1 == null || !user1.getEmail().equals(user.getEmail())) {
+		if (user1 == null ) {
 			usersService.saveUser(user);
 			return "page/login/register_success";
 		}
 		return "/403";
-		*/
-		usersService.saveUser(user);
-		return "page/login/register_success";
 
 	}
 	//-------------------------Get users --------------------------//

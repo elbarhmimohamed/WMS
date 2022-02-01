@@ -14,12 +14,12 @@ public class ComposantController {
     @Autowired
     private ComposantServices composantServices;
 
-
+/*
     @PostMapping("/CreateComposant")
     public Composante createComposant(@RequestBody Composante composante) {
         return composantServices.saveComposante(composante);
     }
-
+*/
     @GetMapping("/composants/{id}")
     public Composante getComposants(@PathVariable("id") final Long id) {
         Optional<Composante> comp = composantServices.getComposanteById(id);

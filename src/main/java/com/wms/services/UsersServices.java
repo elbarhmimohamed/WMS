@@ -17,6 +17,8 @@ import com.wms.repository.UsersRepository;
 
 
 import lombok.Data;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Data
 @Service
@@ -46,25 +48,60 @@ public class UsersServices {
     }
 
     public Users saveUser(Users user) {
-        BCryptPasswordEncod(user);
+
         user.setCreating_date(LocalDateTime.now());
         Users user1 = usersRepository.findByName(user.getName());
-        if (user1 == null || !user1.getEmail().equals(user.getEmail())) {
+        if (user1 == null ) {
+            String bcryptPassword = BCryptPasswordEncod(user.getPassword());
+            user.setPassword(bcryptPassword);
             return usersRepository.save(user);
         }
-        return user;
+            return user;
     }
 
-
-
-
-
-    public Users BCryptPasswordEncod(Users user) {
+    public String BCryptPasswordEncod(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        return  user;
+        String encodedPassword = passwordEncoder.encode(password);
+        return  encodedPassword;
     }
+
+    public void updateUser(final Long id, Users user) {
+        Optional<Users> e = usersRepository.findById( id);
+
+        if(e.isPresent()) {
+            String name = user.getName();
+            String email = user.getEmail();
+            String role = user.getRole();
+            String password = user.getPassword();
+
+            if(name != null || email != null || role != null || password != null ){
+            if(name != null) {
+                usersRepository.updateNameofUser(id,name);
+            }
+            if(email != null) {
+                usersRepository.updateEmailofUser(id,email);
+            }
+            if(role != null) {
+                usersRepository.updateRoleofUser(id,role);
+            }
+            if(password != null) {
+                usersRepository.updateEmailofUser(id,BCryptPasswordEncod(password));
+            }
+
+                usersRepository.updateEditingDateofUser(id, LocalDateTime.now());
+
+            }
+            else{
+                System.out.println( "aucunne modification !!! ");
+            }
+
+        } else {
+            System.out.println( "Error de modification ");
+
+        }
+
+    }
+
     
 
 }
