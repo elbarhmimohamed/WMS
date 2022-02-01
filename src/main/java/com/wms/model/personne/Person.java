@@ -4,6 +4,8 @@ import com.wms.model.operation.Commande;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -12,13 +14,14 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Person {
-
-    @Id @GeneratedValue(strategy = GenerationType.TABLE)
+@Table(name = "Person")
+public class Person {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String Name;
-    private String email;
+    @Column(name="name")
+    private String name;
+    @Column(name="mail")
+    private String mail;
 
     @Column(name="adress")
     private String adress;
@@ -26,9 +29,10 @@ public abstract class Person {
     private String phone;
     @Column(name="status")
     private boolean status;
-
-    @OneToOne
-    private Image image;
+    @Column(name="role")   //role == true => person is customer  -----  role == false  => person is supplier
+    private boolean role;
+    @Column(name = "image")
+    private String image;
 
     @OneToMany(mappedBy = "person")
     private Collection<Commande> commandes;

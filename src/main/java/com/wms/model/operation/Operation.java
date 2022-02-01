@@ -21,7 +21,7 @@ public class Operation {
     @Column(name="date")
     private Date date;
     @Column(name="type")
-    private boolean type;
+    private boolean type;  // type == false => reception   //   type == true  => expedition
 
     @ManyToOne
     private Transport transport;

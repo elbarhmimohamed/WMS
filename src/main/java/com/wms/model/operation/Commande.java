@@ -1,8 +1,6 @@
 package com.wms.model.operation;
 
 
-import com.wms.model.personne.Client;
-import com.wms.model.personne.Fournisseur;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
 import com.wms.model.stock.Composante;
@@ -26,7 +24,7 @@ public class Commande{
     private int id;
     @Column(name="date")
     private Date date;
-    @Column(name="type")
+    @Column(name="type")     // type = false  => commande fournosseur  // type == true => commande client
     private boolean type;
 
 

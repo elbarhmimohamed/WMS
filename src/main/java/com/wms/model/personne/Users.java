@@ -5,6 +5,7 @@ import com.wms.model.operation.Inventaire;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-
+@Transactional
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +22,7 @@ import javax.persistence.*;
 public class Users {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String Name;
     private String email;
     @Column(name="password")
