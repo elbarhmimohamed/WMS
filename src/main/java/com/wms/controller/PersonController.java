@@ -64,10 +64,49 @@ public class PersonController {
     public Person updatePseron(@PathVariable("id") final Long id, @RequestBody Person person) {
         Optional<Person> e = personServices.getPerson(id);
         if(e.isPresent()) {
+<<<<<<< HEAD
             personServices.updatePerson(id, person);
             return person;
             }
              else {
+=======
+            Person currentPerson = e.get();
+
+            String name = person.getName();
+            if(name != null) {
+                currentPerson.setName(name);
+            }
+            String mail = person.getMail();
+            if(mail != null) {
+                currentPerson.setMail(mail);
+            }
+
+            String adress = person.getAdress();
+            if(adress != null) {
+                currentPerson.setAdress(adress);
+            }
+            String phone = person.getPhone();
+            if(phone != null) {
+                currentPerson.setPhone(phone);
+            }
+            boolean status = person.isStatus();
+            if(status != currentPerson.isStatus()) {
+                currentPerson.setStatus(status);
+            }
+            String image = person.getImage();
+            if(image != null) {
+                currentPerson.setImage(image);
+            }
+            if(person.isRole()){
+                personServices.saveCustomer(currentPerson);
+            }
+            else {
+                personServices.saveSupplier(currentPerson);
+            }
+
+            return currentPerson;
+        } else {
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
             return null;
         }
     }

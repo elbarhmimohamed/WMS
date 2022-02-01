@@ -31,7 +31,26 @@ public class emplacementController {
         List<Emplacement> emplacements =new ArrayList<Emplacement>();
         emplacements =this.emplacementServices.getAllEmplacement();
         model.addAttribute("emplacements",emplacements);
-        return "page/dashboard/administarateur/emplacement";
+        return "page/emplacement";
+
+    }
+
+    @GetMapping("/emplacement/configuration")
+    private String configurationEmplacement(Model model){
+
+        return "page/emplacement-configuration";
+
+    }
+
+    @PostMapping("/process_creating_emplacement")
+    public String processCreatingEmplacement(Emplacement emplacement) {
+        Optional<Emplacement> emp = emplacementServices.getEmplacemetByRef(emplacement.getRefemplacement());
+        //if (user1 == null || !user1.getEmail().equals(user.getEmail())) {
+        if (emp == null ) {
+            emplacementServices.saveEmplacement(emplacement);
+            return " ";
+        }
+        return "/403";
 
     }
 

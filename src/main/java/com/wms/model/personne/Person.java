@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 import org.springframework.lang.Nullable;
+<<<<<<< HEAD
 import org.springframework.transaction.annotation.Transactional;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 
 import javax.persistence.*;
 import java.util.Collection;

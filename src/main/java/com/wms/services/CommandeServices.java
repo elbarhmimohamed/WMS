@@ -2,16 +2,22 @@ package com.wms.services;
 
 
 import com.wms.model.operation.Commande;
+<<<<<<< HEAD
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
 import com.wms.model.stock.Composante;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import com.wms.repository.CommandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import java.util.Optional;
 
 @Service
@@ -56,6 +62,7 @@ public class CommandeServices {
 
     }
 
+<<<<<<< HEAD
     public void updateCmd(final Long id, Commande cmd) {
         Optional<Commande> e = commandeRepository.findById( id);
 
@@ -91,4 +98,6 @@ public class CommandeServices {
     }
 
 
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 }

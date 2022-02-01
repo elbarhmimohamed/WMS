@@ -2,14 +2,20 @@ package com.wms.services;
 
 
 import com.wms.model.emplacement.Emplacement;
+<<<<<<< HEAD
 import com.wms.model.personne.Users;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import com.wms.model.stock.Categorie;
 import com.wms.repository.CategoriesRepository;
 import com.wms.repository.EmplacementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +38,7 @@ public class CategorieServices {
     // -------------   Create
     public Categorie saveCategories(Categorie categorie) {
         Optional<Categorie> cat = categoriesRepository.findCategorieByName(categorie.getName());
+<<<<<<< HEAD
         if(cat.isEmpty()){
             return  categoriesRepository.save(categorie);
         }
@@ -66,4 +73,13 @@ public class CategorieServices {
     }
 
 
+=======
+        if(cat == null){
+            return  categoriesRepository.save(categorie);
+        }
+        return  categorie;
+
+
+    }
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 }

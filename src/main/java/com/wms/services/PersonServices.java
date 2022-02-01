@@ -6,8 +6,11 @@ import com.wms.repository.PersonRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 
 import java.time.LocalDateTime;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import java.util.Optional;
 
 @Data
@@ -31,12 +34,16 @@ public class PersonServices {
     public Optional<Person> getPerson(final Long id) {
         return personRepository.findById(id);
     }
+<<<<<<< HEAD
     //----------- delete
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
     public void deletePerson(final Long id) {
         personRepository.deleteById(id);
     }
 
     public Person saveCustomer(Person customer) {
+<<<<<<< HEAD
         Optional<Person> person = personRepository.findPersonByName(customer.getName());
         if(person.isEmpty()){
             customer.setRole(true);
@@ -94,5 +101,22 @@ public class PersonServices {
         }
 
     }
+=======
+        customer.setRole(true);
+        customer.setStatus(true);
+        if(personRepository.findPersonByName(customer.getName()) == null){
+            return  personRepository.save(customer);
+        }
+        return customer;
+    }
+    public Person saveSupplier(Person supplier) {
+        supplier.setRole(false);
+        supplier.setStatus(true);
+        if(personRepository.findPersonByName(supplier.getName()) == null ){
+            return  personRepository.save(supplier);
+        }
+        return supplier;
+    }
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 
 }

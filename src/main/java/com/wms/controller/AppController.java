@@ -18,9 +18,9 @@ public class AppController {
         return "page/index";
     }
 
-    @GetMapping("/reception")
+    @GetMapping("/receptions")
     public String ReceptionPage() {
-        return "/page/Dashboard/agent/reception";
+        return "/page/reception";
     }
     @GetMapping("/expedition")
     public String ExpeditionPage() {
@@ -30,14 +30,65 @@ public class AppController {
     public String GestionStockPage() {
         return "/page/Dashboard/operateur/gestionStock";
     }
-    @GetMapping("/inventaire")
-    public String InventairePage() {
-        return "/page/Dashboard/operateur/inventaire";
+
+    @GetMapping("/utilisateur-config")
+    public String utilisateurconfigPage() {
+        return "/page/utilisateur-config";
     }
 
     @GetMapping("/login")
-    public String viewLoginPage() {
-        return "page/login/login";
+    public String loginPage() {
+        return "/page/login";
+    }
+
+    @GetMapping("/article")
+    public String articlePage() {
+        return "/page/article";
+    }
+
+    @GetMapping("/journal")
+    public String journalPage() {
+        return "/page/journal";
+    }
+
+    @GetMapping("/admin/dashboard")
+    public String dashboardAdminPage() {
+        return "/page/dashboard-admin";
+    }
+
+    @GetMapping("/reception")
+    public String receptionPage() {
+        return "/page/reception";
+    }
+
+    @GetMapping("/commande")
+    public String commandePage() {
+        return "/page/commande";
+    }
+
+    @GetMapping("/livraison")
+    public String livraisonPage() {
+        return "/page/livraison";
+    }
+
+    @GetMapping("/inventaire")
+    public String inventairePage() {
+        return "/page/inventaire";
+    }
+
+    @GetMapping("/client")
+    public String clientPage() {
+        return "/page/client";
+    }
+
+    @GetMapping("/fournisseur")
+    public String fournisseurPage() {
+        return "/page/fournisseur";
+    }
+
+    @GetMapping("/utilisateur/motdepasse")
+    public String ulilisateurPage() {
+        return "/page/utlilisateurmotdepass";
     }
 
     @GetMapping("/403")

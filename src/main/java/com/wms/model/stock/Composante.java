@@ -47,5 +47,12 @@ public class Composante {
     private Collection<Commande> commandes = new ArrayList<>() ;
 
 
+<<<<<<< HEAD
+=======
+    @ManyToMany(mappedBy = "composantes", fetch = FetchType.EAGER)
+    private Collection<Commande> commandes = new ArrayList<>() ;
+
+
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 
 }

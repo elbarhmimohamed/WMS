@@ -5,7 +5,10 @@ import com.wms.model.emplacement.Emplacement;
 import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
+<<<<<<< HEAD
 import com.wms.model.stock.Categorie;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import com.wms.model.stock.Composante;
 import com.wms.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +33,12 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Autowired
 	private EmplacementServices emplacementServices;
+<<<<<<< HEAD
 
 	@Autowired
 	private CategorieServices categorieServices;
+=======
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 
 
 
@@ -77,25 +83,39 @@ public class WmsApplication implements CommandLineRunner {
 		emp.setRefemplacement("AZ1234");
 		//emplacementServices.updateEmplacement(Long.valueOf(1),emp);
 
+<<<<<<< HEAD
 		// tst de creation de client et fournisseur
 
 		Person client = new Person()  ;
 
+=======
+	/*
+		Person client = new Person()  ;
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 		client.setName("SahlTr7el");
 		client.setMail("sahltr7el@gmail.com");
 		client.setAdress("Rabat");
 		client.setPhone("0612345678");
 		client.setImage("azertyui");
+<<<<<<< HEAD
 		client.setRole(true);
 		System.out.println(client);
 		personServices.saveCustomer(client);
 
 
 		Person four = new Person()  ;
+=======
+		System.out.println(client);
+		personServices.saveCustomer(client);
+
+		Person four = new Person()  ;
+
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 		four.setName("ensias");
 		four.setMail("ensias@gmail.com");
 		four.setAdress("Rabat");
 		four.setPhone("0699764567");
+<<<<<<< HEAD
 		four.setRole(false);
 		personServices.saveSupplier(four);
 
@@ -111,15 +131,26 @@ public class WmsApplication implements CommandLineRunner {
 		four1.setAdress("Rabat");
 		personServices.updatePerson(Long.valueOf(2),four1);
 		/*
+=======
+
+
+		personServices.saveSupplier(four);
+
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 		Transport transport = new Transport();
 		transport.setMatricule("AZ123456");
 		transportServices.saveTransport(transport);
 */
 		Composante composante = new Composante();
+<<<<<<< HEAD
+=======
+		Composante c = new Composante();
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 		composante.setType(false);
 		composante.setName("AZE1234");
 		composante.setQuantity(100);
 		composante.setSeuil(10);
+<<<<<<< HEAD
 
 		Composante composante1 = new Composante();
 		composante1.setType(false);
@@ -149,6 +180,11 @@ public class WmsApplication implements CommandLineRunner {
 		cat1.setName("categories 1");
 		//categorieServices.updateCategories(Long.valueOf(1),cat1);
 
+=======
+		//composantServices.saveComposante(composante);
+		c.setQuantity(200);
+		composantServices.updateComposante(Long.valueOf(1),c);
+>>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 
 	}
 
