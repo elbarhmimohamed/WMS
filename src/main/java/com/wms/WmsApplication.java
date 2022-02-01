@@ -5,6 +5,7 @@ import com.wms.model.emplacement.Emplacement;
 import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
+import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
 import com.wms.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Autowired
 	private EmplacementServices emplacementServices;
+
+	@Autowired
+	private CategorieServices categorieServices;
 
 
 
@@ -118,16 +122,16 @@ public class WmsApplication implements CommandLineRunner {
 		composante.setSeuil(10);
 
 		Composante composante1 = new Composante();
-		composante.setType(false);
-		composante.setName("RSD1234");
-		composante.setQuantity(300);
-		composante.setSeuil(25);
+		composante1.setType(false);
+		composante1.setName("RSD1234");
+		composante1.setQuantity(300);
+		composante1.setSeuil(25);
 
 		Composante composante2 = new Composante();
-		composante.setType(false);
-		composante.setName("AZ00221");
-		composante.setQuantity(120);
-		composante.setSeuil(14);
+		composante2.setType(false);
+		composante2.setName("AZ00221");
+		composante2.setQuantity(120);
+		composante2.setSeuil(14);
 
 		composantServices.saveComposante(composante);
 		composantServices.saveComposante(composante1);
@@ -135,6 +139,16 @@ public class WmsApplication implements CommandLineRunner {
 		//Composante c = new Composante();
 		//c.setQuantity(200);
 		//composantServices.updateComposante(Long.valueOf(1),c);
+
+		Categorie cat = new Categorie();
+		cat.setName("categories 1 ");
+		cat.setDescription("L'outil de production représente un investissement important ; la composante de main-d'oeuvre dans le prix de revient est relativement faible. Les modifications ...");
+		categorieServices.saveCategories(cat);
+
+		Categorie cat1 = new Categorie();
+		cat1.setName("categories 1");
+		//categorieServices.updateCategories(Long.valueOf(1),cat1);
+
 
 	}
 
