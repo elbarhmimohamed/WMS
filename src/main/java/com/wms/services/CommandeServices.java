@@ -2,10 +2,16 @@ package com.wms.services;
 
 
 import com.wms.model.operation.Commande;
+import com.wms.model.personne.Person;
+import com.wms.model.personne.Users;
+import com.wms.model.stock.Composante;
 import com.wms.repository.CommandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -49,5 +55,40 @@ public class CommandeServices {
 
 
     }
+
+    public void updateCmd(final Long id, Commande cmd) {
+        Optional<Commande> e = commandeRepository.findById( id);
+
+        if(e.isPresent()) {
+            Date date = cmd.getDate();
+            boolean type = cmd.isType();
+            Person person = cmd.getPerson();
+            Collection<Composante> composantes = cmd.getComposantes();
+
+            if(date != null || type != e.get().isType() || person != null || !composantes.isEmpty() ){
+                if(date != null) {
+                    commandeRepository.updateDateofCmd(id,date);
+                }
+                if(person  != null) {
+                    commandeRepository.updatePersonofCmd(id,person);
+                }
+                if(!composantes.isEmpty()) {
+                    commandeRepository.updateComposantesofCmd(id,composantes);
+                }
+                if(type != e.get().isType()) {
+                    commandeRepository.updateTypeofCmd(id,type);
+                }
+            }
+            else{
+                System.out.println( "aucunne modification !!! ");
+            }
+
+        } else {
+            System.out.println( "Error de modification ");
+
+        }
+
+    }
+
 
 }

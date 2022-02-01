@@ -35,9 +35,6 @@ public class Commande{
     @ManyToOne
     private Person person;
 
-
-
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Composante> composantes;
 

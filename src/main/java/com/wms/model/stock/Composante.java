@@ -43,8 +43,6 @@ public class Composante {
     @ManyToOne
     private Categorie categorie;
 
-
-
     @ManyToMany(mappedBy = "composantes", fetch = FetchType.EAGER)
     private Collection<Commande> commandes = new ArrayList<>() ;
 

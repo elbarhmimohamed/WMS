@@ -73,39 +73,68 @@ public class WmsApplication implements CommandLineRunner {
 		emp.setRefemplacement("AZ1234");
 		//emplacementServices.updateEmplacement(Long.valueOf(1),emp);
 
-	/*
+		// tst de creation de client et fournisseur
+
 		Person client = new Person()  ;
+
 		client.setName("SahlTr7el");
 		client.setMail("sahltr7el@gmail.com");
 		client.setAdress("Rabat");
 		client.setPhone("0612345678");
 		client.setImage("azertyui");
+		client.setRole(true);
 		System.out.println(client);
 		personServices.saveCustomer(client);
 
-		Person four = new Person()  ;
 
+		Person four = new Person()  ;
 		four.setName("ensias");
 		four.setMail("ensias@gmail.com");
 		four.setAdress("Rabat");
 		four.setPhone("0699764567");
-
-
+		four.setRole(false);
 		personServices.saveSupplier(four);
 
+		// test de modification de client et fournisseur
+		/*
+		Person client1 = new Person()  ;
+		client1.setAdress("Rabat");
+		client1.setRole(true);
+		personServices.updatePerson(Long.valueOf(1),client1);
+
+		Person four1 = new Person()  ;
+		four1.setRole(false);
+		four1.setAdress("Rabat");
+		personServices.updatePerson(Long.valueOf(2),four1);
+		/*
 		Transport transport = new Transport();
 		transport.setMatricule("AZ123456");
 		transportServices.saveTransport(transport);
 */
 		Composante composante = new Composante();
-		Composante c = new Composante();
 		composante.setType(false);
 		composante.setName("AZE1234");
 		composante.setQuantity(100);
 		composante.setSeuil(10);
-		//composantServices.saveComposante(composante);
-		c.setQuantity(200);
-		composantServices.updateComposante(Long.valueOf(1),c);
+
+		Composante composante1 = new Composante();
+		composante.setType(false);
+		composante.setName("RSD1234");
+		composante.setQuantity(300);
+		composante.setSeuil(25);
+
+		Composante composante2 = new Composante();
+		composante.setType(false);
+		composante.setName("AZ00221");
+		composante.setQuantity(120);
+		composante.setSeuil(14);
+
+		composantServices.saveComposante(composante);
+		composantServices.saveComposante(composante1);
+		composantServices.saveComposante(composante2);
+		//Composante c = new Composante();
+		//c.setQuantity(200);
+		//composantServices.updateComposante(Long.valueOf(1),c);
 
 	}
 

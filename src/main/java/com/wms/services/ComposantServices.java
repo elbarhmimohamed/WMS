@@ -30,13 +30,13 @@ public class ComposantServices {
 
     // -------------   Create
     public Composante saveComposante(Composante composante) {
-        Optional<Composante> comp = composantRepository.findComposanteByName(composante.getName());
+        //Optional<Composante> comp = composantRepository.findComposanteByName(composante.getName());
 
-        if(comp.isEmpty()){
+        //if(comp.isEmpty()){
+
             return  composantRepository.save(composante);
-        }
-
-        return  composante;
+        //}
+          //  return  composante;
     }
     //------------------- Edit
     public void updateComposante(final Long id, Composante composante) {
