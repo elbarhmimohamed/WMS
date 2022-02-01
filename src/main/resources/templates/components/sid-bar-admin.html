@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div th:fragment="sid-bar-admin">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/dashboard}" th:target="_self">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">Tableau de board</span>
+                </a>
+              </li>          
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                  <i class="icon-head menu-icon"></i>
+                  <span class="menu-title">Utilisateur</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic1">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/utilisateur-config}" th:target="_self">Configuration</a></li>
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/utilisateur/motdepasse}" th:target="_self">Mot de passe oublié</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
+                  <i class="icon-grid-2 menu-icon"></i>
+                  <span class="menu-title">Entité</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic6">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/article}" th:target="_self">Article</a></li>
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/client}" th:target="_self">Client</a></li>
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/fournisseur}" th:target="_self">Fournisseur</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                  <i class="icon-layout menu-icon"></i>
+                  <span class="menu-title">Emplacement</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/emplacement}" th:target="_self">Tableau de board</a></li>
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/emplacement/configuration}" th:target="_self">Configuration</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+                  <i class="mdi mdi-home-variant menu-icon"></i>
+                  <span class="menu-title">Transaction</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="form-elements">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/journal}" th:target="_self">Journal</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Commande}" th:target="_self">Commande</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/reception}" th:target="_self">Reception</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/livraison}" th:target="_self">Livraison</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/inventaire}" th:target="_self">L'inventaire</a></li>
+
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+                  <i class="icon-paper menu-icon"></i>
+                  <span class="menu-title">Documents</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="charts">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html" th:target="_self">NaNo</a></li>
+                  </ul>
+                </div>
+              </li>
+      
+            </ul>
+          </nav>
+    </div>
+</body>
+</html>

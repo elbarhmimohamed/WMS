@@ -28,7 +28,14 @@ public class emplacementController {
         List<Emplacement> emplacements =new ArrayList<Emplacement>();
         emplacements =this.emplacementServices.getAllEmplacement();
         model.addAttribute("emplacements",emplacements);
-        return "page/dashboard/administarateur/emplacement";
+        return "page/emplacement";
+
+    }
+
+    @GetMapping("/emplacement/configuration")
+    private String configurationEmplacement(Model model){
+
+        return "page/emplacement-configuration";
 
     }
 

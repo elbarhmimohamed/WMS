@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <base href="../../static" target="_blank">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tableau de bord: Livraison</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="vendors/feather/feather.css">
+    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- End plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+    <link href="dist/css/tabular-input.css" rel="stylesheet" type="text/css">
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.css"/>
+
+
+    <!-- endinject -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
+
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:nav-bar-admin-->
+    <div th:replace="components/nav-bar-admin :: nav-bar-admin"></div>
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+
+        <!-- partial -->
+        <!-- partial:sid-bar-admin.html -->
+        <div th:replace="../templates/components/sid-bar-admin :: sid-bar-admin"></div>
+
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="row">
+                            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                                <h3 class="font-weight-bold">Tableau de board : Livraison<img  src="images/cargo.png"></h3>
+                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de livraison</span>!</span></h6>
+                            </div>
+                            <div class="col-12 col-xl-4">
+                                <div class="justify-content-end d-flex">
+                                    <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+
+                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#receptionModal">
+                                            <i class="icon-head "></i>
+                                            Ajouter un bon de livraison
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-responsive p-3">
+                                        <table class="table" id="table_id">
+                                            <thead>
+                                            <tr >
+                                                <th>Id</th>
+                                                <th>Référence</th>
+                                                <th>Fournisseur</th>
+                                                <th>Date de réception </th>
+                                                <th>Total TTC</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>BR-11111</td>
+                                                <td>Hamza</td>
+
+                                                <td>14/20/2022</td>
+                                                <td>1452dh</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3">
+                                                        <i class="ti-file btn-icon-prepend"></i>
+                                                        Details
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#receptionModal">Modifier</button>
+                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
+                                                </td>
+                                            </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+
+            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Voulez vous vraiment supprimer ce bon de reception ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                            <button type="button" class="btn btn-primary">Oui</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="receptionModal" tabindex="-1" role="dialog" aria-labelledby="receptionModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="receptionModalLabel">Ajouter un bon de reception</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="row">
+                                        <div class="col-md-12 grid-margin ">
+                                            <div class="row">
+                                                <div class="col-md-5 grid-margin ">
+                                                    <div class="card">
+                                                        <div class="form-group">
+                                                            <label>Sélectionner le client</label>
+                                                            <select class="js-example-basic-single w-100">
+                                                                <option value="AL">hamza</option>
+                                                                <option value="WY">mohamed</option>
+                                                                <option value="AM">America</option>
+                                                                <option value="CA">Canada</option>
+                                                                <option value="RU">Russia</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Référence</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">BR-</span>
+                                                                </div>
+                                                                <input type="text" class="form-control" placeholder="1111" aria-label="Username">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputdate">date de livraison</label>
+                                                            <input class="form-control" placeholder="dd/mm/yyyy">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Nb palettes</label>
+                                                            <input type="number" class="form-control" placeholder="1">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7 grid-margin">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <p class="card-title mb-0">Article </p>
+                                                            <br>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-borderless" id="demo-2">
+                                                                </table>
+                                                            </div>
+
+                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("addRow")' class="btn btn-primary">Ajouter article </button>
+                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("deleteRow")' class="btn btn-primary">Supprimer dernier article</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-primary">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
+
+        </div>
+
+
+
+
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script src="vendors/js/vendor.bundle.base.js"></script>
+<script src="js/select2.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script>
+    $(document).on("click", ".hamza", function () {
+        var reff = $(this).data('id');
+        $(".input-hamza").val( reff );
+
+        $('.modal fade').modal('show');
+    });
+    $(document).ready(function() {
+        $('#table_id').DataTable( {
+            "language": {
+                "emptyTable": "Aucune donnée disponible dans le tableau",
+                "loadingRecords": "Chargement...",
+                "processing": "Traitement...",
+                "aria": {
+                    "sortAscending": ": activer pour trier la colonne par ordre croissant",
+                    "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+                },
+                "select": {
+                    "rows": {
+                        "1": "1 ligne sélectionnée",
+                        "_": "%d lignes sélectionnées"
+                    },
+                    "cells": {
+                        "1": "1 cellule sélectionnée",
+                        "_": "%d cellules sélectionnées"
+                    },
+                    "columns": {
+                        "1": "1 colonne sélectionnée",
+                        "_": "%d colonnes sélectionnées"
+                    }
+                },
+                "autoFill": {
+                    "cancel": "Annuler",
+                    "fill": "Remplir toutes les cellules avec <i>%d</i>",
+                    "fillHorizontal": "Remplir les cellules horizontalement",
+                    "fillVertical": "Remplir les cellules verticalement"
+                },
+                "searchBuilder": {
+                    "conditions": {
+                        "date": {
+                            "after": "Après le",
+                            "before": "Avant le",
+                            "between": "Entre",
+                            "empty": "Vide",
+                            "not": "Différent de",
+                            "notBetween": "Pas entre",
+                            "notEmpty": "Non vide",
+                            "equals": "Égal à"
+                        },
+                        "number": {
+                            "between": "Entre",
+                            "empty": "Vide",
+                            "gt": "Supérieur à",
+                            "gte": "Supérieur ou égal à",
+                            "lt": "Inférieur à",
+                            "lte": "Inférieur ou égal à",
+                            "not": "Différent de",
+                            "notBetween": "Pas entre",
+                            "notEmpty": "Non vide",
+                            "equals": "Égal à"
+                        },
+                        "string": {
+                            "contains": "Contient",
+                            "empty": "Vide",
+                            "endsWith": "Se termine par",
+                            "not": "Différent de",
+                            "notEmpty": "Non vide",
+                            "startsWith": "Commence par",
+                            "equals": "Égal à",
+                            "notContains": "Ne contient pas",
+                            "notEnds": "Ne termine pas par",
+                            "notStarts": "Ne commence pas par"
+                        },
+                        "array": {
+                            "empty": "Vide",
+                            "contains": "Contient",
+                            "not": "Différent de",
+                            "notEmpty": "Non vide",
+                            "without": "Sans",
+                            "equals": "Égal à"
+                        }
+                    },
+                    "add": "Ajouter une condition",
+                    "button": {
+                        "0": "Recherche avancée",
+                        "_": "Recherche avancée (%d)"
+                    },
+                    "clearAll": "Effacer tout",
+                    "condition": "Condition",
+                    "data": "Donnée",
+                    "deleteTitle": "Supprimer la règle de filtrage",
+                    "logicAnd": "Et",
+                    "logicOr": "Ou",
+                    "title": {
+                        "0": "Recherche avancée",
+                        "_": "Recherche avancée (%d)"
+                    },
+                    "value": "Valeur"
+                },
+                "searchPanes": {
+                    "clearMessage": "Effacer tout",
+                    "count": "{total}",
+                    "title": "Filtres actifs - %d",
+                    "collapse": {
+                        "0": "Volet de recherche",
+                        "_": "Volet de recherche (%d)"
+                    },
+                    "countFiltered": "{shown} ({total})",
+                    "emptyPanes": "Pas de volet de recherche",
+                    "loadMessage": "Chargement du volet de recherche...",
+                    "collapseMessage": "Réduire tout",
+                    "showMessage": "Montrer tout"
+                },
+                "buttons": {
+                    "collection": "Collection",
+                    "colvis": "Visibilité colonnes",
+                    "colvisRestore": "Rétablir visibilité",
+                    "copy": "Copier",
+                    "copySuccess": {
+                        "1": "1 ligne copiée dans le presse-papier",
+                        "_": "%ds lignes copiées dans le presse-papier"
+                    },
+                    "copyTitle": "Copier dans le presse-papier",
+                    "csv": "CSV",
+                    "excel": "Excel",
+                    "pageLength": {
+                        "-1": "Afficher toutes les lignes",
+                        "_": "Afficher %d lignes"
+                    },
+                    "pdf": "PDF",
+                    "print": "Imprimer",
+                    "copyKeys": "Appuyez sur ctrl ou u2318 + C pour copier les données du tableau dans votre presse-papier."
+                },
+                "decimal": ",",
+                "search": "Rechercher:",
+                "thousands": ".",
+                "datetime": {
+                    "previous": "Précédent",
+                    "next": "Suivant",
+                    "hours": "Heures",
+                    "minutes": "Minutes",
+                    "seconds": "Secondes",
+                    "unknown": "-",
+                    "amPm": [
+                        "am",
+                        "pm"
+                    ],
+                    "months": {
+                        "0": "Janvier",
+                        "1": "Février",
+                        "2": "Mars",
+                        "3": "Avril",
+                        "4": "Mai",
+                        "5": "Juin",
+                        "6": "Juillet",
+                        "7": "Août",
+                        "8": "Septembre",
+                        "9": "Octobre",
+                        "10": "Novembre",
+                        "11": "Décembre"
+                    },
+                    "weekdays": [
+                        "Dim",
+                        "Lun",
+                        "Mar",
+                        "Mer",
+                        "Jeu",
+                        "Ven",
+                        "Sam"
+                    ]
+                },
+                "editor": {
+                    "close": "Fermer",
+                    "create": {
+                        "title": "Créer une nouvelle entrée",
+                        "button": "Nouveau",
+                        "submit": "Créer"
+                    },
+                    "edit": {
+                        "button": "Editer",
+                        "title": "Editer Entrée",
+                        "submit": "Mettre à jour"
+                    },
+                    "remove": {
+                        "button": "Supprimer",
+                        "title": "Supprimer",
+                        "submit": "Supprimer",
+                        "confirm": {
+                            "1": "Êtes-vous sûr de vouloir supprimer 1 ligne ?",
+                            "_": "Êtes-vous sûr de vouloir supprimer %d lignes ?"
+                        }
+                    },
+                    "error": {
+                        "system": "Une erreur système s'est produite"
+                    },
+                    "multi": {
+                        "noMulti": "Ce champ peut être édité individuellement, mais ne fait pas partie d'un groupe. ",
+                        "title": "Valeurs multiples",
+                        "restore": "Rétablir modification",
+                        "info": "Les éléments sélectionnés contiennent différentes valeurs pour cette entrée. Pour modifier et définir tous les éléments de cette entrée à la même valeur, cliquez ou tapez ici, sinon ils conserveront leurs valeurs individuelles."
+                    }
+                },
+                "stateRestore": {
+                    "removeSubmit": "Supprimer",
+                    "creationModal": {
+                        "button": "Créer",
+                        "name": "Nom :",
+                        "order": "Tri",
+                        "paging": "Pagination",
+                        "scroller": "Position du défilement",
+                        "search": "Recherche",
+                        "select": "Sélection",
+                        "toggleLabel": "Inclus :"
+                    },
+                    "renameButton": "Renommer"
+                },
+                "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+                "infoEmpty": "Affichage de 0 à 0 sur 0 entrées",
+                "infoFiltered": "(filtrées depuis un total de _MAX_ entrées)",
+                "lengthMenu": "Afficher _MENU_ entrées",
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "next": "Suivante",
+                    "previous": "Précédente"
+                },
+                "zeroRecords": "Aucune entrée correspondante trouvée"
+            }
+        } );
+    } );
+    $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );
+
+
+</script>
+
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.js"></script>
+<script src="js/tabular-input.js"></script>
+
+
+<script src="js/off-canvas.js"></script>
+<script src="js/hoverable-collapse.js"></script>
+<script src="js/template.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/todolist.js"></script>
+
+<script src="js/dashboard.js"></script>
+<script src="js/Chart.roundedBarCharts.js"></script>
+<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="vendors/select2/select2.min.js"></script>
+<script src="dist/js/tabular-input.js"></script>
+<script>
+    jQuery('#demo-2').tabularInput({
+        'rows': 1,
+        'columns':4,
+        'animate': true,
+        'columnHeads': ['Référence article', 'nom' ,'quantité', 'prix unitaire']
+    });
+    $("#demo-2").tabularInput("addRow");			// Add a row at the end
+    $("#demo-2").tabularInput("deleteRow");			// Delete the last row
+    $("#demo-2").tabularInput("deleteRow", 2);		// Delete row at index 2// Add a column at the end
+    // Delete the last column
+
+
+</script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+<!-- End custom js for this page-->
+</body>
+
+</html>
+
