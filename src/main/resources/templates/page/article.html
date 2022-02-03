@@ -56,7 +56,7 @@
                                 <div class="justify-content-end d-flex">
                                     <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
-                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#fournisseurModal">
+                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#articleModal">
                                             <i class="icon-head "></i>
                                             Ajouter un Article
                                         </button>
@@ -78,55 +78,29 @@
                                             <thead>
                                             <tr >
                                                 <th>Id</th>
-                                                <th>Nom</th>
-                                                <th>Categorie</th>
                                                 <th>Reference</th>
+                                                <th>Categorie</th>
                                                 <th>Quantite</th>
                                                 <th>Seuil min</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
+                                            <tr th:each="article: ${articles}">
+                                                <td th:text="${article.id}">Article ID</td>
+                                                <td th:text="${article.name}"> name</td>
+                                                <td  th:text="${article.categorie == null ? '' : article.categorie.categorie_name}"> categorie</td>
+                                                <td th:text="${article.quantity}">quantity</td>
+                                                <td th:text="${article.seuil}">seuil</td>
+                                             <!--   <td th:text="${article.categorie}">E-mail</td> -->
 
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#fournisseurmodifieModal">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
+
+
+                                                <td >
+                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${article.id}"	data-toggle="modal" data-target="#articlemodifieModal">Modifier</a>
+                                                    <a type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${article.id}"	data-toggle="modal" data-target="#removeModal">Supprimer</a>
                                                 </td>
                                             </tr>
-                                            <tr >
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr >
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
-
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3">Supprimer</button>
-                                                </td>
-                                            </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -142,44 +116,52 @@
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
             <!-- Button trigger modal -->
-
-
-            <!-- Modal ajouter fournisseur-->
-            <div class="modal fade" id="fournisseurModal" tabindex="-1" role="dialog" aria-labelledby="fournisseurModalLabel" aria-hidden="true">
+            <!-- Modal ajouter article-->
+            <div class="modal fade" id="articleModal" tabindex="-1" role="dialog" aria-labelledby="articleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un fournisseur</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un article</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample">
+
+                            <form action="#" th:action="@{/ajouterarticle}" th:object="${composante} "   method="POST" th:target="_self">
+
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Nom</label>
-                                    <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Nom">
+                                    <label for="categorie">Catégorie</label>
+                                    <select  th:field="*{categorie.categorie_name}" id="categorie" class="form-control" aria-label="Default select example" placeholder="Selectionner une catégories">
+                                        <!--    <option selected>Selectionner une catégories</option> -->
+                                           <option th:each="i : ${categories}" th:value="${i.categorie_name}" th:text="${i.categorie_name}">
+                                           </option>
+                                       </select>
+                                   </div>
+
+                                <div class="form-group">
+                                    <label for="name">Référence</label>
+                                    <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="AB1234">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="quantity">Quantité</label>
+                                    <input th:field="*{quantity}" type="number" class="form-control" id="quantity" placeholder="1000">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPrenom">Prénom</label>
-                                    <input type="text" class="form-control" id="exampleInputPrenom" placeholder="Prenom">
+                                    <label for="seuil">Seuil</label>
+                                    <input th:field="*{seuil}" type="number" class="form-control" id="seuil" placeholder="30">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputAdresse">Adresse</label>
-                                    <input type="text" class="form-control" id="exampleInputAdresse" placeholder="Adresse">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputTelephone">Telephone</label>
-                                    <input type="tel" class="form-control" id="exampleInputTelephone" placeholder="Telephone">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                </div>
+
+
+
+
                                 <div class="modal-footer">
+
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                    <button type="submit" class="btn btn-primary" >Ajouter</button>
                                 </div>
+
                             </form>
 
                         </div>
@@ -187,81 +169,114 @@
                 </div>
             </div>
             <!-- end Modal -->
-            <!-- Modal modifier fournisseur-->
-            <div class="modal fade" id="fournisseurmodifieModal" tabindex="-1" role="dialog" aria-labelledby="fournisseurModalLabel" aria-hidden="true">
+            <!-- Modal modifier article-->
+            <div class="modal fade" id="articlemodifieModal" tabindex="-1" role="dialog" aria-labelledby="articlemodifieModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="examplefournisseurModalLabel">Modifier un fournisseur</h5>
+                            <h5 class="modal-title" id="exampleModalLabel1">Modifier un article</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample">
+
+                            <form action="#" th:action="@{/modifierarticle}" th:object="${composante} "   method="POST" th:target="_self">
+                                <input type="hidden" th:field="*{id}" id="update_id" >
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Nom</label>
-                                    <input type="text" class="form-control" id="examplefournisseurInputUsername1" placeholder="Nom">
+                                    <label for="categorie1">Catégorie</label>
+                                    <select  th:field="*{categorie.categorie_name}" id="categorie1" class="form-control" aria-label="Default select example" placeholder="Selectionner une catégories">
+                                        <!--    <option selected>Selectionner une catégories</option> -->
+                                        <option th:each="i : ${categories}" th:value="${i.categorie_name}" th:text="${i.categorie_name}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name1">Référence</label>
+                                    <input th:field="*{name}" type="text" VALUE=""  class="form-control" id="name1" placeholder="AB1234">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="quantity1">Quantité</label>
+                                    <input th:field="*{quantity}" type="number"  class="form-control" id="quantity1" placeholder="1000">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPrenom">Prénom</label>
-                                    <input type="text" class="form-control" id="examplefournisseurInputPrenom" placeholder="Prenom">
+                                    <label for="seuil1">Seuil</label>
+                                    <input th:field="*{seuil}" type="number"  class="form-control" id="seuil1" placeholder="30">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputAdresse">Adresse</label>
-                                    <input type="text" class="form-control" id="examplefournisseurInputAdresse" placeholder="Adresse">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputTelephone">Telephone</label>
-                                    <input type="tel" class="form-control" id="examplefournisseurInputTelephone" placeholder="Telephone">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" id="examplefournisseurInputEmail1" placeholder="Email">
-                                </div>
+
+
                                 <div class="modal-footer">
+
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                    <button type="submit" class="btn btn-primary" >Modifier</button>
                                 </div>
+
                             </form>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Modal -->
+
+            <!-------   modal supprimer article -->
             <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    <form action="#" th:action="@{/supprimerarticle}" th:object="${composante_id}" method="POST" th:target="_self">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>Voulez vous vraiment supprimer cette rangé ?</p>
+                                <input type="hidden" th:field="*{id}" id="delete_id" >
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                <button  type="submit" class="btn btn-primary" >Oui</button>
+                            </div>
+
                         </div>
-                        <div class="modal-body">
-                            Voulez vous vraiment supprimer ce fournisseur ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <button type="button" class="btn btn-primary">Oui</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
-            <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
+
+            <!-- end of modal -->
+          <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
 
         </div>
         <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-
+</div>
     <!-- plugins:js -->
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script>
+
+        $('#articlemodifieModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var update_id = button.data('update_id')
+            var modal = $(this)
+            modal.find('.modal-body #update_id').val(update_id);
+        })
+
+        $('#removeModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var delete_id = button.data('delete_id')
+            var modal = $(this)
+            modal.find('.modal-body #delete_id').val(delete_id);
+        })
+
         $(document).on("click", ".hamza", function () {
             var reff = $(this).data('id');
             $(".input-hamza").val( reff );
@@ -512,6 +527,7 @@
     <script src="js/dashboard.js"></script>
     <script src="js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+
 </body>
 
 </html>

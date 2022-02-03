@@ -48,17 +48,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-<<<<<<< HEAD
-                .antMatchers("process_register","updateUserProcess/**","/updateUser/**","/deleteUser/**","/listofUsers","/register").hasAuthority("Admin")
-                .antMatchers( "/inventaire","/gestionStock").hasAnyAuthority("Admin","Opérateur")
-                .antMatchers("/expedition","/reception").hasAnyAuthority("Admin","Agent Expédition/Réception")
-=======
+
 
                 .antMatchers("process_register","updateUserProcess/**","/updateUser/**","/deleteUser/**","/listofUsers","/register","/process_register").hasAuthority("Admin")
                 .antMatchers( "/inventaireee","/gestionStock").hasAnyAuthority("Admin","Opérateur")
                 .antMatchers("/expeditionee","/receptionee").hasAnyAuthority("Admin","Agent Expédition/Réception")
 
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
                 .antMatchers("/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")
                 .anyRequest().permitAll()
                 .and()
@@ -68,6 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling().accessDeniedPage("/403")
                 ;
 
+        http.csrf().disable();
     }
+
 
 }

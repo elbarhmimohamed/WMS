@@ -40,12 +40,12 @@ public class AppController {
     public String loginPage() {
         return "/page/login";
     }
-
+    /*
     @GetMapping("/article")
     public String articlePage() {
         return "/page/article";
     }
-
+*/
     @GetMapping("/journal")
     public String journalPage() {
         return "/page/journal";
@@ -75,17 +75,19 @@ public class AppController {
     public String inventairePage() {
         return "/page/inventaire";
     }
-
-    @GetMapping("/client")
+/*
+    @GetMapping("/clients")
     public String clientPage() {
         return "/page/client";
     }
 
-    @GetMapping("/fournisseur")
+
+
+    @GetMapping("/fournisseurs")
     public String fournisseurPage() {
         return "/page/fournisseur";
     }
-
+*/
     @GetMapping("/utilisateur/motdepasse")
     public String ulilisateurPage() {
         return "/page/utlilisateurmotdepass";

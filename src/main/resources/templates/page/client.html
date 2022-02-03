@@ -80,7 +80,6 @@
                                             <tr >
                                                 <th>Id</th>
                                                 <th>Nom</th>
-                                                <th>Prénom</th>
                                                 <th>Adresse</th>
                                                 <th>Telephone</th>
                                                 <th>Email</th>
@@ -88,46 +87,20 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
+                                            <tr th:each="client: ${clients}">
+                                                <td th:text="${client.id}">Client ID</td>
+                                                <td th:text="${client.name}"> Name</td>
+                                                <td th:text="${client.adress}">Adress</td>
+                                                <td th:text="${client.phone}">phone</td>
+                                                <td th:text="${client.mail}">E-mail</td>
 
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#clientmodifieModal">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
+
+
+                                                <td >
+                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${client.id}"	data-toggle="modal" data-target="#clientmodifieModal">Modifier</a>
+                                                    <a type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${client.id}"	data-toggle="modal" data-target="#removeModal">Supprimer</a>
                                                 </td>
                                             </tr>
-                                            <tr >
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr >
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
-
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3">Supprimer</button>
-                                                </td>
-                                            </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -156,31 +129,30 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample">
+                            <form action="#" th:action="@{/ajouterclient}" th:object="${newperson} "   method="POST" th:target="_self">
+
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Nom</label>
-                                    <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Nom">
+                                    <label for="name">Nom</label>
+                                    <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Nom">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPrenom">Prénom</label>
-                                    <input type="text" class="form-control" id="exampleInputPrenom" placeholder="Prenom">
+                                    <label for="Adresse">Adresse</label>
+                                    <input th:field="*{adress}" type="text" class="form-control" id="Adresse" placeholder="Adresse">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputAdresse">Adresse</label>
-                                    <input type="text" class="form-control" id="exampleInputAdresse" placeholder="Adresse">
+                                    <label for="phone">Telephone</label>
+                                    <input  th:field="*{phone}" type="tel" class="form-control" id="phone" placeholder="Telephone">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputTelephone">Telephone</label>
-                                    <input type="tel" class="form-control" id="exampleInputTelephone" placeholder="Telephone">
+                                    <label for="mail">Email</label>
+                                    <input  th:field="*{mail}" type="email" class="form-control" id="mail" placeholder="Email">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-primary" >Ajouter</button>
                                 </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn btn-primary">Ajouter</button>
-                            </div>
                             </form>
 
                         </div>
@@ -199,76 +171,95 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample">
+                            <form action="#" th:action="@{/modifierperson}" th:object="${person} "   method="POST" th:target="_self">
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Nom</label>
-                                    <input type="text" class="form-control" id="exampleclientInputUsername1" placeholder="Nom">
+                                    <label for="name1">Nom</label>
+                                    <input th:field="*{name}" type="text" class="form-control" id="name1" placeholder="Nom">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPrenom">Prénom</label>
-                                    <input type="text" class="form-control" id="exampleclientInputPrenom" placeholder="Prenom">
+                                    <label for="Adresse1">Adresse</label>
+                                    <input th:field="*{adress}" type="text" class="form-control" id="Adresse1" placeholder="Adresse">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputAdresse">Adresse</label>
-                                    <input type="text" class="form-control" id="exampleclientInputAdresse" placeholder="Adresse">
+                                    <label for="phone1">Telephone</label>
+                                    <input  th:field="*{phone}" type="tel" class="form-control" id="phone1" placeholder="Telephone">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputTelephone">Telephone</label>
-                                    <input type="tel" class="form-control" id="exampleclientInputTelephone" placeholder="Telephone">
+                                    <label for="mail1">Email</label>
+                                    <input  th:field="*{mail}" type="email" class="form-control" id="mail1" placeholder="Email">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" id="exampleclientInputEmail1" placeholder="Email">
-                                </div>
+
+                                <input type="hidden" th:field="*{id}" id="update_id" >
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                                 </div>
+
+
                             </form>
 
                         </div>
                     </div>
                 </div>
+
             </div>
             <!-- Modal -->
             <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    <form action="#" th:action="@{/supprimerperson}" th:object="${person_id}" method="POST" th:target="_self">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>Voulez vous vraiment supprimer ce client ?</p>
+                                <input type="hidden" th:field="*{id}" id="delete_id" >
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                <button  type="submit" class="btn btn-primary" >Oui</button>
+                            </div>
+
                         </div>
-                        <div class="modal-body">
-                            Voulez vous vraiment supprimer ce client ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <button type="button" class="btn btn-primary">Oui</button>
-                        </div>
-                    </div>
+
+
+                    </form>
                 </div>
             </div>
-
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
 
         </div>
         <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-
+</div>
     <!-- plugins:js -->
     <script src="vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script>
-        $(document).on("click", ".hamza", function () {
-            var reff = $(this).data('id');
-            $(".input-hamza").val( reff );
+        $('#clientmodifieModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var update_id = button.data('update_id')
+            var modal = $(this)
+            modal.find('.modal-body #update_id').val(update_id);
+        })
 
-            $('.modal fade').modal('show');
-        });
+        $('#removeModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var delete_id = button.data('delete_id')
+            var modal = $(this)
+            modal.find('.modal-body #delete_id').val(delete_id);
+        })
+
         $(document).ready(function() {
             $('#table_id').DataTable( {
                 "language": {
@@ -516,4 +507,3 @@
 </body>
 
 </html>
-

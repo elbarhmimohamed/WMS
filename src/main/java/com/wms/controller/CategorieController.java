@@ -44,13 +44,13 @@ public class CategorieController {
         if(e.isPresent()) {
             Categorie currentCategorie = e.get();
 
-            String name = categorie.getName();
+            String name = categorie.getCategorie_name();
             if(name != null) {
-                currentCategorie.setName(name);
+                currentCategorie.setCategorie_name(name);
             }
-            String description = categorie.getDescription();
+            String description = categorie.getCategorie_description();
             if(description != null) {
-                currentCategorie.setDescription(description);;
+                currentCategorie.setCategorie_description(description);;
             }
 
             List<Composante> composantes = categorie.getComposantes();

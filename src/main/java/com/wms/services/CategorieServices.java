@@ -1,21 +1,12 @@
 package com.wms.services;
 
 
-import com.wms.model.emplacement.Emplacement;
-<<<<<<< HEAD
-import com.wms.model.personne.Users;
-=======
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import com.wms.model.stock.Categorie;
 import com.wms.repository.CategoriesRepository;
-import com.wms.repository.EmplacementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-import java.time.LocalDateTime;
-=======
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
+
 import java.util.List;
 import java.util.Optional;
 
@@ -30,16 +21,16 @@ public class CategorieServices {
 
 
     public Optional<Categorie> getCategorieById(final Long id){ return categoriesRepository.findById(id);}
-    public Optional<Categorie> getCategorieByName(final String name){ return categoriesRepository.findCategorieByName(name);}
+    public Categorie getCategorieByName(final String name){ return categoriesRepository.findCategorieByName(name);}
 
     public void deleteCategories(final Long id) {
         categoriesRepository.deleteById(id);
     }
     // -------------   Create
     public Categorie saveCategories(Categorie categorie) {
-        Optional<Categorie> cat = categoriesRepository.findCategorieByName(categorie.getName());
-<<<<<<< HEAD
-        if(cat.isEmpty()){
+        Categorie cat = categoriesRepository.findCategorieByName(categorie.getCategorie_name());
+
+        if(cat == null){
             return  categoriesRepository.save(categorie);
         }
         return  categorie;
@@ -49,8 +40,8 @@ public class CategorieServices {
         Optional<Categorie> e = categoriesRepository.findById( id);
 
         if(e.isPresent()) {
-            String name = categorie.getName();
-            String desc = categorie.getDescription();
+            String name = categorie.getCategorie_name();
+            String desc = categorie.getCategorie_description();
 
             if(name != null || desc != null  ){
                 if(name != null) {
@@ -72,14 +63,4 @@ public class CategorieServices {
 
     }
 
-
-=======
-        if(cat == null){
-            return  categoriesRepository.save(categorie);
-        }
-        return  categorie;
-
-
-    }
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 }

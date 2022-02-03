@@ -1,10 +1,8 @@
 package com.wms.services;
 
 import com.wms.model.emplacement.Emplacement;
-<<<<<<< HEAD
+
 import com.wms.model.personne.Person;
-=======
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import com.wms.model.personne.Users;
 import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
@@ -28,12 +26,14 @@ public class ComposantServices {
     }
 
     public Optional<Composante> getComposanteById(final Long id){ return composantRepository.findById(id);}
+    public Composante findComposanteById(final Long id){ return composantRepository.findComposanteById(id);}
+
     public Optional<Composante> getComposanteByName(final String name){ return composantRepository.findComposanteByName(name);}
 
     public void deleteComposante(final Long id) { composantRepository.deleteById(id);}
 
     // -------------   Create
-<<<<<<< HEAD
+
 
     public Composante saveComposante(Composante composante) {
         Optional<Composante> comp = composantRepository.findComposanteByName(composante.getName());
@@ -45,21 +45,11 @@ public class ComposantServices {
     }
     public Composante saveProduct(Composante composante) {
         Optional<Composante> comp = composantRepository.findComposanteByName(composante.getName());
-        if(comp.isEmpty()){
+        if (comp.isEmpty()) {
             composante.setType(true);
-            return  composantRepository.save(composante);
+            return composantRepository.save(composante);
         }
         return composante;
-=======
-    public Composante saveComposante(Composante composante) {
-        Optional<Composante> comp = composantRepository.findComposanteByName(composante.getName());
-
-        if(comp.isEmpty()){
-            return  composantRepository.save(composante);
-        }
-
-        return  composante;
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
     }
     //------------------- Edit
     public void updateComposante(final Long id, Composante composante) {
@@ -67,26 +57,24 @@ public class ComposantServices {
 
         if(e.isPresent()) {
             String name = composante.getName();
-                if(name != null) {
+                if(composante.getName() != "" && composante.getName().length() >= 6 ) {
                     composantRepository.updateNameofComposante(id,name);
                 }
 
-            long qte = composante.getQuantity();
-                if(qte != 0) {
-                    composantRepository.updateQuantityofComposante(id,qte);
+
+                if(composante.getQuantity() > 0) {
+                    composantRepository.updateQuantityofComposante(id, composante.getQuantity());
                 }
 
-            long seuil = composante.getSeuil();
-                if(seuil != 0) {
-                    composantRepository.updateSeuilofComposante(id,seuil);
+                if(composante.getSeuil() > 0) {
+                    composantRepository.updateSeuilofComposante(id, composante.getSeuil());
                 }
-<<<<<<< HEAD
+
             Categorie cat = composante.getCategorie();
                 if(cat != null){
                     composantRepository.updateCatofComposante(id,cat);
                 }
-=======
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
+
 
             }
 

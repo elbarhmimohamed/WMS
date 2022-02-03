@@ -80,50 +80,26 @@
                                             <tr >
                                                 <th>Id</th>
                                                 <th>Nom</th>
-                                                <th>Prénom</th>
+                                                <!-- <th>Prénom</th> -->
                                                 <th>Adresse</th>
                                                 <th>Telephone</th>
                                                 <th>Email</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
-
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#fournisseurmodifieModal">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr >
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr >
-                                                <td>1</td>
-                                                <td>hamza</td>
-                                                <td>hamza</td>
-
-                                                <td>fes</td>
-                                                <td>0622757880</td>
-                                                <td>hamzauar20@gmail.com</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning p-lg-3">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3">Supprimer</button>
+                                            <tr th:each="fournisseur: ${fournisseurs}">
+                                                <td th:text="${fournisseur.id}">Fournisseur ID</td>
+                                                <td th:text="${fournisseur.name}"> Name</td>
+                                                <td th:text="${fournisseur.adress}">Adress</td>
+                                                <td th:text="${fournisseur.phone}">phone</td>
+                                                <td th:text="${fournisseur.mail}">E-mail</td>
+                                                <td th:text="${fournisseur.status}">status</td>
+                                                <!-- <td th:text="${clients.image}">image</td> -->
+                                                <td >
+                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${fournisseur.id}"	data-toggle="modal" data-target="#fournisseurmodifieModal">Modifier</a>
+                                                    <a type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${fournisseur.id}"	data-toggle="modal" data-target="#removeModal">Supprimer</a>
                                                 </td>
                                             </tr>
 
@@ -150,36 +126,36 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un fournisseur</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un client</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample">
+                            <form action="#" th:action="@{/ajouterfournisseur}" th:object="${newperson} "   method="POST" th:target="_self">
+
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Nom</label>
-                                    <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Nom">
+                                    <label for="name">Nom</label>
+                                    <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Nom">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPrenom">Prénom</label>
-                                    <input type="text" class="form-control" id="exampleInputPrenom" placeholder="Prenom">
+                                    <label for="Adresse">Adresse</label>
+                                    <input th:field="*{adress}" type="text" class="form-control" id="Adresse" placeholder="Adresse">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputAdresse">Adresse</label>
-                                    <input type="text" class="form-control" id="exampleInputAdresse" placeholder="Adresse">
+                                    <label for="phone">Telephone</label>
+                                    <input  th:field="*{phone}" type="tel" class="form-control" id="phone" placeholder="Telephone">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputTelephone">Telephone</label>
-                                    <input type="tel" class="form-control" id="exampleInputTelephone" placeholder="Telephone">
+                                    <label for="mail">Email</label>
+                                    <input  th:field="*{mail}" type="email" class="form-control" id="mail" placeholder="Email">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                </div>
+
+
                                 <div class="modal-footer">
+
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                    <button type="submit" class="btn btn-primary" >Ajouter</button>
                                 </div>
                             </form>
 
@@ -187,70 +163,83 @@
                     </div>
                 </div>
             </div>
+
             <!-- end Modal -->
             <!-- Modal modifier fournisseur-->
-            <div class="modal fade" id="fournisseurmodifieModal" tabindex="-1" role="dialog" aria-labelledby="fournisseurModalLabel" aria-hidden="true">
+            <div class="modal fade" id="fournisseurmodifieModal" tabindex="-1" role="dialog" aria-labelledby="fournisseurmodifieModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="examplefournisseurModalLabel">Modifier un fournisseur</h5>
+                            <h5 class="modal-title" id="exampleclientModalLabel">Modifier un client</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample">
-                                <div class="form-group">
-                                    <label for="exampleInputUsername1">Nom</label>
-                                    <input type="text" class="form-control" id="examplefournisseurInputUsername1" placeholder="Nom">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPrenom">Prénom</label>
-                                    <input type="text" class="form-control" id="examplefournisseurInputPrenom" placeholder="Prenom">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputAdresse">Adresse</label>
-                                    <input type="text" class="form-control" id="examplefournisseurInputAdresse" placeholder="Adresse">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputTelephone">Telephone</label>
-                                    <input type="tel" class="form-control" id="examplefournisseurInputTelephone" placeholder="Telephone">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" id="examplefournisseurInputEmail1" placeholder="Email">
-                                </div>
+
+                                <form action="#" th:action="@{/modifierperson}" th:object="${person} "   method="POST" th:target="_self">
+                                    <div class="form-group">
+                                        <label for="name1">Nom</label>
+                                        <input th:field="*{name}" type="text" class="form-control" id="name1" placeholder="Nom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Adresse1">Adresse</label>
+                                        <input th:field="*{adress}" type="text" class="form-control" id="Adresse1" placeholder="Adresse">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone1">Telephone</label>
+                                        <input  th:field="*{phone}" type="tel" class="form-control" id="phone1" placeholder="Telephone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mail1">Email</label>
+                                        <input  th:field="*{mail}" type="email" class="form-control" id="mail1" placeholder="Email">
+                                    </div>
+
+                                <input type="hidden" th:field="*{id}" id="update_id" >
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                                 </div>
+
+
                             </form>
 
                         </div>
                     </div>
                 </div>
+
             </div>
+
             <!-- Modal -->
             <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        <form action="#" th:action="@{/supprimerperson}" th:object="${person_id}" method="POST" th:target="_self">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>Voulez vous vraiment supprimer ce client ?</p>
+                                <input type="hidden" th:field="*{id}" id="delete_id" >
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                <button  type="submit" class="btn btn-primary" >Oui</button>
+                            </div>
+
                         </div>
-                        <div class="modal-body">
-                            Voulez vous vraiment supprimer ce fournisseur ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <button type="button" class="btn btn-primary">Oui</button>
-                        </div>
-                    </div>
+
+
+                    </form>
                 </div>
             </div>
-
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
 
         </div>
@@ -263,6 +252,21 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script>
+
+        $('#fournisseurmodifieModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var update_id = button.data('update_id')
+            var modal = $(this)
+            modal.find('.modal-body #update_id').val(update_id);
+        })
+
+        $('#removeModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var delete_id = button.data('delete_id')
+            var modal = $(this)
+            modal.find('.modal-body #delete_id').val(delete_id);
+        })
+
         $(document).on("click", ".hamza", function () {
             var reff = $(this).data('id');
             $(".input-hamza").val( reff );
@@ -513,6 +517,7 @@
     <script src="js/dashboard.js"></script>
     <script src="js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+</div>
 </body>
 
 </html>

@@ -2,20 +2,22 @@ package com.wms;
 
 
 import com.wms.model.emplacement.Emplacement;
+import com.wms.model.operation.Commande;
 import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
-<<<<<<< HEAD
+
 import com.wms.model.stock.Categorie;
-=======
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 import com.wms.model.stock.Composante;
+import com.wms.repository.PersonRepository;
 import com.wms.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @SpringBootApplication
@@ -33,12 +35,16 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Autowired
 	private EmplacementServices emplacementServices;
-<<<<<<< HEAD
+
+	@Autowired
+	private PersonRepository personRepository;
+
 
 	@Autowired
 	private CategorieServices categorieServices;
-=======
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
+
+	@Autowired
+	private CommandeServices commandeServices;
 
 
 
@@ -52,12 +58,7 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
-		Iterable<Person> clients = personServices.getClients();
-		for (Person client : clients ){
-			System.out.println(client);
-		}
-*/
+
 
 		//test of users
 		Users admin = new Users();
@@ -83,108 +84,100 @@ public class WmsApplication implements CommandLineRunner {
 		emp.setRefemplacement("AZ1234");
 		//emplacementServices.updateEmplacement(Long.valueOf(1),emp);
 
-<<<<<<< HEAD
-		// tst de creation de client et fournisseur
 
-		Person client = new Person()  ;
-
-=======
-	/*
-		Person client = new Person()  ;
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
-		client.setName("SahlTr7el");
-		client.setMail("sahltr7el@gmail.com");
-		client.setAdress("Rabat");
-		client.setPhone("0612345678");
-		client.setImage("azertyui");
-<<<<<<< HEAD
-		client.setRole(true);
-		System.out.println(client);
-		personServices.saveCustomer(client);
+		// test de creation de client et fournisseur
 
 
-		Person four = new Person()  ;
-=======
-		System.out.println(client);
-		personServices.saveCustomer(client);
 
-		Person four = new Person()  ;
 
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
-		four.setName("ensias");
-		four.setMail("ensias@gmail.com");
-		four.setAdress("Rabat");
-		four.setPhone("0699764567");
-<<<<<<< HEAD
-		four.setRole(false);
-		personServices.saveSupplier(four);
 
-		// test de modification de client et fournisseur
-		/*
 		Person client1 = new Person()  ;
+		client1.setName("Clien1");
+		client1.setMail("client1@gmail.com");
 		client1.setAdress("Rabat");
+		client1.setPhone("0612345678");
+		client1.setImage("azertyui");
 		client1.setRole(true);
-		personServices.updatePerson(Long.valueOf(1),client1);
+		Person client2 = new Person()  ;
+		client2.setName("Clien2");
+		client2.setMail("client2@gmail.com");
+		client2.setAdress("Casablanca");
+		client2.setPhone("0612345678");
+		client2.setImage("azertyui");
+		client2.setRole(true);
+		personServices.saveCustomer(client1);
+		personServices.saveCustomer(client2);
+
 
 		Person four1 = new Person()  ;
-		four1.setRole(false);
+		four1.setName("fournisseur1");
+		four1.setMail("ff1@gmail.com");
 		four1.setAdress("Rabat");
-		personServices.updatePerson(Long.valueOf(2),four1);
-		/*
-=======
+		four1.setPhone("0699764567");
+		four1.setRole(false);
+		personServices.saveSupplier(four1);
+		Person four2 = new Person()  ;
+		four2.setName("fournisseur2");
+		four2.setMail("ff2@gmail.com");
+		four2.setAdress("casablanca");
+		four2.setPhone("0699764567");
+		four2.setRole(false);
+		personServices.saveSupplier(four2);
 
 
+
+
+
+
+
+
+/*
 		personServices.saveSupplier(four);
 
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
 		Transport transport = new Transport();
 		transport.setMatricule("AZ123456");
 		transportServices.saveTransport(transport);
 */
-		Composante composante = new Composante();
-<<<<<<< HEAD
-=======
-		Composante c = new Composante();
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
-		composante.setType(false);
-		composante.setName("AZE1234");
-		composante.setQuantity(100);
-		composante.setSeuil(10);
-<<<<<<< HEAD
+
+
+
+
+		Categorie cat1 = new Categorie();
+		cat1.setCategorie_name("categories 1 ");
+		cat1.setCategorie_description("L'outil de production représente un investissement important  ...");
+		categorieServices.saveCategories(cat1);
+		Categorie cat2 = new Categorie();
+		cat2.setCategorie_name("categories 2 ");
+		cat2.setCategorie_description("L'outil de production représente pour la categorie 3  ...");
+		categorieServices.saveCategories(cat2);
 
 		Composante composante1 = new Composante();
 		composante1.setType(false);
 		composante1.setName("RSD1234");
 		composante1.setQuantity(300);
 		composante1.setSeuil(25);
-
+		composante1.setCategorie(cat1);
 		Composante composante2 = new Composante();
 		composante2.setType(false);
-		composante2.setName("AZ00221");
-		composante2.setQuantity(120);
+		composante2.setName("AZ222222");
+		composante2.setQuantity(220);
 		composante2.setSeuil(14);
-
-		composantServices.saveComposante(composante);
+		composante1.setCategorie(cat2);
 		composantServices.saveComposante(composante1);
 		composantServices.saveComposante(composante2);
-		//Composante c = new Composante();
-		//c.setQuantity(200);
-		//composantServices.updateComposante(Long.valueOf(1),c);
 
-		Categorie cat = new Categorie();
-		cat.setName("categories 1 ");
-		cat.setDescription("L'outil de production représente un investissement important ; la composante de main-d'oeuvre dans le prix de revient est relativement faible. Les modifications ...");
-		categorieServices.saveCategories(cat);
+		List<Composante> composantes = new ArrayList<Composante>(){};
+		composantes.add(composantServices.findComposanteById(Long.valueOf(1)));
+		composantes.add(composantServices.findComposanteById(Long.valueOf(6)));
 
-		Categorie cat1 = new Categorie();
-		cat1.setName("categories 1");
-		//categorieServices.updateCategories(Long.valueOf(1),cat1);
 
-=======
-		//composantServices.saveComposante(composante);
-		c.setQuantity(200);
-		composantServices.updateComposante(Long.valueOf(1),c);
->>>>>>> f2b7a46a917d3335c2b16ea6dd0df5d10ac97fd4
+
+
+		Commande cmd = new Commande();
+		cmd.setPerson(personServices.getPersonById(Long.valueOf(1)));
+		cmd.setComposantes(composantes);
+		cmd.setUser(usersServices.getUserByName("mohamed"));
+		commandeServices.saveReceptionCmd(cmd);
 
 	}
 

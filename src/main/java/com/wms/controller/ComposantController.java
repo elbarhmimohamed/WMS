@@ -1,11 +1,17 @@
 package com.wms.controller;
 
+import com.wms.model.personne.Person;
+import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
+import com.wms.services.CategorieServices;
 import com.wms.services.ComposantServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
@@ -14,12 +20,22 @@ public class ComposantController {
     @Autowired
     private ComposantServices composantServices;
 
-/*
-    @PostMapping("/CreateComposant")
-    public Composante createComposant(@RequestBody Composante composante) {
-        return composantServices.saveComposante(composante);
+    @Autowired
+    private CategorieServices categorieServices;
+    //--------- table of article
+
+    @GetMapping("/article")
+    public String articlePage(Model model) {
+        Iterable<Composante> articles = composantServices.getAllComposants();
+        Iterable<Categorie> categories = categorieServices.getAllCategories();
+        model.addAttribute("articles",articles);
+        model.addAttribute("categories",categories);
+        model.addAttribute("composante", new Composante());
+        model.addAttribute("composante_id", new Composante());
+        return "/page/article";
     }
-*/
+
+
     @GetMapping("/composants/{id}")
     public Composante getComposants(@PathVariable("id") final Long id) {
         Optional<Composante> comp = composantServices.getComposanteById(id);
@@ -30,49 +46,45 @@ public class ComposantController {
         }
     }
 
-    @GetMapping("/cmposants")
-    public Iterable<Composante> getComposants() {
-        return composantServices.getAllComposants();
-    }
-
-
-    @PutMapping("/updatecomposant/{id}")
-    public Composante updateComposant(@PathVariable("id") final Long id, @RequestBody Composante composante) {
-        Optional<Composante> e = composantServices.getComposanteById(id);
-        if(e.isPresent()) {
-            Composante currentComposant = e.get();
-
-            String name = composante.getName();
-            if(name != null) {
-                currentComposant.setName(name);
-            }
-            Long seuil = composante.getSeuil();
-            if (seuil != 0 ){
-                currentComposant.setSeuil(seuil);
-            }
-            Long qte = composante.getQuantity();
-            if (qte != 0 ){
-                currentComposant.setQuantity(seuil);
-            }
-            Boolean type = composante.isType();
-            if(type != currentComposant.isType()) {
-                currentComposant.setType(type);;
-            }
 
 
 
-            composantServices.saveComposante(currentComposant);
-            return currentComposant;
-        } else {
-            return null;
+    //------------ modifier
+
+        @PostMapping("/modifierarticle")
+        public String modifierarticle(Composante composante ,BindingResult result, Model model) {
+
+            Categorie cat = categorieServices.getCategorieByName(composante.getCategorie().getCategorie_name());
+            composante.setCategorie(cat);
+
+            composantServices.updateComposante(composante.getId(), composante);
+            return "redirect:/article";
+
         }
+
+//-------ajouter
+
+    @PostMapping("/ajouterarticle")
+    public String ajouterArticle(Composante composante ,BindingResult result, Model model) {
+        Categorie cat = categorieServices.getCategorieByName(composante.getCategorie().getCategorie_name());
+        composante.setCategorie(cat);
+        composantServices.saveComposante(composante);
+        return "redirect:/article";
+    }
+    @PostMapping("/ajouterproduit")
+    public String ajouterProduit(Composante composante, BindingResult result, Model model) {
+        Categorie cat = categorieServices.getCategorieByName(composante.getCategorie().getCategorie_name());
+        composante.setCategorie(cat);
+        composantServices.saveProduct(composante);
+        return "redirect:/article";
+    }
+//--------------delete
+
+    @PostMapping("/supprimerarticle")
+    public String supprimerArticle(Composante composante_id, BindingResult result, Model model) {
+        composantServices.deleteComposante(composante_id.getId());
+        return "redirect:/article";
     }
 
-
-
-    @DeleteMapping("/deletecomposant/{id}")
-    public void deleteComposant(@PathVariable("id") final Long id) {
-        composantServices.deleteComposante(id);
-    }
 
 }
