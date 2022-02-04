@@ -167,8 +167,8 @@ public class WmsApplication implements CommandLineRunner {
 		composantServices.saveComposante(composante2);
 
 		List<Composante> composantes = new ArrayList<Composante>(){};
-		composantes.add(composantServices.findComposanteById(Long.valueOf(1)));
-		composantes.add(composantServices.findComposanteById(Long.valueOf(6)));
+		composantes.add(composantServices.getComposanteById(Long.valueOf(1)));
+		composantes.add(composantServices.getComposanteById(Long.valueOf(6)));
 
 
 
@@ -177,7 +177,7 @@ public class WmsApplication implements CommandLineRunner {
 		cmd.setPerson(personServices.getPersonById(Long.valueOf(1)));
 		cmd.setComposantes(composantes);
 		cmd.setUser(usersServices.getUserByName("mohamed"));
-		commandeServices.saveReceptionCmd(cmd);
+		//commandeServices.saveReceptionCmd(cmd);
 
 	}
 

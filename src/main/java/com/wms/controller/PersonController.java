@@ -48,9 +48,9 @@ public class PersonController {
 
     @GetMapping("/person/{id}")
     public Person getPerson(@PathVariable("id") final Long id) {
-        Optional<Person> person = personServices.getPerson(id);
-        if(person.isPresent()) {
-            return person.get();
+        Person person = personServices.getPersonById(id);
+        if(person != null) {
+            return person;
         } else {
             return null;
         }

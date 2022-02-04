@@ -23,6 +23,9 @@ public interface CommandeRepository extends JpaRepository<Commande,Long> {
     @Query("SELECT u FROM Commande u WHERE u.type = false ")
     public Iterable<Commande> findAllReceptionCommande();
 
+    @Query("SELECT u FROM Commande u WHERE u.id = ?1 ")
+    public Commande findCommandeById(long id);
+
 
     @Modifying
     @Query("UPDATE Commande u SET u.date = ?2 WHERE u.id = ?1")

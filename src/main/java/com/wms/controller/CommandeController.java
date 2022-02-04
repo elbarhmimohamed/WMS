@@ -44,9 +44,9 @@ public class CommandeController {
 
     @GetMapping("/Commande/{id}")
     public Commande getCommande(@PathVariable("id") final Long id) {
-        Optional<Commande> commande = commandeServices.getCommandeById(id);
-        if(commande.isPresent()) {
-            return commande.get();
+        Commande commande = commandeServices.getCommandeById(id);
+        if(commande != null) {
+            return commande;
         } else {
             return null;
         }

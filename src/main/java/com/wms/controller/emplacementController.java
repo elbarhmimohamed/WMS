@@ -44,7 +44,7 @@ public class emplacementController {
 
     @PostMapping("/process_creating_emplacement")
     public String processCreatingEmplacement(Emplacement emplacement) {
-        Optional<Emplacement> emp = emplacementServices.getEmplacemetByRef(emplacement.getRefemplacement());
+        Emplacement emp = emplacementServices.getEmplacemetByRef(emplacement.getRefemplacement());
         //if (user1 == null || !user1.getEmail().equals(user.getEmail())) {
         if (emp == null ) {
             emplacementServices.saveEmplacement(emplacement);

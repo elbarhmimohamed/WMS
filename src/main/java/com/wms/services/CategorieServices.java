@@ -20,7 +20,7 @@ public class CategorieServices {
     }
 
 
-    public Optional<Categorie> getCategorieById(final Long id){ return categoriesRepository.findById(id);}
+    public Categorie getCategorieById(final Long id){ return categoriesRepository.findCategorieById(id);}
     public Categorie getCategorieByName(final String name){ return categoriesRepository.findCategorieByName(name);}
 
     public void deleteCategories(final Long id) {
@@ -43,18 +43,16 @@ public class CategorieServices {
             String name = categorie.getCategorie_name();
             String desc = categorie.getCategorie_description();
 
-            if(name != null || desc != null  ){
-                if(name != null) {
+
+                if(name != null && name.length() > 1) {
                     categoriesRepository.updateNameofCat(id,name);
                 }
-                if(desc != null) {
+                if(desc != null && desc.length() > 6 ) {
                     categoriesRepository.updateDescofCat(id,desc);
                 }
 
-            }
-            else{
-                System.out.println( "aucunne modification !!! ");
-            }
+
+
 
         } else {
             System.out.println( "Error de modification ");

@@ -36,15 +36,6 @@ public class ComposantController {
     }
 
 
-    @GetMapping("/composants/{id}")
-    public Composante getComposants(@PathVariable("id") final Long id) {
-        Optional<Composante> comp = composantServices.getComposanteById(id);
-        if(comp.isPresent()) {
-            return comp.get();
-        } else {
-            return null;
-        }
-    }
 
 
 
@@ -65,10 +56,10 @@ public class ComposantController {
 //-------ajouter
 
     @PostMapping("/ajouterarticle")
-    public String ajouterArticle(Composante composante ,BindingResult result, Model model) {
-        Categorie cat = categorieServices.getCategorieByName(composante.getCategorie().getCategorie_name());
-        composante.setCategorie(cat);
-        composantServices.saveComposante(composante);
+    public String ajouterArticle(Composante newcomposante ,BindingResult result, Model model) {
+        Categorie cat = categorieServices.getCategorieByName(newcomposante.getCategorie().getCategorie_name());
+        newcomposante.setCategorie(cat);
+        composantServices.saveComposante(newcomposante);
         return "redirect:/article";
     }
     @PostMapping("/ajouterproduit")

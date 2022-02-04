@@ -17,16 +17,18 @@ import java.util.Date;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
 
+    @Query("SELECT u FROM Users u WHERE u.id = ?1")
+    public Users findByID(long id);
 
     @Query("SELECT u FROM Users u WHERE u.email = ?1")
     public Users findByEmail(String email);
 
-    @Query("SELECT u FROM Users u WHERE u.Name = ?1")
+    @Query("SELECT u FROM Users u WHERE u.name = ?1")
     public Users findByName(String name);
 
 
     @Modifying
-    @Query("UPDATE Users u SET u.Name = ?2 WHERE u.id = ?1 ")
+    @Query("UPDATE Users u SET u.name = ?2 WHERE u.id = ?1 ")
     public void updateNameofUser( Long id , String name );
 
     @Modifying

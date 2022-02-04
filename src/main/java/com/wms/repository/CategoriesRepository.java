@@ -18,6 +18,9 @@ public interface CategoriesRepository extends JpaRepository<Categorie,Long> {
     @Query("SELECT u FROM Categorie u WHERE u.categorie_name = ?1")
     public Categorie findCategorieByName(String name);
 
+    @Query("SELECT u FROM Categorie u WHERE u.id = ?1")
+    public Categorie findCategorieById(long id);
+
 
     @Modifying
     @Query("UPDATE Categorie u SET u.categorie_name = ?2 WHERE u.id = ?1 ")

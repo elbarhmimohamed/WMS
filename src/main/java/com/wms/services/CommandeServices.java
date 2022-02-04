@@ -31,8 +31,8 @@ public class CommandeServices {
     }
     //------- find by id ------------
 
-    public Optional<Commande> getCommandeById(final Long id) {
-        return commandeRepository.findById(id);
+    public Commande getCommandeById(final Long id) {
+        return commandeRepository.findCommandeById(id);
     }
 
     //-------------- delete

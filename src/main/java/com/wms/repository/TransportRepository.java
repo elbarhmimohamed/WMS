@@ -10,5 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface TransportRepository extends JpaRepository<Transport, Long> {
 
     @Query("SELECT u FROM Transport u WHERE u.matricule = ?1 ")
-    public Transport findPersonByMatricule(String matricule);
+    public Transport findTransportByMatricule(String matricule);
+
+    @Query("SELECT u FROM Transport u WHERE u.id = ?1 ")
+    public Transport findTransportById(long id);
 }

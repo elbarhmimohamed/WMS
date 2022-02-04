@@ -30,12 +30,12 @@ public class AppController {
     public String GestionStockPage() {
         return "/page/Dashboard/operateur/gestionStock";
     }
-
+/*
     @GetMapping("/utilisateur-config")
     public String utilisateurconfigPage() {
         return "/page/utilisateur-config";
     }
-
+*/
     @GetMapping("/login")
     public String loginPage() {
         return "/page/login";

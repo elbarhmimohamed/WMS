@@ -25,8 +25,7 @@ public class ComposantServices {
         return composantRepository.findAll();
     }
 
-    public Optional<Composante> getComposanteById(final Long id){ return composantRepository.findById(id);}
-    public Composante findComposanteById(final Long id){ return composantRepository.findComposanteById(id);}
+    public Composante getComposanteById(final Long id){ return composantRepository.findComposanteById(id);}
 
     public Optional<Composante> getComposanteByName(final String name){ return composantRepository.findComposanteByName(name);}
 
