@@ -61,10 +61,7 @@ public class AppController {
         return "/page/reception";
     }
 
-    @GetMapping("/commande")
-    public String commandePage() {
-        return "/page/commande";
-    }
+
 
     @GetMapping("/livraison")
     public String livraisonPage() {
@@ -81,7 +78,7 @@ public class AppController {
         return "/page/client";
     }
 
-    @GetMapping("/fournisseur")
+    @GetMapping("/fournisseur1")
     public String fournisseurPage() {
         return "/page/fournisseur";
     }

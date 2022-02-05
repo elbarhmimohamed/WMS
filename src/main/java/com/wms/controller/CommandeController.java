@@ -26,6 +26,13 @@ public class CommandeController {
 
     //--------------- GetPersons -----------
 
+    @GetMapping("/commande")
+    public String commandePage(Model model) {
+        Iterable<Commande> receptionsCmd = commandeServices.getReceptionCmd();
+        model.addAttribute("Commande",receptionsCmd);
+        return "/page/commande";
+    }
+
     @GetMapping("/receptionsCmd")
     public String getReceptionsCmd(Model model) {
         Iterable<Commande> receptionsCmd = commandeServices.getReceptionCmd();

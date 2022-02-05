@@ -20,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService();
@@ -47,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+
         http.authorizeRequests()
 
                 .antMatchers("process_register","updateUserProcess/**","/updateUser/**","/deleteUser/**","/listofUsers","/register","/process_register").hasAuthority("Admin")
@@ -60,7 +62,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutSuccessUrl("/login").permitAll()
                 .and().exceptionHandling().accessDeniedPage("/403")
+                .and()
                 ;
+        http.csrf().disable();
+
+
 
     }
 

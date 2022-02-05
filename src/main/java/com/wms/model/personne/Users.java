@@ -34,8 +34,7 @@ public class Users {
     @Column(name="editing_date")
     private LocalDateTime editing_date;
 
-    @OneToMany(mappedBy = "user")
-    private Collection<Commande> commandes;
+
 
     @OneToMany(mappedBy = "user")
     private Collection<Inventaire> inventaires;

@@ -13,4 +13,5 @@ public interface CommandeRepository extends JpaRepository<Commande,Long> {
 
     @Query("SELECT u FROM Commande u WHERE u.type = false ")
     public Iterable<Commande> findAllReceptionCommande();
+
 }

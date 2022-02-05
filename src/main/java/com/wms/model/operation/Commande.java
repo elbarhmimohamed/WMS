@@ -27,21 +27,15 @@ public class Commande{
     @Column(name="type")     // type = false  => commande fournosseur  // type == true => commande client
     private boolean type;
 
+    @Column(name="reference")
+    private String reference;
 
 
-    @ManyToOne
-    private Users user;
 
     @ManyToOne
     private Person person;
 
-
-
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Composante> composantes;
-
-
-
 
 }

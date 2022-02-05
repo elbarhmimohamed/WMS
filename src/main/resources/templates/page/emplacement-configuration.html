@@ -7,7 +7,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
+    <title>Configuration: Emplacement</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -33,114 +33,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_settings-panel.html -->
-        <div class="theme-setting-wrapper">
-            <div id="settings-trigger"><i class="ti-settings"></i></div>
-            <div id="theme-settings" class="settings-panel">
-                <i class="settings-close ti-close"></i>
-                <p class="settings-heading">SIDEBAR SKINS</p>
-                <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-                <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
-                <p class="settings-heading mt-2">HEADER SKINS</p>
-                <div class="color-tiles mx-0 px-4">
-                    <div class="tiles success"></div>
-                    <div class="tiles warning"></div>
-                    <div class="tiles danger"></div>
-                    <div class="tiles info"></div>
-                    <div class="tiles dark"></div>
-                    <div class="tiles default"></div>
-                </div>
-            </div>
-        </div>
-        <div id="right-sidebar" class="settings-panel">
-            <i class="settings-close ti-close"></i>
-            <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="setting-content">
-                <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
-                    <div class="add-items d-flex px-3 mb-0">
-                        <form class="form w-100">
-                            <div class="form-group d-flex">
-                                <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
-                                <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="list-wrapper px-3">
-                        <ul class="d-flex flex-column-reverse todo-list">
-                            <li>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Team review meeting at 3.00 PM
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Prepare for presentation
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        Resolve all the low priority tickets due today
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li class="completed">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox" checked>
-                                        Schedule meeting for next week
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                            <li class="completed">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox" checked>
-                                        Project review
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                        </ul>
-                    </div>
-                    <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
-                    <div class="events pt-4 px-3">
-                        <div class="wrapper d-flex mb-2">
-                            <i class="ti-control-record text-primary mr-2"></i>
-                            <span>Feb 11 2018</span>
-                        </div>
-                        <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
-                        <p class="text-gray mb-0">The total number of sessions</p>
-                    </div>
-                    <div class="events pt-4 px-3">
-                        <div class="wrapper d-flex mb-2">
-                            <i class="ti-control-record text-primary mr-2"></i>
-                            <span>Feb 7 2018</span>
-                        </div>
-                        <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-                        <p class="text-gray mb-0 ">Call Sarah Graves</p>
-                    </div>
-                </div>
 
-            </div>
-        </div>
         <!-- partial -->
         <!-- partial:sid-bar-admin.html -->
         <div th:replace="../templates/components/sid-bar-admin :: sid-bar-admin"></div>
@@ -174,41 +67,43 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <p class="card-title mb-0">Entrepôt</p>
-                                        <div class="table-responsive">
-                                            <table class="table table-borderless">
-                                                <thead>
-                                                <tr>
-                                                    <th class="pl-0  pb-1 border-bottom">rangée</th>
-                                                    <th class="border-bottom pb-1">niveaux</th>
-                                                    <th class="border-bottom pb-1">rackes</th>
-                                                    <th class="border-bottom pb-1">position</th>
-                                                    <th class="border-bottom pb-1">occupation</th>
-                                                    <th class="border-bottom pb-1">action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="pl-0">A</td>
-                                                    <td class="text-muted">5</td>
-                                                    <td class="text-muted">8</td>
-                                                    <td class="text-muted">3</td>
-                                                    <td><p class="mb-0"><span class="font-weight-bold mr-2">65</span>(2.15%)</p></td>
-<td>
-    <button type="button" class="btn btn-dark btn-icon-text">
-        Modifie
-        <i class="ti-file btn-icon-append"></i>
-    </button>
-    <button type="button" class="btn btn-warning btn-icon-text">
-        <i class="ti-reload btn-icon-prepend"></i>
-        Réinitialiser
-    </button>
-    <button type="button" class="btn btn-danger">Supprimer</button>
+                                        <div th:switch="${configemplacements}">
+                                            <h2 th:case="null">aucun configuration!</h2>
+                                            <div th:case="*">
+                                                <div class="table-responsive">
+                                                    <table class="table table-borderless">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="pl-0  pb-1 border-bottom">rangée</th>
+                                                            <th class="border-bottom pb-1">niveau</th>
+                                                            <th class="border-bottom pb-1">racke</th>
+                                                            <th class="border-bottom pb-1">position</th>
+                                                            <th class="border-bottom pb-1">occupation</th>
+                                                            <th class="border-bottom pb-1">action</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr th:each="config : ${configemplacements}">
 
-</td>
-                                                </tr>
+                                                            <td class="pl-0" th:text="${config.indexRangee}"></td>
+                                                            <td class="text-muted"  th:text="${config.numNiveau}"></td>
+                                                            <td class="text-muted" th:text="${config.numRack}"></td>
+                                                            <td class="text-muted" th:text="${config.numPosition}"></td>
+                                                            <td><p class="mb-0"><span class="font-weight-bold mr-2" th:text="${config.occupation}"></span>%</p></td>
+                                                            <td> <button type="button" class="btn btn-warning btn-icon-text">
+                                                                <i class="ti-reload btn-icon-prepend"></i>
+                                                                Réinitialiser
+                                                            </button>
 
-                                                </tbody>
-                                            </table>
+                                                                <button type="button" class="btn btn-danger" th:data-delete_id="${config.indexRangee}"	data-toggle="modal" data-target="#removeconfigModal">Supprimer</button>
+
+                                                            </td>
+
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -221,96 +116,116 @@
                                             Gere votre entrepot <code>facilement</code> et <code>effecament</code>.
                                         </p>
                                         <div id="accordion">
+
+
                                             <div class="card ">
+
                                                 <div class="card-header bg-success" id="headingOne">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-success" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                           Ajouter nouveaux rangé <i class="mdi mdi-chevron-double-down"></i>
+                                                            Ajouter nouveaux rangé <i class="mdi mdi-chevron-double-down"></i>
                                                         </button>
                                                     </h5>
                                                 </div>
 
-                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-<div>
-                                                                <form class="forms-sample">
+                                                <form action="#" th:action="@{/ajouterrangee}" th:object="${rangee}" method="POST" th:target="_self">
+                                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                        <div class="form-group m-1">
+                                                            <label for="indexRangee">Sélectionner: une index pour le nouveaux rangée</label>
+                                                            <select th:field="*{indexRangee}" class="form-control form-control-lg" id="indexRangee" >
+                                                                <option th:value="'A'" th:text="A"></option>
+                                                                <option th:value="'B'" th:text="B"></option>
+                                                                <option th:value="'C'" th:text="C"></option>
+                                                                <option th:value="'D'" th:text="D"></option>
+                                                                <option th:value="'E'" th:text="E"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group m-1">
+                                                            <label for="numNiveau">Sélectionner:Combien des niveau </label>
+                                                            <select th:field="*{numNiveau}" class="form-control form-control-lg" id="numNiveau" >
+                                                                <option th:value="'1'" th:text="1"></option>
+                                                                <option th:value="'2'" th:text="2"></option>
+                                                                <option th:value="'3'" th:text="3"></option>
+                                                                <option th:value="'4'" th:text="4"></option>
+                                                                <option th:value="'5'" th:text="5"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group m-1">
+                                                            <label for="numRack">Sélectionner: combien des racks </label>
+                                                            <select th:field="*{numRack}" class="form-control form-control-lg" id="numRack" >
+                                                                <option th:value="'1'" th:text="1"></option>
+                                                                <option th:value="'2'" th:text="2"></option>
+                                                                <option th:value="'3'" th:text="3"></option>
+                                                                <option th:value="'4'" th:text="4"></option>
+                                                                <option th:value="'5'" th:text="5"></option>
+                                                            </select>
+                                                        </div>
 
-                                                                    <div class="form-group m-1">
-                                                                        <label for="exampleFormControlSelect1">Sélectionner: une index pour le nouveaux rangée</label>
-                                                                        <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                                                            <option>A</option>
-                                                                            <option>B</option>
-                                                                            <option>C</option>
-                                                                            <option>D</option>
-                                                                            <option>E</option>
-                                                                        </select>
-                                                                    </div>
+                                                        <div class="form-group m-1 mb-3">
+                                                            <label for="numPosition">Sélectionner: combien des position dans chaque rack </label>
+                                                            <select th:field="*{numPosition}" class="form-control form-control-lg" id="numPosition" >
+                                                                <option th:value="'1'" th:text="1"></option>
+                                                                <option th:value="'2'" th:text="2"></option>
+                                                                <option th:value="'3'" th:text="3"></option>
+                                                                <option th:value="'4'" th:text="4"></option>
+                                                                <option th:value="'5'" th:text="5"></option>
+                                                            </select>
+                                                        </div>
+
+                                                        <input type="hidden" th:value="0" th:field="*{occupation}">
+                                                        <button type="submit" class="btn btn-primary mr-2 mb-3">Ajouter</button>
+                                                        <div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
 
 
-                                                                    <div class="form-group m-1">
-                                                                        <label for="exampleFormControlSelect1">Sélectionner: combien des niveaux </label>
-                                                                        <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                                                            <option>A</option>
-                                                                            <option>B</option>
-                                                                            <option>C</option>
-                                                                            <option>D</option>
-                                                                            <option>E</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group m-1">
-                                                                        <label for="exampleFormControlSelect1">Sélectionner: combien des racks </label>
-                                                                        <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                                                            <option>A</option>
-                                                                            <option>B</option>
-                                                                            <option>C</option>
-                                                                            <option>D</option>
-                                                                            <option>E</option>
-                                                                        </select>
-                                                                    </div>
+                                            <div class="card">
+                                                <div class="card-header bg-warning" id="headingThree">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn bg-warning " data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                            Libérer tous les occupations<i class="mdi mdi-chevron-double-down"></i>
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 
-                                                                    <div class="form-group m-1 mb-3">
-                                                                        <label for="exampleFormControlSelect1">Sélectionner: combien des position dans chaque rack </label>
-                                                                        <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                                                            <option>A</option>
-                                                                            <option>B</option>
-                                                                            <option>C</option>
-                                                                            <option>D</option>
-                                                                            <option>E</option>
-                                                                        </select>
-                                                                    </div>
+                                                    <form action="#" th:action="@{/libérerToutRangee}"  method="POST" th:target="_self">
+                                                        <div class="card-body">
+                                                            Voulez vous vraiment Libérer tous les occupations ?
+
+                                                            <button type="submit" class="btn btn-primary mr-2 mb-3">Oui</button>
+                                                        </div>
+
+                                                    </form>
 
 
-                                                                    <button type="submit" class="btn btn-primary mr-2 mb-3">ajouter</button>
-                                                                </form>
-</div>
+
                                                 </div>
                                             </div>
+
                                             <div class="card">
-                                                <div class="card-header bg-warning" id="headingTwo">
+                                                <div class="card-header bg-danger" id="headingTwo">
                                                     <h5 class="mb-0">
-                                                        <button class="btn btn-warning" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                        <button class="btn bg-danger" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                             vide entrepot<i class="mdi mdi-chevron-double-down"></i>
                                                         </button>
 
                                                     </h5>
                                                 </div>
                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        Réinitialiser
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header" id="headingThree">
-                                                    <h5 class="mb-0">
-                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                            Réinitialiser entrepot
-                                                        </button>
-                                                    </h5>
-                                                </div>
-                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        Réinitialiser
-                                                    </div>
+                                                    <form action="#" th:action="@{/supprimerToutRangee}" method="POST" th:target="_self">
+
+
+
+                                                        <div class="card-body">
+                                                            Voulez vous vraiment supprimer touts les rangées ?
+
+
+                                                            <button type="submit" class="btn btn-primary mr-2 mb-3">Oui</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -321,47 +236,88 @@
                             </div>
                         </div>
 
+                        </div>
+                    </div>
+
+                <div class="modal fade" id="removeconfigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form action="#" th:action="@{/supprimerEmplacement}" th:object="${id}" method="POST" th:target="_self">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <p>Voulez vous vraiment supprimer cette rangé ?</p>
+                                    <input type="hidden" th:field="*{indexRangee}" id="delete_id" >
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                    <button  type="submit" class="btn btn-primary" >Oui</button>
+                                </div>
+
+                            </div>
+                        </form>
                     </div>
                 </div>
 
-
             </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:partials/_footer.html -->
-            <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
-            <!-- partial -->
+
+
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.html -->
+                    <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+
         </div>
-        <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- container-scroller -->
 </div>
-<!-- container-scroller -->
 
-<!-- plugins:js -->
-<script src="vendors/js/vendor.bundle.base.js"></script>
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<script src="vendors/chart.js/Chart.min.js"></script>
-<script src="vendors/datatables.net/jquery.dataTables.js"></script>
-<script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-<script src="js/dataTables.select.min.js"></script>
+    </script>
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="vendors/chart.js/Chart.min.js"></script>
+    <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="js/dataTables.select.min.js"></script>
 
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="js/off-canvas.js"></script>
-<script src="js/hoverable-collapse.js"></script>
-<script src="js/template.js"></script>
-<script src="js/settings.js"></script>
-<script src="js/todolist.js"></script>
-<!-- endinject -->
-<!-- Custom js for this page-->
-<script src="js/dashboard.js"></script>
-<script src="js/Chart.roundedBarCharts.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="js/dashboard.js"></script>
+    <script src="js/Chart.roundedBarCharts.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- End custom js for this page-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- End custom js for this page-->
+
+    <script type="text/javascript">
+        $('#removeconfigModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var delete_id = button.data('delete_id')
+            var modal = $(this)
+            modal.find('.modal-body #delete_id').val(delete_id);
+        })
+    </script>
 </body>
 
 </html>

@@ -1,7 +1,9 @@
 package com.wms;
 
 
+import com.wms.model.emplacement.ConfigEmplacement;
 import com.wms.model.emplacement.Emplacement;
+import com.wms.model.operation.Commande;
 import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
@@ -12,6 +14,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -29,6 +33,10 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Autowired
 	private EmplacementServices emplacementServices;
+	@Autowired
+	private ConfigEmplacementServices configEmplacementServices;
+	@Autowired
+	private CommandeServices commandeServices;
 
 
 
@@ -42,13 +50,50 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+
+
+
+
+
+
+		Composante composante = new Composante();
+		composante.setType(false);
+		composante.setName("AZE1234");
+		composante.setQuantity(100);
+		composante.setSeuil(10);
+		composantServices.saveComposante(composante);
+
+		Person four = new Person()  ;
+
+		four.setName("ensias");
+		four.setMail("ensias@gmail.com");
+		four.setAdress("Rabat");
+		four.setPhone("0699764567");
+		personServices.saveSupplier(four);
+
+
+/*
+		Commande commande = new Commande();
+		commande.setType(false);
+		commande.setComposantes(composantServices.getAllComposants());
+		commande.setPerson(personServices.getPerson(1L));
+		commande.setDate(new Date());
+		this.commandeServices.saveReceptionCmd(commande);
+*/
+
+
+
+
+
+
 		/*
 		Iterable<Person> clients = personServices.getClients();
 		for (Person client : clients ){
 			System.out.println(client);
 		}
 */
-
+/*
 		//test of users
 		Users admin = new Users();
 		Users user = new Users();
@@ -69,8 +114,17 @@ public class WmsApplication implements CommandLineRunner {
 		emplacement.setRefemplacement("Z9001");
 		emplacement.setTauxOccupation(80);
 		emplacementServices.saveEmplacement(emplacement);
+		emp.setRefemplacement("AZ1234");*/
+		/*ConfigEmplacement configEmplacement = new ConfigEmplacement();
+		configEmplacement.setIndexRangee("A");
+		configEmplacement.setNumNiveau(4);
+		configEmplacement.setNumRack(4);
+		configEmplacement.setNumPosition(3);
+		configEmplacement.setOccupation(65);
+		configEmplacementServices.saveConfigEmplacement(configEmplacement);*/
+		/*configEmplacementServices.saveConfigEmplacement(configEmplacement);*/
 
-		emp.setRefemplacement("AZ1234");
+
 		//emplacementServices.updateEmplacement(Long.valueOf(1),emp);
 
 	/*
@@ -97,7 +151,7 @@ public class WmsApplication implements CommandLineRunner {
 		transport.setMatricule("AZ123456");
 		transportServices.saveTransport(transport);
 */
-		Composante composante = new Composante();
+		/*Composante composante = new Composante();
 		Composante c = new Composante();
 		composante.setType(false);
 		composante.setName("AZE1234");
@@ -105,7 +159,7 @@ public class WmsApplication implements CommandLineRunner {
 		composante.setSeuil(10);
 		//composantServices.saveComposante(composante);
 		c.setQuantity(200);
-		composantServices.updateComposante(Long.valueOf(1),c);
+		composantServices.updateComposante(Long.valueOf(1),c);*/
 
 	}
 

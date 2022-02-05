@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Data
@@ -17,14 +14,12 @@ import javax.persistence.Table;
 @Table(name = "ConfigEmplacement")
 public class ConfigEmplacement {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int numRangee;
-    private int NumNiveau;
-    private int NumRack;
-
-
-
-
-
+    private String indexRangee;
+    private int numNiveau;
+    private int numRack;
+    private int numPosition;
+    private int occupation;
 }

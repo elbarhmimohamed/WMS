@@ -7,7 +7,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>Configuration: Emplacement</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/feather/feather.css">
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -89,120 +89,41 @@
                     <thead>
                     <tr>
                       <th></th>
-                      <th>01A</th>
-                      <th>01B</th>
-                      <th>01C</th>
-                      <th>02A</th>
-                      <th>02B</th>
-                      <th>02C</th>
-                      <th>03A</th>
-                      <th>03B</th>
-                      <th>03C</th>
+                      <div th:each="ra : ${#numbers.sequence(1, rack)}" >
+                    <div th:each="po: ${#numbers.sequence(1, position)}" >
 
-                      <th></th>
+                      <th th:text="'P'+${po}+'-R0'+${ra}"></th>
+                    </div>
+                    </div>
+
                     </tr>
+
                     </thead>
                     <tbody >
-                    <tr class="bg-warning">
-                      <th style="color: white">A4</th>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn hamza w-100 h-100" data-id="a4-01a" data-toggle="modal" data-target="#exampleModal">
-                          rege
-                        </button>
-                      </td>
-                      <td class="p-0 m-0 ">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
+                    <div th:each="rangee:${configEmplacement} ">
+                      <div th:each="ni: ${#numbers.sequence(1, niveau)} ">
+                        <tr class="bg-warning">
+                          <th style="color: white" th:text="${rangee.indexRangee}+${ni}" ></th>
 
+                          <div th:each="ra : ${#numbers.sequence(1, rack)}" >
+                            <div th:each="po: ${#numbers.sequence(1, position)}" >
 
-                    </tr>
+                              <td class="p-0 m-0 ">
+                                <button type="button" th:text="vide" th:data-delete_id="${rangee.indexRangee}+${ni}+'-R'+${ra}+'-P'+${po}"
+                                        th:data-rangee="${rangee.indexRangee}"
+                                        th:data-niveau="${ni}"
+                                        th:data-rack="${ra}"
+                                        th:data-position="${po}"
+                                        th:data-occup="${rangee.occupation}"
+                                        id='hamza' class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal"></button>
+                              </td>
+                            </div>
+                          </div>
 
-                    <tr class="bg-warning">
-                      <th style="color: white">A3</th>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn hamza w-100 h-100" data-id="a4-01a" data-toggle="modal" data-target="#exampleModal">
-                          rege
-                        </button>
-                      </td>
-                      <td class="p-0 m-0 ">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
-                      <td class="p-0 m-0">
-                        <button type="button" class="btn w-100 h-100" data-toggle="modal" data-target="#exampleModal">
-                          reff
-                        </button>
-                      </td>
+                        </tr>
 
-                    </tr>
+                      </div>
+                    </div>
 
                     </tbody>
                   </table>
@@ -282,7 +203,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">Case reference</span>
                     </div>
-                    <input type="text" class="form-control input-hamza" value="" disabled>
+                    <input type="text" class="form-control input-hamza" id="input-hamza" value="" disabled>
 
                     <div class="table-responsive">
                       <table class="table table-borderless">
@@ -297,11 +218,11 @@
                         </thead>
                         <tbody>
                         <tr>
-                          <td class="pl-0">A</td>
-                          <td class="text-muted">5</td>
-                          <td class="text-muted">8</td>
-                          <td class="text-muted">3</td>
-                          <td><p class="mb-0"><span class="font-weight-bold mr-2">65</span>(2.15%)</p></td>
+                          <td id="rangee"class="pl-0"></td>
+                          <td id="niveau" class="text-muted"></td>
+                          <td id="rack"class="text-muted"></td>
+                          <td id="position" class="text-muted"></td>
+                          <td ><p class="mb-0"><span id="occup" class="font-weight-bold mr-2"></span>%</p></td>
 
                         </tr>
 
@@ -464,14 +385,7 @@
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-<script>
-  $(document).on("click", ".hamza", function () {
-    var reff = $(this).data('id');
-    $(".input-hamza").val( reff );
 
-    $('.modal fade').modal('show');
-  });
-</script>
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
@@ -485,6 +399,1857 @@
   <script src="js/dashboard.js"></script>
   <script src="js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+    <script type="text/javascript">
+      $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var delete_id=button.data('delete_id')
+        var rangee = button.data('rangee')
+        var niveau = button.data('niveau')
+        var rack = button.data('rack')
+        var position = button.data('position')
+        var occupation = button.data('occupation')
+        v
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $(this)
+        modal.find('.modal-body #input-hamza').val(delete_id);
+        var modal = $(this)
+        modal.find('.modal-body #rangee').text(rangee);
+        var modal = $(this)
+        modal.find('.modal-body #niveau').text(niveau);
+        var modal = $(this)
+        modal.find('.modal-body #rack').text(rack);
+        var modal = $(this)
+        modal.find('.modal-body #position').text(position);
+        var modal = $(this)
+        modal.find('.modal-body #occup').text(occupation);
+      })
+    </script>
+
+
 </body>
 
 </html>
