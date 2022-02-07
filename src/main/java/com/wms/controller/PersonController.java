@@ -2,12 +2,17 @@ package com.wms.controller;
 
 
 import com.wms.model.personne.Person;
+import com.wms.model.stock.Categorie;
+import com.wms.model.stock.Composante;
 import com.wms.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Column;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 
@@ -21,95 +26,87 @@ public class PersonController {
 
     //--------------- GetPersons -----------
 
-    @GetMapping("/customer")
+    @GetMapping("/Clients")
     public String getClients(Model model) {
         Iterable<Person> clients = personServices.getClients();
-        model.addAttribute("person",clients);
-        model.addAttribute("isCustomer", true);
-        return "page/person/person";
+        model.addAttribute("clients",clients);
+        model.addAttribute("person_id",new Person());
+        model.addAttribute("newperson",new Person());
+        model.addAttribute("person",new Person());
+        return "/page/client";
     }
-    @GetMapping("/fournisseur")
+    @GetMapping("/fournisseurs")
     public String getFournisseur(Model model) {
         Iterable<Person> fournisseurs = personServices.getFournisseurs();
-        model.addAttribute("isCustomer", false);
-        model.addAttribute("person",fournisseurs);
-        return "page/person/person";
+        model.addAttribute("fournisseurs",fournisseurs);
+        model.addAttribute("person_id",new Person());
+        model.addAttribute("newperson",new Person());
+        model.addAttribute("person",new Person());
+        return "/page/fournisseur";
     }
 
 
     @GetMapping("/person/{id}")
     public Person getPerson(@PathVariable("id") final Long id) {
-        Optional<Person> person = personServices.getPerson(id);
-        if(person.isPresent()) {
-            return person.get();
+        Person person = personServices.getPersonById(id);
+        if(person != null) {
+            return person;
         } else {
             return null;
         }
     }
     //---------------- Save ---------------------
-    @PostMapping("/savePerson")
-    public Person createPerson(@RequestBody Person person) {
-        if(person.isRole()){
-            return personServices.saveCustomer(person);
-        }
 
-        return personServices.saveSupplier(person);
+
+
+
+
+    @PostMapping("/ajouterclient")
+    public String ajouterClient(Person newperson ,BindingResult result, Model model) {
+        personServices.saveCustomer(newperson);
+        return "redirect:/Clients";
+
+    }
+
+
+    @PostMapping("/ajouterfournisseur")
+    public String ajouterFournisseur(Person newperson ,BindingResult result, Model model) {
+        personServices.saveSupplier(newperson);
+        return "redirect:/fournisseurs";
+
     }
 
 
 
     //---------------- update ------------------------
 
-    @PutMapping("/Updateperosn/{id}")
-    public Person updatePseron(@PathVariable("id") final Long id, @RequestBody Person person) {
-        Optional<Person> e = personServices.getPerson(id);
-        if(e.isPresent()) {
-            Person currentPerson = e.get();
 
-            String name = person.getName();
-            if(name != null) {
-                currentPerson.setName(name);
-            }
-            String mail = person.getMail();
-            if(mail != null) {
-                currentPerson.setMail(mail);
-            }
+    @PostMapping("/modifierperson")
+    public String modifierclient(Person person ,BindingResult result, Model model ) {
+        boolean role = personServices.getPersonById(person.getId()).isRole();
+        personServices.updatePerson(person.getId(),person);
 
-            String adress = person.getAdress();
-            if(adress != null) {
-                currentPerson.setAdress(adress);
-            }
-            String phone = person.getPhone();
-            if(phone != null) {
-                currentPerson.setPhone(phone);
-            }
-            boolean status = person.isStatus();
-            if(status != currentPerson.isStatus()) {
-                currentPerson.setStatus(status);
-            }
-            String image = person.getImage();
-            if(image != null) {
-                currentPerson.setImage(image);
-            }
-            if(person.isRole()){
-                personServices.saveCustomer(currentPerson);
-            }
-            else {
-                personServices.saveSupplier(currentPerson);
-            }
-
-            return currentPerson;
-        } else {
-            return null;
+        if ( role ){
+            return "redirect:/Clients";
         }
+        return "redirect:/fournisseurs";
+
     }
+
+
 
     //--------------- Delete -------------
-
-    @DeleteMapping("/deletePerson/{id}")
-    public void deletePerson(@PathVariable("id") final Long id) {
-        personServices.deletePerson(id);
+    @PostMapping("/supprimerperson")
+    public String supprimerPerson(Person person_id, BindingResult result, Model model) {
+        boolean role = personServices.getPersonById(person_id.getId()).isRole();
+        personServices.deletePerson(person_id.getId());
+        if (role){
+            return "redirect:/Clients";
+        }
+        return "redirect:/fournisseurs";
     }
+
+
 
 
 }

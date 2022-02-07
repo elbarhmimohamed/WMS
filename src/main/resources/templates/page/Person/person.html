@@ -17,7 +17,7 @@
   <h4><a th:href="@{/}">Click here to go home</a></h4>
   <br>
   <div>
-    <h1  th:text="${isCustomer} ? 'List of Customer' : 'List of Supplier'"></h1>
+    <h1 'List of Customer' ></h1>
   </div>
 
   <div  >
@@ -25,30 +25,28 @@
       <thead class="thead-dark">
       <tr>
         <th>ID</th>
-        <th>E-mail</th>
+
 
         <th>Name</th>
-        <th>Adress</th>
+        <th>E-mail</th>
+        <th>Adresse</th>
         <th>Phone</th>
         <th>Status</th>
-        <th>Image</th>
         <th>Modifier</th>
         <th>Supprimer</th>
       </tr>
       </thead>
       <tbody >
-      <tr th:each="person: ${person}">
+      <tr th:each="person: ${clients}">
         <td th:text="${person.id}">User ID</td>
         <td th:text="${person.name}"> Name</td>
         <td th:text="${person.mail}">E-mail</td>
         <td th:text="${person.adress}">Adress</td>
         <td th:text="${person.phone}">phone</td>
         <td th:text="${person.status}">status</td>
-        <td th:text="${person.image}">image</td>
-<!--
-        <td th:if="${ #request.userPrincipal.principal.fullName != user.name}" > <a  class="btn btn-warning" th:href="@{/updateUser/{id}(id=${user.id})}">Modifier</a></td>
-        <td th:if="${ #request.userPrincipal.principal.fullName != user.name}"> <a  class="btn btn-danger" th:href="@{/deleteUser/{id}(id=${user.id})}">Supprimer</a></td>
-     -->
+        <td> <a  class="btn btn-warning" th:href="@{/Updateperosn/{id}(id=${person.id})}">Modifier</a></td>
+        <td> <a  class="btn btn-danger" th:href="@{/deleteperson/{id}(id=${person.id})}">Supprimer</a></td>
+
       </tr>
       </tbody>
     </table>

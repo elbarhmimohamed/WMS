@@ -7,9 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Value;
 import org.springframework.lang.Nullable;
 
+import org.springframework.transaction.annotation.Transactional;
+
+
 import javax.persistence.*;
 import java.util.Collection;
 
+@Transactional
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,6 +38,6 @@ public class Person {
     @Column(name = "image")
     private String image;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "fournisseur")
     private Collection<Commande> commandes;
 }

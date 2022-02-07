@@ -27,9 +27,10 @@ public class UsersServices {
     @Autowired
     private UsersRepository usersRepository;
 
-    public Optional<Users> getUser(final Long id) {
-        return usersRepository.findById(id);
+    public Users getUserByID(final Long id) {
+        return usersRepository.findByID(id);
     }
+
     public Users getUserByName(final String name) {
         Users user = usersRepository.findByName(name);
         if (user == null) {
@@ -75,24 +76,21 @@ public class UsersServices {
             String password = user.getPassword();
 
             if(name != null || email != null || role != null || password != null ){
-            if(name != null) {
+            if(name != null && name.length() > 5)  {
                 usersRepository.updateNameofUser(id,name);
             }
-            if(email != null) {
+            if(email != null && email.length() > 6) {
                 usersRepository.updateEmailofUser(id,email);
             }
-            if(role != null) {
+            if(role != null && role.length() > 4) {
                 usersRepository.updateRoleofUser(id,role);
             }
-            if(password != null) {
-                usersRepository.updateEmailofUser(id,BCryptPasswordEncod(password));
+            if(password != null && password.length() > 4 ) {
+                usersRepository.updatePAsswordofUser(id,BCryptPasswordEncod(password));
             }
 
                 usersRepository.updateEditingDateofUser(id, LocalDateTime.now());
 
-            }
-            else{
-                System.out.println( "aucunne modification !!! ");
             }
 
         } else {

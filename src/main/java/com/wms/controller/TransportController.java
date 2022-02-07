@@ -27,15 +27,7 @@ public class TransportController {
     }
 
 
-    @GetMapping("/transport/{id}")
-    public Transport getTransport(@PathVariable("id") final Long id) {
-        Optional<Transport> transport = transportServices.getTransport(id);
-        if(transport.isPresent()) {
-            return transport.get();
-        } else {
-            return null;
-        }
-    }
+
     //---------------- Save ---------------------
     @PostMapping("/saveTrnasport")
     public Transport createTransport(@RequestBody Transport transport) {
@@ -50,9 +42,9 @@ public class TransportController {
 
     @PutMapping("/Updatetransport/{id}")
     public Transport updateTransport(@PathVariable("id") final Long id, @RequestBody Transport transport) {
-        Optional<Transport> e = transportServices.getTransport(id);
-        if(e.isPresent()) {
-            Transport currentTransport = e.get();
+        Transport e = transportServices.getTransportById(id);
+        if(e != null) {
+            Transport currentTransport = e;
 
             String mat = transport.getMatricule();
             if(mat != null) {

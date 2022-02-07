@@ -20,8 +20,8 @@ public class TransportServices {
 
 
 
-    public Optional<Transport> getTransport(final Long id) {
-        return transportRepository.findById(id);
+    public Transport getTransportById(final Long id) {
+        return transportRepository.findTransportById(id);
     }
 
     public Iterable<Transport> getTransports() {
@@ -29,7 +29,7 @@ public class TransportServices {
     }
 
     public  Transport getTransportByMatricule(String matricule){
-        Transport transport = transportRepository.findPersonByMatricule(matricule);
+        Transport transport = transportRepository.findTransportByMatricule(matricule);
         if(transport != null){
             return  transport;
         }
@@ -41,7 +41,7 @@ public class TransportServices {
     }
 
     public Transport saveTransport(Transport transport) {
-        Transport transport1 = transportRepository.findPersonByMatricule(transport.getMatricule());
+        Transport transport1 = transportRepository.findTransportByMatricule(transport.getMatricule());
         if(transport1 == null){
             return  transportRepository.save(transport);
         }

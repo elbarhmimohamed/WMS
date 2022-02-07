@@ -4,10 +4,16 @@ package com.wms;
 import com.wms.model.emplacement.ConfigEmplacement;
 import com.wms.model.emplacement.Emplacement;
 import com.wms.model.operation.Commande;
+import com.wms.model.operation.LigneCommande;
 import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
+
+import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
+import com.wms.repository.CommandeRepository;
+import com.wms.repository.LigneCommandeRepository;
+import com.wms.repository.PersonRepository;
 import com.wms.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Collection;
 import java.util.List;
 
 @SpringBootApplication
@@ -38,6 +45,21 @@ public class WmsApplication implements CommandLineRunner {
 	@Autowired
 	private CommandeServices commandeServices;
 
+	@Autowired
+	private PersonRepository personRepository;
+
+
+	@Autowired
+	private CategorieServices categorieServices;
+
+	@Autowired
+	private LigneCommandeRepository ligneCommandeRepository;
+
+	@Autowired
+	private CommandeRepository commandeRepository;
+
+
+
 
 
 	public static void main(String[] args) {
@@ -53,49 +75,8 @@ public class WmsApplication implements CommandLineRunner {
 
 
 
-
-
-
-
-		Composante composante = new Composante();
-		composante.setType(false);
-		composante.setName("AZE1234");
-		composante.setQuantity(100);
-		composante.setSeuil(10);
-		composantServices.saveComposante(composante);
-
-		Person four = new Person()  ;
-
-		four.setName("ensias");
-		four.setMail("ensias@gmail.com");
-		four.setAdress("Rabat");
-		four.setPhone("0699764567");
-		personServices.saveSupplier(four);
-
-
-/*
-		Commande commande = new Commande();
-		commande.setType(false);
-		commande.setComposantes(composantServices.getAllComposants());
-		commande.setPerson(personServices.getPerson(1L));
-		commande.setDate(new Date());
-		this.commandeServices.saveReceptionCmd(commande);
-*/
-
-
-
-
-
-
-		/*
-		Iterable<Person> clients = personServices.getClients();
-		for (Person client : clients ){
-			System.out.println(client);
-		}
-*/
-/*
 		//test of users
-		Users admin = new Users();
+		/*Users admin = new Users();
 		Users user = new Users();
 
 		admin.setName("mohamed");
@@ -127,39 +108,149 @@ public class WmsApplication implements CommandLineRunner {
 
 		//emplacementServices.updateEmplacement(Long.valueOf(1),emp);
 
-	/*
-		Person client = new Person()  ;
-		client.setName("SahlTr7el");
-		client.setMail("sahltr7el@gmail.com");
-		client.setAdress("Rabat");
-		client.setPhone("0612345678");
-		client.setImage("azertyui");
-		System.out.println(client);
-		personServices.saveCustomer(client);
 
-		Person four = new Person()  ;
-
-		four.setName("ensias");
-		four.setMail("ensias@gmail.com");
-		four.setAdress("Rabat");
-		four.setPhone("0699764567");
+		// test de creation de client et fournisseur
 
 
+
+/*
+
+		Person client1 = new Person()  ;
+		client1.setName("Clien1");
+		client1.setMail("client1@gmail.com");
+		client1.setAdress("Rabat");
+		client1.setPhone("0612345678");
+		client1.setImage("azertyui");
+		client1.setRole(true);
+		Person client2 = new Person()  ;
+		client2.setName("Clien2");
+		client2.setMail("client2@gmail.com");
+		client2.setAdress("Casablanca");
+		client2.setPhone("0612345678");
+		client2.setImage("azertyui");
+		client2.setRole(true);
+		personServices.saveCustomer(client1);
+		personServices.saveCustomer(client2);
+
+
+		Person four1 = new Person()  ;
+		four1.setName("fournisseur1");
+		four1.setMail("ff1@gmail.com");
+		four1.setAdress("Rabat");
+		four1.setPhone("0699764567");
+		four1.setRole(false);
+		personServices.saveSupplier(four1);
+		Person four2 = new Person()  ;
+		four2.setName("fournisseur2");
+		four2.setMail("ff2@gmail.com");
+		four2.setAdress("casablanca");
+		four2.setPhone("0699764567");
+		four2.setRole(false);
+		personServices.saveSupplier(four2);
+
+*/
+
+
+
+
+
+
+/*
 		personServices.saveSupplier(four);
 
 		Transport transport = new Transport();
 		transport.setMatricule("AZ123456");
 		transportServices.saveTransport(transport);
 */
-		/*Composante composante = new Composante();
-		Composante c = new Composante();
-		composante.setType(false);
-		composante.setName("AZE1234");
-		composante.setQuantity(100);
-		composante.setSeuil(10);
-		//composantServices.saveComposante(composante);
-		c.setQuantity(200);
-		composantServices.updateComposante(Long.valueOf(1),c);*/
+
+
+/*
+		Person four2 = new Person()  ;
+		four2.setName("fournisseur2");
+		four2.setMail("ff2@gmail.com");
+		four2.setAdress("casablanca");
+		four2.setPhone("0699764567");
+		four2.setRole(false);
+		personServices.saveSupplier(four2);
+
+		Categorie cat1 = new Categorie();
+		cat1.setCategorie_name("categories 1 ");
+		cat1.setCategorie_description("L'outil de production représente un investissement important  ...");
+		categorieServices.saveCategories(cat1);
+		Categorie cat2 = new Categorie();
+		cat2.setCategorie_name("categories 2 ");
+		cat2.setCategorie_description("L'outil de production représente pour la categorie 3  ...");
+		categorieServices.saveCategories(cat2);
+
+		Composante composante1 = new Composante();
+		composante1.setType(false);
+		composante1.setName("RSD1234");
+		composante1.setQuantity(300);
+		composante1.setSeuil(25);
+		composante1.setCategorie(cat1);
+		Composante composante2 = new Composante();
+		composante2.setType(false);
+		composante2.setName("AZ222222");
+		composante2.setQuantity(220);
+		composante2.setSeuil(14);
+		composante1.setCategorie(cat2);
+		composantServices.saveComposante(composante1);
+		composantServices.saveComposante(composante2);
+
+		List<Composante> composantes = new ArrayList<Composante>(){};
+		composantes.add(composantServices.getComposanteById(Long.valueOf(1)));
+		composantes.add(composantServices.getComposanteById(Long.valueOf(6)));
+
+
+
+
+		Commande cmd = new Commande();
+		cmd.setPerson(personServices.getPersonById(Long.valueOf(1)));
+		cmd.setComposantes(composantes);
+		cmd.setUser(usersServices.getUserByName("mohamed"));
+		commandeServices.saveReceptionCmd(cmd);
+
+ */
+
+		Categorie cat1 = new Categorie();
+		cat1.setCategorie_name("categories 1 ");
+		cat1.setCategorie_description("L'outil de production représente un investissement important  ...");
+		categorieServices.saveCategories(cat1);
+
+		Composante composante1 = new Composante();
+		composante1.setType(false);
+		composante1.setName("RSD1234");
+		composante1.setQuantity(300);
+		composante1.setSeuil(25);
+		composantServices.saveComposante(composante1);
+
+		Person four2 = new Person()  ;
+		four2.setName("fournisseur2");
+		four2.setMail("ff2@gmail.com");
+		four2.setAdress("casablanca");
+		four2.setPhone("0699764567");
+		four2.setRole(false);
+		personServices.saveSupplier(four2);
+
+		/*Commande cmd = new Commande();
+		cmd.setFournisseur(personServices.getPersonById(Long.valueOf(1)));
+		cmd.setReference("cm124778");
+		cmd.setDate(new Date());
+		LigneCommande ligneCommande = new LigneCommande();
+		ligneCommande.setComposante(composantServices.getComposanteById(Long.valueOf(1)));
+		ligneCommande.setPrix(20);
+		ligneCommande.setQuantite(2000);
+		ligneCommandeRepository.save(ligneCommande);
+
+		//List<LigneCommande> ligneCommandes = new ArrayList<>();
+		//ligneCommandes.add(ligneCommandeRepository.getById(4L));
+		//cmd.setLigneCommande(ligneCommandes);
+*/
+
+
+
+
+
 
 	}
 

@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="vendors/select2/select2.min.css">
-    <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+
     <!-- End plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
@@ -27,12 +26,15 @@
     <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
     <link href="dist/css/tabular-input.css" rel="stylesheet" type="text/css">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.css"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.css"/>
 
 
     <!-- endinject -->
-    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="shortcut icon" href="images/favicon.ico"/>
 
 
 </head>
@@ -56,14 +58,17 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Tableau de board : Commande<img  src="images/commande.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de Commande</span>!</span></h6>
+                                <h3 class="font-weight-bold">Tableau de board : Commande<img src="images/commande.png">
+                                </h3>
+                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour <span
+                                        class="text-primary">gérer les bons de Commande</span>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
                                     <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
-                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#CommandeModal">
+                                        <button type="button" class="btn btn-primary btn-md btn-block"
+                                                data-toggle="modal" data-target="#CommandeModal">
                                             <i class="icon-head "></i>
                                             Ajouter un bon de Commande
                                         </button>
@@ -80,42 +85,59 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="table-responsive p-3">
-                                        <table class="table" id="table_id">
-                                            <thead>
-                                            <tr >
-                                                <th>Id</th>
-                                                <th>Référence</th>
-                                                <th>Fournisseur</th>
 
-                                                <th>Date de creation </th>
+                                    <div th:switch="${commande}">
 
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>BR-11111</td>
-                                                <td>Hamza</td>
+                                        <div th:case="*">
+                                            <div class="table-responsive p-3">
+                                                <table class="table table-borderless" id="table_id">
+                                                    <thead>
 
-                                                <td>14/20/2022</td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3">
-                                                        <i class="ti-file btn-icon-prepend"></i>
-                                                        Details
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#CommandeModal">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
-                                                </td>
-                                            </tr>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Référence</th>
+                                                        <th>Fournisseur</th>
+                                                        <th>Date de creation</th>
+                                                        <th>Action</th>
+                                                    </tr>
 
 
+                                                    </thead>
+                                                    <tbody>
 
-                                            </tbody>
-                                        </table>
+
+                                                    <tr th:each="co : ${commande}">
+
+                                                        <td th:text="${co.id}"></td>
+                                                        <td th:text="${co.reference}"></td>
+                                                        <td th:text="${co.fournisseur.name}"></td>
+                                                        <td th:text="${co.date}"></td>
+
+                                                        <td>
+                                                            <button type="button"
+                                                                    class="btn btn-primary btn-icon-text p-lg-3">
+                                                                <i class="ti-file btn-icon-prepend"></i>
+                                                                Details
+                                                            </button>
+                                                            <button type="button" class="btn btn-warning p-lg-3"
+                                                                    data-toggle="modal" data-target="#CommandeModal">
+                                                                Modifier
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${co.id}"
+                                                                    data-toggle="modal" data-target="#removeconfigModal">
+                                                                Supprimer
+                                                            </button>
+                                                        </td>
+
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -123,14 +145,13 @@
                 </div>
 
 
-
             </div>
 
 
-
-
-            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="removeconfigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
+                    <form action="#" th:action="@{/supprimerCommande}" th:object="${commanderemove}" method="POST" th:target="_self">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
@@ -140,15 +161,20 @@
                         </div>
                         <div class="modal-body">
                             Voulez vous vraiment supprimer ce bon de Commande ?
+                            <input type="hidden" th:field="*{id}" id="delete_id" >
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <button type="button" class="btn btn-primary">Oui</button>
+                            <button type="submit" class="btn btn-primary">Oui</button>
                         </div>
                     </div>
+                    </form>
                 </div>
+
             </div>
-            <div class="modal fade" id="CommandeModal" tabindex="-1" role="dialog" aria-labelledby="CommandeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="CommandeModal" tabindex="-1" role="dialog" aria-labelledby="CommandeModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-lg " role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
@@ -157,58 +183,185 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <form action="#" th:action="@{/ajouterCommande}"
+                                       th:object="${commandeAdd}" method="POST"
+                                       th:target="_self">
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="row">
                                         <div class="col-md-12 grid-margin ">
-                                            <div class="row">
-                                                <div class="col-md-5 grid-margin ">
-                                                    <div class="card">
-                                                        <div class="form-group">
-                                                            <label>Sélectionner le fournisseur</label>
-                                                            <select class="js-example-basic-single w-100">
-                                                                <option value="AL">hamza</option>
-                                                                <option value="WY">mohamed</option>
-                                                                <option value="AM">America</option>
-                                                                <option value="CA">Canada</option>
-                                                                <option value="RU">Russia</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Référence</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text">BC-</span>
+
+
+                                                <div class="row">
+                                                    <div class="col-md-6 grid-margin ">
+                                                        <div class="card">
+
+                                                            <div class="form-group">
+                                                                <label>Sélectionner le fournisseur</label>
+                                                                <select th:field="*{fournisseur}"
+                                                                        class="form-control form-control-lg">
+                                                                    <div th:each="fou :${fournisseur}">
+
+                                                                        <option th:value="${fou.id}"
+                                                                                th:text="${fou.name}"></option>
+
+                                                                    </div>
+
+
+                                                                </select>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Référence</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text">BC-</span>
+                                                                    </div>
+                                                                    <input type="text" class="form-control"
+                                                                           placeholder="1111" th:field="*{reference}"
+                                                                           aria-label="Username">
                                                                 </div>
-                                                                <input type="text" class="form-control" placeholder="1111" aria-label="Username">
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Date de commande</label>
-                                                            <input class="form-control" placeholder="dd/mm/yyyy">
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputdate">Date de commande</label>
+                                                                <input type="date" class="form-control"
+                                                                       th:field="*{date}" placeholder="dd/mm/yyyy"
+                                                                       id="exampleInputdate">
+                                                            </div>
 
 
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-7 grid-margin">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <p class="card-title mb-0">Article </p>
-                                                            <br>
-                                                            <div class="table-responsive">
-                                                                <table class="table table-borderless" id="demo-2">
+                                                    <div class="col-md-6 grid-margin">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <p class="card-title mb-0">Article </p>
+                                                                <br>
+
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Le nom d'article</th>
+                                                                        <th>Quantite</th>
+                                                                        <th>Prix</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <select name="idarticle" class="form-control form-control-lg">
+                                                                                <option value="Article" selected disabled>Nom article</option>
+                                                                                <div th:each="article : ${composants}">
+                                                                                    <option th:value="${article.id}"
+                                                                                            th:text="${article.name}"></option>
+                                                                                </div>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="quantite"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="prix"/>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <select name="idarticle" class="form-control form-control-lg">
+                                                                                <option value="Article" selected disabled>Nom article</option>
+                                                                                <div th:each="article : ${composants}">
+                                                                                    <option th:value="${article.id}"
+                                                                                            th:text="${article.name}"></option>
+                                                                                </div>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="quantite"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="prix"/>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <select name="idarticle" class="form-control form-control-lg">
+                                                                                <option value="Article" selected disabled>Nom article</option>
+                                                                                <div th:each="article : ${composants}">
+                                                                                    <option th:value="${article.id}"
+                                                                                            th:text="${article.name}"></option>
+                                                                                </div>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="quantite"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="prix"/>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <select name="idarticle" class="form-control form-control-lg">
+                                                                                <option value="Article" selected disabled>Nom article</option>
+                                                                                <div th:each="article : ${composants}">
+                                                                                    <option th:value="${article.id}"
+                                                                                            th:text="${article.name}"></option>
+                                                                                </div>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="quantite"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="prix"/>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <select name="idarticle" class="form-control form-control-lg">
+                                                                                <option value="Article" selected disabled>Nom article</option>
+                                                                                <div th:each="article : ${composants}">
+                                                                                    <option th:value="${article.id}"
+                                                                                            th:text="${article.name}"></option>
+                                                                                </div>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="quantite"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control"
+                                                                                   name="prix"/>
+                                                                        </td>
+
+                                                                    </tr>
+
+
+
+
+                                                                    </tbody>
                                                                 </table>
+
+
                                                             </div>
-
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("addRow")' class="btn btn-primary">Ajouter article </button>
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("deleteRow")' class="btn btn-primary">Supprimer dernier article</button>
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+
+
 
                                         </div>
                                     </div>
@@ -220,20 +373,18 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Enregistrer</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
-
-
 
 
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
 
         </div>
-
-
 
 
     </div>
@@ -249,12 +400,12 @@
 <script>
     $(document).on("click", ".hamza", function () {
         var reff = $(this).data('id');
-        $(".input-hamza").val( reff );
+        $(".input-hamza").val(reff);
 
         $('.modal fade').modal('show');
     });
-    $(document).ready(function() {
-        $('#table_id').DataTable( {
+    $(document).ready(function () {
+        $('#table_id').DataTable({
             "language": {
                 "emptyTable": "Aucune donnée disponible dans le tableau",
                 "loadingRecords": "Chargement...",
@@ -474,18 +625,19 @@
                 },
                 "zeroRecords": "Aucune entrée correspondante trouvée"
             }
-        } );
-    } );
-    $(document).ready( function () {
+        });
+    });
+    $(document).ready(function () {
         $('#table_id').DataTable();
-    } );
+    });
 
 
 </script>
 
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.js"></script>
 <script src="js/tabular-input.js"></script>
 
 
@@ -498,18 +650,20 @@
 <script src="js/dashboard.js"></script>
 <script src="js/Chart.roundedBarCharts.js"></script>
 <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
-<script src="vendors/select2/select2.min.js"></script>
 <script src="dist/js/tabular-input.js"></script>
 <script>
     jQuery('#demo-2').tabularInput({
         'rows': 1,
-        'columns':4,
+        'columns': 4,
         'animate': true,
-        'columnHeads': ['Référence article', 'nom' ,'quantité', 'prix unitaire']
+        'name': 'hamza',
+        'columnHeads': ['Référence article', 'nom', 'quantité', 'prix unitaire']
     });
     $("#demo-2").tabularInput("addRow");			// Add a row at the end
     $("#demo-2").tabularInput("deleteRow");			// Delete the last row
-    $("#demo-2").tabularInput("deleteRow", 2);		// Delete row at index 2// Add a column at the end
+    $("#demo-2").tabularInput("deleteRow", 2);
+
+    // Delete row at index 2// Add a column at the end
     // Delete the last column
 
 
@@ -521,13 +675,29 @@
     _gaq.push(['_setDomainName', 'jqueryscript.net']);
     _gaq.push(['_trackPageview']);
 
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
     })();
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
 
+
+    $('#removeconfigModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var delete_id = button.data('delete_id')
+        var modal = $(this)
+        modal.find('.modal-body #delete_id').val(delete_id);
+    });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
 <!-- End custom js for this page-->
 </body>
 

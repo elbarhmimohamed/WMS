@@ -1,25 +1,22 @@
 package com.wms.model.operation;
 
-
 import com.wms.model.personne.Person;
-import com.wms.model.personne.Users;
-import com.wms.model.stock.Composante;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "commande")
-public class Commande{
+@Table(name = "Reception")
+public class Reception {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,16 +25,28 @@ public class Commande{
     @Column(name="date")
 
     private Date date;
+
+    private Boolean Qualite;
+
     @Column(name="reference")
     private String reference;
 
-    @ManyToOne
-    @JoinColumn(name = "fournisseur_id")
-    private Person fournisseur;
+    @OneToOne
+    @JoinColumn(name = "commande_id")
+    private Commande commande;
 
-    @OneToMany(mappedBy="commande" ,cascade = CascadeType.ALL)
-    private List<LigneCommande> ligneCommande;
+    @OneToOne(cascade = CascadeType.ALL)
+    private FichierStock fichierStock;
 
-    private double total;
+    @OneToMany(mappedBy="reception",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<ControleQualite> controleQualiteList;
+
+
+
+
+
+
+
+
 
 }

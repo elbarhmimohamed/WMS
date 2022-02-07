@@ -1,53 +1,54 @@
 package com.wms.services;
 
-
 import com.wms.model.operation.Commande;
+import com.wms.model.operation.LigneCommande;
+import com.wms.model.personne.Person;
+import com.wms.model.stock.Composante;
 import com.wms.repository.CommandeRepository;
+import com.wms.repository.ComposantRepository;
+import com.wms.repository.LigneCommandeRepository;
+import com.wms.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CommandeServices {
-
     @Autowired
-    private CommandeRepository commandeRepository;
+    PersonServices personServices;
+    @Autowired
+    ComposantRepository composantRepository;
+    @Autowired
+    CommandeRepository commandeRepository;
+    @Autowired
+    LigneCommandeRepository ligneCommandeRepository;
 
-    /// ------- get all reception -----------
-    public Iterable<Commande> getReceptionCmd() {
-        return commandeRepository.findAllReceptionCommande();
-    }
-    /// ------- get all expedition -----------
-    public Iterable<Commande> getExpetionCmd() {
-        return commandeRepository.findAllExpeditionCommande();
-    }
-    //------- find by id ------------
-
-    public Optional<Commande> getCommandeById(final Long id) {
-        return commandeRepository.findById(id);
+    public List<Person> findAllfournisseur() {
+        return personServices.getFournisseurs();
     }
 
-    //-------------- delete
 
-    public void deleteCommande(final Long id) {
-        commandeRepository.deleteById(id);
-    }
-    // -------------   Create
-    public Commande saveReceptionCmd(Commande commande) {
-        commande.setType(false);
-        Commande savedCMD = commandeRepository.save(commande);
-        return  savedCMD;
-
-
+    public List<Composante> findAllcomposant() {
+        return composantRepository.findAll();
     }
 
-    public Commande saveExepiditionCmd(Commande commande) {
-        commande.setType(true);
-        Commande savedCMD = commandeRepository.save(commande);
-        return  savedCMD;
+    public List<Commande> findAllCommande() {
+        return commandeRepository.findAll();
+    }
+
+    public void saveCommande(Commande commande) {
+
+        for (LigneCommande ligneCommande : commande.getLigneCommande()) {
+            ligneCommandeRepository.save(ligneCommande);
+        }
+        commandeRepository.save(commande);
+
 
 
     }
+
+
 
 }

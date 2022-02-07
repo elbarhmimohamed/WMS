@@ -14,7 +14,12 @@ import java.util.Optional;
 public interface EmplacementRepository extends JpaRepository<Emplacement, Long> {
 
     @Query("SELECT u FROM Emplacement u WHERE u.refemplacement = ?1")
-    public Optional<Emplacement> findByrefemplacement(String refemplacement);
+    public Emplacement findByrefemplacement(String refemplacement);
+
+    boolean existsByRefemplacement(String refemplacement);
+
+    @Query("SELECT u FROM Emplacement u WHERE u.id = ?1")
+    public Emplacement findByID(long id);
 
     @Modifying
     @Query("UPDATE Emplacement u SET u.refemplacement = ?2 WHERE u.id = ?1")

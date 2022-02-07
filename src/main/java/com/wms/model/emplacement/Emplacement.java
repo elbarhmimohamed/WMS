@@ -1,5 +1,6 @@
 package com.wms.model.emplacement;
 
+import com.wms.model.operation.Palette;
 import com.wms.model.stock.Composante;
 import lombok.Data;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +19,9 @@ public class Emplacement {
     @Column(name = "tauxOccupation")
     private  float tauxOccupation;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Composante> composantes;
-
+    @JoinColumn(name="palette_id")
+    @OneToOne
+    private Palette palette;
 
 
 }

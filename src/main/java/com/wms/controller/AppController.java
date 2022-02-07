@@ -1,7 +1,16 @@
 package com.wms.controller;
 
 
+import com.wms.model.operation.Commande;
+import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
+import com.wms.model.stock.Composante;
+import com.wms.repository.CommandeRepository;
+import com.wms.repository.LigneCommandeRepository;
+import com.wms.services.CommandeServices;
+import com.wms.services.ComposantServices;
+import com.wms.services.PersonServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +22,24 @@ import java.util.List;
 public class AppController {
 
 
+    @Autowired
+    CommandeServices commandeServices;
+    @Autowired
+    PersonServices personServices;
+    @Autowired
+    ComposantServices composantServices;
+    @Autowired
+    CommandeRepository commandeRepository;
+    @Autowired
+    LigneCommandeRepository ligneCommandeRepository;
+
+
     @GetMapping("/")
     public String viewHomePage() {
         return "page/index";
     }
 
-    @GetMapping("/receptions")
-    public String ReceptionPage() {
-        return "/page/reception";
-    }
+
     @GetMapping("/expedition")
     public String ExpeditionPage() {
         return "/page/Dashboard/agent/expedition";
@@ -31,19 +49,9 @@ public class AppController {
         return "/page/Dashboard/operateur/gestionStock";
     }
 
-    @GetMapping("/utilisateur-config")
-    public String utilisateurconfigPage() {
-        return "/page/utilisateur-config";
-    }
-
     @GetMapping("/login")
     public String loginPage() {
         return "/page/login";
-    }
-
-    @GetMapping("/article")
-    public String articlePage() {
-        return "/page/article";
     }
 
     @GetMapping("/journal")
@@ -56,10 +64,6 @@ public class AppController {
         return "/page/dashboard-admin";
     }
 
-    @GetMapping("/reception")
-    public String receptionPage() {
-        return "/page/reception";
-    }
 
 
 
@@ -71,16 +75,6 @@ public class AppController {
     @GetMapping("/inventaire")
     public String inventairePage() {
         return "/page/inventaire";
-    }
-
-    @GetMapping("/client")
-    public String clientPage() {
-        return "/page/client";
-    }
-
-    @GetMapping("/fournisseur1")
-    public String fournisseurPage() {
-        return "/page/fournisseur";
     }
 
     @GetMapping("/utilisateur/motdepasse")

@@ -7,7 +7,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tableau de bord: Reception</title>
+    <title>Tableau de bord: fichier de stockage</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -56,8 +56,8 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Tableau de board : Reception<img  src="images/reception.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de Reception</span>!</span></h6>
+                                <h3 class="font-weight-bold">Tableau de board : Fichier de stockage<img  src="images/stock.png"></h3>
+                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les fichiers de stockage</span>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
@@ -65,7 +65,7 @@
 
                                         <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#ReceptionModal">
                                             <i class="icon-head "></i>
-                                            Ajouter un bon de Reception
+                                            Ajouter fichier de stockage
                                         </button>
                                     </div>
                                 </div>
@@ -86,17 +86,17 @@
                                             <tr >
                                                 <th>Id</th>
                                                 <th>Référence</th>
-                                                <th>Date de réception </th>
+                                                <th>Bon de commande </th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            <tr th:each="re : ${reception}">
+                                            <tr th:each="re : ${fichierStockList}">
 
                                                 <td th:text="${re.id}"></td>
-                                                <td th:text="${re.reference}"></td>
-                                                <td th:text="${re.date}"></td>
+                                                <td th:text="FS-+${re.reference}"></td>
+                                                <td th:text="BR-+${re.reception.reference}"></td>
 
                                                 <td>
                                                     <button type="button"
@@ -135,7 +135,7 @@
 
             <div class="modal fade" id="removeconfigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="#" th:action="@{/supprimerReception}" th:object="${receptionremove}" method="POST" th:target="_self">
+                    <form action="#" th:action="@{/supprimerfichierStock}" th:object="${fichierStockRemove}" method="POST" th:target="_self">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
@@ -145,7 +145,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <p>Voulez vous vraiment supprimer ce bon de reception ?</p>
+                                <p>Voulez vous vraiment supprimer cette rangé ?</p>
                                 <input type="hidden" th:field="*{id}" id="delete_id" >
 
 
@@ -166,106 +166,105 @@
                 <div class="modal-dialog modal-lg " role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="CommandeModalLabel">Ajouter un bon de reception</h5>
+                            <h5 class="modal-title" id="CommandeModalLabel">Ajouter fichier de stock</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="#" th:action="@{/ajouterReception}"
-                              th:object="${receptionAdd}" method="POST"
+                        <form action="#" th:action="@{/ajouterFichierStock}"
+                              th:object="${fichierStock}" method="POST"
                               th:target="_self">
                             <div class="modal-body">
                                 <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
                                             <div class="card">
 
-                                                            <div class="form-group">
-                                                                <label>Sélectionner le bon de commande</label>
-                                                                <select id="hamza" th:field="*{commande}"
-                                                                        class="form-control form-control-lg">
-                                                                    <option value="">--Veuillez choisir une commande--</option>
-                                                                    <div th:each="co :${commandeList}">
+                                                <div class="form-group">
+                                                    <label>Sélectionner le bon de reception</label>
+                                                    <select id="hamza1" th:field="*{reception}"
+                                                            class="form-control form-control-lg">
+                                                        <option value="">--Veuillez choisir une reception--</option>
+                                                        <div th:each="co :${receptionList}">
 
-                                                                        <option th:value="${co.id}"
-                                                                                th:text="BC-+${co.reference}"></option>
+                                                            <option th:value="${co.id}"
+                                                                    th:text="BR-+${co.reference}"></option>
 
-                                                                    </div>
-
-
-                                                                </select>
-
-
-
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Référence</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text">BR-</span>
-                                                                    </div>
-                                                                    <input th:field="*{reference}" type="text" class="form-control"
-                                                                           placeholder="1111"
-                                                                           aria-label="Username">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleInputdate">Date de reception</label>
-                                                                <input th:field="*{date}"  type="date" class="form-control"
-                                                                      placeholder="dd/mm/yyyy"
-                                                                       id="exampleInputdate">
-                                                            </div>
                                                         </div>
-                                            </div>
-
-                                            <div class="col-md-12 ">
-                                         <div class="card">
-
-                                                            <div class="card-body">
-                                                                <div class="card-title">
-                                                                    Controle qualité
-                                                                </div>
-                                                                <div class="table-responsive">
-                                                                <table class="table  table-bordered">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>Article</th>
-                                                                        <th>Prix</th>
-                                                                        <th>Quantité demandée </th>
-                                                                        <th>Quantité réelle</th>
-                                                                        <th>échantillon</th>
-                                                                        <th>defectueux</th>
-                                                                        <th>Accepter</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody id="zips">
 
 
+                                                    </select>
 
-
-                                                                    </tbody>
-                                                                </table>
-                                                                </div>
-
-
-
-
-
-
-
-
-
-                                                            </div>
-                                                        </div>
-                                            </div>
 
 
                                                 </div>
-
-
-
+                                                <div class="form-group">
+                                                    <label>Référence</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">FS-</span>
+                                                        </div>
+                                                        <input th:field="*{reference}" type="text" class="form-control"
+                                                               placeholder="1111"
+                                                               aria-label="Username">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="hamza">Nomber de palette </label>
+                                                    <input id="hamza"   type="number" class="form-control"
+                                                    >
+                                                </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-12 ">
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <div class="card-title">
+                                                        fichier de stock
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table  table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Palette</th>
+                                                                <th>reference</th>
+                                                                <th>Article</th>
+                                                                <th>Emplacement</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="zips">
+
+
+
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -577,16 +576,20 @@
     })();
 
     $('#hamza').on('change', function() {
-        var optionSelected = $("option:selected", this);
-        var id = this.value;
-        var url =[[@{'/lignecommande'}]] +'?id='+id;
+
+        var id = $('#hamza1').val();
+        var numberpalette = this.value;
+        var url ='/lignepalette' +'?id='+id +'&nb=' +numberpalette;
+
         $.ajax({
             type: 'GET',
             url:url,
             success : function(data) {
                 $('#zips').html(data);
+
             }
         });
+
 
 
 

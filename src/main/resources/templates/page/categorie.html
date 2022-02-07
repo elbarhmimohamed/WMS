@@ -7,7 +7,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tableau de bord: Reception</title>
+    <title>Tableau de bord: Catégorie</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -17,16 +17,10 @@
     <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="vendors/select2/select2.min.css">
-    <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
-    <!-- End plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="css/vertical-layout-light/style.css">
     <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
-    <link href="dist/css/tabular-input.css" rel="stylesheet" type="text/css">
-
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.css"/>
 
@@ -56,16 +50,16 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Tableau de board : Reception<img  src="images/reception.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de Reception</span>!</span></h6>
+                                <h3 class="font-weight-bold">Tableau de board : Catégorie<img  src="images/client.png"></h3>
+                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les Catégories de votre entreport</entrport>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
                                     <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
-                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#ReceptionModal">
+                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#CategorieModal">
                                             <i class="icon-head "></i>
-                                            Ajouter un bon de Reception
+                                            Ajouter une catégorie
                                         </button>
                                     </div>
                                 </div>
@@ -85,39 +79,24 @@
                                             <thead>
                                             <tr >
                                                 <th>Id</th>
-                                                <th>Référence</th>
-                                                <th>Date de réception </th>
+                                                <th>Nom</th>
+                                                <th>Déscreption</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <tr th:each="categorie: ${categories}">
+                                                <td th:text="${categorie.id}">categorie ID</td>
+                                                <td th:text="${categorie.categorie_name}"> Name</td>
+                                                <td th:text="${categorie.categorie_description}">Déscreption</td>
 
-                                            <tr th:each="re : ${reception}">
 
-                                                <td th:text="${re.id}"></td>
-                                                <td th:text="${re.reference}"></td>
-                                                <td th:text="${re.date}"></td>
 
-                                                <td>
-                                                    <button type="button"
-                                                            class="btn btn-primary btn-icon-text p-lg-3">
-                                                        <i class="ti-file btn-icon-prepend"></i>
-                                                        Details
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning p-lg-3"
-                                                            data-toggle="modal" data-target="#CommandeModal">
-                                                        Modifier
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${re.id}"
-                                                            data-toggle="modal" data-target="#removeconfigModal">
-                                                        Supprimer
-                                                    </button>
+                                                <td >
+                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${categorie.id}"	data-toggle="modal" data-target="#clientmodifieModal">Modifier</a>
+                                                    <a type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${categorie.id}"	data-toggle="modal" data-target="#removeModal">Supprimer</a>
                                                 </td>
                                             </tr>
-
-
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -130,12 +109,86 @@
 
 
             </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <!-- Button trigger modal -->
 
 
-
-            <div class="modal fade" id="removeconfigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Modal ajouter client-->
+            <div class="modal fade" id="CategorieModal" tabindex="-1" role="dialog" aria-labelledby="CategorieModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="#" th:action="@{/supprimerReception}" th:object="${receptionremove}" method="POST" th:target="_self">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajouter une catégorie</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" th:action="@{/ajoutercategorie}" th:object="${newcategorie} "   method="POST" th:target="_self">
+
+                                <div class="form-group">
+                                    <label for="name">Nom</label>
+                                    <input th:field="*{categorie_name}" type="text" class="form-control" id="name" placeholder="Nom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descreption">Adresse</label>
+                                    <input th:field="*{categorie_description}" type="text" class="form-control" id="descreption" placeholder="Descreption">
+                                </div>
+
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-primary" >Ajouter</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end Modal -->
+            <!-- Modal modifier client-->
+            <div class="modal fade" id="clientmodifieModal" tabindex="-1" role="dialog" aria-labelledby="clientmodifieModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleclientModalLabel">Modifier une catégorie</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" th:action="@{/modifiercategorie}" th:object="${categorie} "   method="POST" th:target="_self">
+                                <input type="hidden" th:field="*{id}" id="update_id" >
+
+                                <div class="form-group">
+                                    <label for="name1">Nom</label>
+                                    <input th:field="*{categorie_name}" type="text" class="form-control" id="name1" placeholder="Nom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descreption2">Adresse</label>
+                                    <input th:field="*{categorie_description}" type="text" class="form-control" id="descreption2" placeholder="Descreption">
+                                </div>
+
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-primary" >Ajouter</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="#" th:action="@{/supprimercategorie}" th:object="${categorie_id}" method="POST" th:target="_self">
+
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
@@ -145,7 +198,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <p>Voulez vous vraiment supprimer ce bon de reception ?</p>
+                                <p>Voulez vous vraiment supprimer cette catégorie ?</p>
                                 <input type="hidden" th:field="*{id}" id="delete_id" >
 
 
@@ -156,152 +209,37 @@
                             </div>
 
                         </div>
+
+
                     </form>
                 </div>
             </div>
-
-
-            <div class="modal fade" id="ReceptionModal" tabindex="-1" role="dialog" aria-labelledby="ReceptionModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-lg " role="document">
-                    <div class="modal-content m-lg-4">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="CommandeModalLabel">Ajouter un bon de reception</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="#" th:action="@{/ajouterReception}"
-                              th:object="${receptionAdd}" method="POST"
-                              th:target="_self">
-                            <div class="modal-body">
-                                <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            <div class="card">
-
-                                                            <div class="form-group">
-                                                                <label>Sélectionner le bon de commande</label>
-                                                                <select id="hamza" th:field="*{commande}"
-                                                                        class="form-control form-control-lg">
-                                                                    <option value="">--Veuillez choisir une commande--</option>
-                                                                    <div th:each="co :${commandeList}">
-
-                                                                        <option th:value="${co.id}"
-                                                                                th:text="BC-+${co.reference}"></option>
-
-                                                                    </div>
-
-
-                                                                </select>
-
-
-
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Référence</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text">BR-</span>
-                                                                    </div>
-                                                                    <input th:field="*{reference}" type="text" class="form-control"
-                                                                           placeholder="1111"
-                                                                           aria-label="Username">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleInputdate">Date de reception</label>
-                                                                <input th:field="*{date}"  type="date" class="form-control"
-                                                                      placeholder="dd/mm/yyyy"
-                                                                       id="exampleInputdate">
-                                                            </div>
-                                                        </div>
-                                            </div>
-
-                                            <div class="col-md-12 ">
-                                         <div class="card">
-
-                                                            <div class="card-body">
-                                                                <div class="card-title">
-                                                                    Controle qualité
-                                                                </div>
-                                                                <div class="table-responsive">
-                                                                <table class="table  table-bordered">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>Article</th>
-                                                                        <th>Prix</th>
-                                                                        <th>Quantité demandée </th>
-                                                                        <th>Quantité réelle</th>
-                                                                        <th>échantillon</th>
-                                                                        <th>defectueux</th>
-                                                                        <th>Accepter</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody id="zips">
-
-
-
-
-                                                                    </tbody>
-                                                                </table>
-                                                                </div>
-
-
-
-
-
-
-
-
-
-                                                            </div>
-                                                        </div>
-                                            </div>
-
-
-                                                </div>
-
-
-
-                                            </div>
-                                        </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-
-
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
 
         </div>
-
-
-
-
+        <!-- page-body-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- container-scroller -->
 </div>
-<!-- container-scroller -->
-
 <!-- plugins:js -->
 <script src="vendors/js/vendor.bundle.base.js"></script>
-<script src="js/select2.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <script>
-    $(document).on("click", ".hamza", function () {
-        var reff = $(this).data('id');
-        $(".input-hamza").val( reff );
+    $('#clientmodifieModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var update_id = button.data('update_id')
+        var modal = $(this)
+        modal.find('.modal-body #update_id').val(update_id);
+    })
 
-        $('.modal fade').modal('show');
-    });
+    $('#removeModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var delete_id = button.data('delete_id')
+        var modal = $(this)
+        modal.find('.modal-body #delete_id').val(delete_id);
+    })
+
     $(document).ready(function() {
         $('#table_id').DataTable( {
             "language": {
@@ -535,76 +473,17 @@
 <!-- End plugin js for this page -->
 <!-- inject:js -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.js"></script>
-<script src="js/tabular-input.js"></script>
-
 
 <script src="js/off-canvas.js"></script>
 <script src="js/hoverable-collapse.js"></script>
 <script src="js/template.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/todolist.js"></script>
-
+<!-- endinject -->
+<!-- Custom js for this page-->
 <script src="js/dashboard.js"></script>
 <script src="js/Chart.roundedBarCharts.js"></script>
-<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
-<script src="vendors/select2/select2.min.js"></script>
-<script src="dist/js/tabular-input.js"></script>
-<script>
-    jQuery('#demo-2').tabularInput({
-        'rows': 1,
-        'columns':4,
-        'animate': true,
-        'columnHeads': ['Référence article', 'nom' ,'quantité', 'prix unitaire']
-    });
-    $("#demo-2").tabularInput("addRow");			// Add a row at the end
-    $("#demo-2").tabularInput("deleteRow");			// Delete the last row
-    $("#demo-2").tabularInput("deleteRow", 2);		// Delete row at index 2// Add a column at the end
-    // Delete the last column
-
-
-</script>
-<script th:inline="javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36251023-1']);
-    _gaq.push(['_setDomainName', 'jqueryscript.net']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-    $('#hamza').on('change', function() {
-        var optionSelected = $("option:selected", this);
-        var id = this.value;
-        var url =[[@{'/lignecommande'}]] +'?id='+id;
-        $.ajax({
-            type: 'GET',
-            url:url,
-            success : function(data) {
-                $('#zips').html(data);
-            }
-        });
-
-
-
-
-    });
-
-
-
-    $('#removeconfigModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var delete_id = button.data('delete_id')
-        var modal = $(this)
-        modal.find('.modal-body #delete_id').val(delete_id);
-    });
-
-</script>
 <!-- End custom js for this page-->
 </body>
 
 </html>
-

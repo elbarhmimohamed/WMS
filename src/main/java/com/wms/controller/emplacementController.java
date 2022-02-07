@@ -2,9 +2,11 @@ package com.wms.controller;
 
 import com.wms.model.emplacement.ConfigEmplacement;
 import com.wms.model.emplacement.Emplacement;
+import com.wms.model.operation.Palette;
 import com.wms.model.personne.Users;
 import com.wms.repository.ConfigEmplacementRepository;
 import com.wms.repository.EmplacementRepository;
+import com.wms.repository.PaletteRepository;
 import com.wms.services.ConfigEmplacementServices;
 import com.wms.services.EmplacementServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,11 @@ public class emplacementController {
     @Autowired
     private EmplacementServices emplacementServices;
     @Autowired
+    EmplacementRepository emplacementRepository;
+    @Autowired
     private ConfigEmplacementRepository configEmplacementRepository;
+    @Autowired
+    private PaletteRepository paletteRepository;
 
 
 
@@ -43,11 +49,12 @@ public class emplacementController {
         List<String> nbrrangee=this.configEmplacementRepository.findallrangee();
         model.addAttribute("rangee",nbrrangee);
 
+
         model.addAttribute("niveau",5);
         model.addAttribute("rack",5);
         model.addAttribute("position",3);
         model.addAttribute("configEmplacement",configEmplacement);
-
+        model.addAttribute("emplacementRepository",emplacementRepository);
         return "page/emplacement";
 
     }
@@ -74,7 +81,7 @@ public class emplacementController {
     }
 
     @PostMapping("/ajouterrangee")
-    public String supprimerRangee(ConfigEmplacement configEmplacement, BindingResult result, Model model) {
+    public String ajouterRangee(ConfigEmplacement configEmplacement, BindingResult result, Model model) {
         this.configEmplacementRepository.save(configEmplacement);
         return "redirect:/emplacement/configuration";
     }
@@ -102,7 +109,7 @@ public class emplacementController {
 
     @PostMapping("/process_creating_emplacement")
     public String processCreatingEmplacement(Emplacement emplacement) {
-        Optional<Emplacement> emp = emplacementServices.getEmplacemetByRef(emplacement.getRefemplacement());
+        Emplacement emp = emplacementServices.getEmplacemetByRef(emplacement.getRefemplacement());
         //if (user1 == null || !user1.getEmail().equals(user.getEmail())) {
         if (emp == null ) {
             emplacementServices.saveEmplacement(emplacement);

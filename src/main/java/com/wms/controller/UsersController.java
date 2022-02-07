@@ -6,10 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.wms.model.stock.Categorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,11 +37,22 @@ public class UsersController {
 
     @Autowired
     private UsersServices usersService;
-    
-   
 
 
+    @GetMapping("/utilisateur-config")
+    public String utilisateurconfigPage(Model model) {
+        Iterable<Users> users = usersService.getUsers();
+        List<String> roles = Arrays.asList("Opérateur","Agent Expédition/Réception","Admin");
+        model.addAttribute("roles",roles);
+        model.addAttribute("users",users);
+        model.addAttribute("user_id",new Users());
+        model.addAttribute("newuser",new Users());
+        model.addAttribute("user",new Users());
 
+        return "/page/utilisateur-config";
+    }
+
+	/*
 	@GetMapping("/users/{id}")
 	public Users getUser(@PathVariable("id") final Long id) {
 		Optional<Users> user = usersService.getUser(id);
@@ -109,6 +122,7 @@ public class UsersController {
 		return "/403";
 
 	}
+
 	//-------------------------Get users --------------------------//
 	@GetMapping("/listofUsers")
 	public String getUsers(Model model) {
@@ -116,7 +130,33 @@ public class UsersController {
 		model.addAttribute("listUsers", usres);
 		return "page/login/usersList";
 	}
+*/
+    //------------ modifier
 
+    @PostMapping("/modifierutilisateur")
+    public String modifierCategorie(Users user ,BindingResult result, Model model) {
+
+        usersService.updateUser(user.getId(), user);
+        return "redirect:/utilisateur-config";
+
+    }
+
+    //------- ajouter
+
+    @PostMapping("/ajouterutilisateur")
+    public String ajouterUser(Users newuser ,BindingResult result, Model model) {
+        usersService.saveUser(newuser);
+        return "redirect:/utilisateur-config";
+    }
+
+    //--------------delete
+
+
+    @PostMapping("/supprimerutilisateur")
+    public String supprimerUser(Users user_id, BindingResult result, Model model) {
+        usersService.deleteuser(user_id.getId());
+        return "redirect:/utilisateur-config";
+    }
 
 
 
