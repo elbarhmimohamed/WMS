@@ -20,7 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService();
@@ -48,12 +47,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
         http.authorizeRequests()
 
 
                 .antMatchers("process_register","updateUserProcess/**","/updateUser/**","/deleteUser/**","/listofUsers","/register","/process_register").hasAuthority("Admin")
-                .antMatchers( "/inventaireee","/gestionStock").hasAnyAuthority("Admin","Opérateur")
+                .antMatchers( "/Clients","/inventaireee","/gestionStock").hasAnyAuthority("Admin","Opérateur")
                 .antMatchers("/expeditionee","/receptionee").hasAnyAuthority("Admin","Agent Expédition/Réception")
 
                 .antMatchers("/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")
@@ -62,12 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/login").permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403")
-                .and()
+                .and().exceptionHandling().accessDeniedPage("/404")
                 ;
-        http.csrf().disable();
-
-
 
         http.csrf().disable();
     }

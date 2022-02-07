@@ -1,27 +1,27 @@
 package com.wms;
 
 
-import com.wms.model.emplacement.ConfigEmplacement;
 import com.wms.model.emplacement.Emplacement;
 import com.wms.model.operation.Commande;
-import com.wms.model.operation.LigneCommande;
+import com.wms.model.operation.Inventaire;
 import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
 
 import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
-import com.wms.repository.CommandeRepository;
-import com.wms.repository.LigneCommandeRepository;
+import com.wms.model.stock.Inventaire_composante;
 import com.wms.repository.PersonRepository;
+import com.wms.repository.UsersRepository;
 import com.wms.services.*;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -40,25 +40,22 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Autowired
 	private EmplacementServices emplacementServices;
-	@Autowired
-	private ConfigEmplacementServices configEmplacementServices;
-	@Autowired
-	private CommandeServices commandeServices;
 
 	@Autowired
-	private PersonRepository personRepository;
+	private UsersRepository usersRepository;
+
 
 
 	@Autowired
 	private CategorieServices categorieServices;
 
 	@Autowired
-	private LigneCommandeRepository ligneCommandeRepository;
+	private CommandeServices commandeServices;
+	@Autowired
+	private InventaireServices inventaireServices;
 
 	@Autowired
-	private CommandeRepository commandeRepository;
-
-
+	private  Inventaire_composanteServices inventaireComposanteRepository;
 
 
 
@@ -74,9 +71,8 @@ public class WmsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 
-
 		//test of users
-		/*Users admin = new Users();
+		Users admin = new Users();
 		Users user = new Users();
 
 		admin.setName("mohamed");
@@ -95,17 +91,8 @@ public class WmsApplication implements CommandLineRunner {
 		emplacement.setRefemplacement("Z9001");
 		emplacement.setTauxOccupation(80);
 		emplacementServices.saveEmplacement(emplacement);
-		emp.setRefemplacement("AZ1234");*/
-		/*ConfigEmplacement configEmplacement = new ConfigEmplacement();
-		configEmplacement.setIndexRangee("A");
-		configEmplacement.setNumNiveau(4);
-		configEmplacement.setNumRack(4);
-		configEmplacement.setNumPosition(3);
-		configEmplacement.setOccupation(65);
-		configEmplacementServices.saveConfigEmplacement(configEmplacement);*/
-		/*configEmplacementServices.saveConfigEmplacement(configEmplacement);*/
 
-
+		emp.setRefemplacement("AZ1234");
 		//emplacementServices.updateEmplacement(Long.valueOf(1),emp);
 
 
@@ -113,7 +100,7 @@ public class WmsApplication implements CommandLineRunner {
 
 
 
-/*
+
 
 		Person client1 = new Person()  ;
 		client1.setName("Clien1");
@@ -148,7 +135,7 @@ public class WmsApplication implements CommandLineRunner {
 		four2.setRole(false);
 		personServices.saveSupplier(four2);
 
-*/
+
 
 
 
@@ -164,14 +151,7 @@ public class WmsApplication implements CommandLineRunner {
 */
 
 
-/*
-		Person four2 = new Person()  ;
-		four2.setName("fournisseur2");
-		four2.setMail("ff2@gmail.com");
-		four2.setAdress("casablanca");
-		four2.setPhone("0699764567");
-		four2.setRole(false);
-		personServices.saveSupplier(four2);
+
 
 		Categorie cat1 = new Categorie();
 		cat1.setCategorie_name("categories 1 ");
@@ -204,53 +184,45 @@ public class WmsApplication implements CommandLineRunner {
 
 
 
-		Commande cmd = new Commande();
-		cmd.setPerson(personServices.getPersonById(Long.valueOf(1)));
-		cmd.setComposantes(composantes);
-		cmd.setUser(usersServices.getUserByName("mohamed"));
-		commandeServices.saveReceptionCmd(cmd);
+		//commandeServices.saveReceptionCmd(cmd);
+/*
+		Inventaire_composante invc1 = new Inventaire_composante();
+		invc1.setComposante(composantServices.getComposanteById(Long.valueOf(1)));
+		invc1.setQuantityInReality(290);
 
- */
+		Inventaire_composante invc2 = new Inventaire_composante();
+		invc2.setComposante(composantServices.getComposanteById(Long.valueOf(2)));
+		invc2.setQuantityInReality(200);
+		List<Inventaire_composante> inventaireComposanteList = new ArrayList<Inventaire_composante>();
+		inventaireComposanteList.add(invc1);
+		inventaireComposanteList.add(invc2);
+		//--------------------
+		Inventaire inventaire = new Inventaire();
+		//inventaire.setDate(LocalDateTime.now());
+		inventaire.setReference("INV-001");
+		inventaire.setInventaire_composantes(inventaireComposanteList);
+		inventaire.setUser(usersServices.getUserByName("mohamed"));
+		System.out.println("--------------");
+		System.out.println("--------------");
+		System.out.println("--------------");
+		System.out.println("--------------");
+		System.out.println(inventaire.getUser().getRole());
+		//inventaireComposanteRepository.saveInvComp(invc1);
+		//inventaireComposanteRepository.saveInvComp(invc2);
+		//inventaireServices.saveInventaire(inventaire);
 
-		Categorie cat1 = new Categorie();
-		cat1.setCategorie_name("categories 1 ");
-		cat1.setCategorie_description("L'outil de production représente un investissement important  ...");
-		categorieServices.saveCategories(cat1);
-
-		Composante composante1 = new Composante();
-		composante1.setType(false);
-		composante1.setName("RSD1234");
-		composante1.setQuantity(300);
-		composante1.setSeuil(25);
-		composantServices.saveComposante(composante1);
-
-		Person four2 = new Person()  ;
-		four2.setName("fournisseur2");
-		four2.setMail("ff2@gmail.com");
-		four2.setAdress("casablanca");
-		four2.setPhone("0699764567");
-		four2.setRole(false);
-		personServices.saveSupplier(four2);
-
-		/*Commande cmd = new Commande();
-		cmd.setFournisseur(personServices.getPersonById(Long.valueOf(1)));
-		cmd.setReference("cm124778");
-		cmd.setDate(new Date());
-		LigneCommande ligneCommande = new LigneCommande();
-		ligneCommande.setComposante(composantServices.getComposanteById(Long.valueOf(1)));
-		ligneCommande.setPrix(20);
-		ligneCommande.setQuantite(2000);
-		ligneCommandeRepository.save(ligneCommande);
-
-		//List<LigneCommande> ligneCommandes = new ArrayList<>();
-		//ligneCommandes.add(ligneCommandeRepository.getById(4L));
-		//cmd.setLigneCommande(ligneCommandes);
 */
+		//Inventaire inventaire = inventaireServices.getInventaireById(1);
 
+		System.out.println("--------------");
+		System.out.println("--------------");
+		//for (int i = 0 ; i < inventaire.getInventaire_composantes().size() )
+		//System.out.println(inventaire.getInventaire_composantes().size());
 
+		System.out.println("--------------");
+		System.out.println("--------------");
 
-
-
+		//inventaireServices.deleteById(Long.valueOf(3));
 
 	}
 

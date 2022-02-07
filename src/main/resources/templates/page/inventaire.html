@@ -65,7 +65,7 @@
 
                                         <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#receptionModal">
                                             <i class="icon-head "></i>
-                                            Ajouter un bon de livraison
+                                            Ajouter un inventaire
                                         </button>
                                     </div>
                                 </div>
@@ -86,32 +86,31 @@
                                             <tr >
                                                 <th>Id</th>
                                                 <th>Référence</th>
-                                                <th>Fournisseur</th>
-                                                <th>Date de réception </th>
-                                                <th>Total TTC</th>
+                                              <!--  <th>Référence</th> -->
+                                                <th>Utilisateur</th>
+                                                <th>Date d'inventaire</th>
+                                              <!--  <th>Total TTC</th> -->
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>BR-11111</td>
-                                                <td>Hamza</td>
+                                            <tr th:each="inventaire: ${inventaires}">
+                                                <td th:text="${inventaire.id}">Inventaire Ref</td>
+                                                <td th:text="${inventaire.reference}">Inventaire ID</td>
+                                                <td th:text="${inventaire.user.name}"> Utilisateur</td>
+                                                <td th:text="${inventaire.date}">Date</td>
 
-                                                <td>14/20/2022</td>
-                                                <td>1452dh</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3">
+
+
+                                                <td >
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detait_id="${inventaire.id}"	data-toggle="modal" data-target="#inventairedetailModal">
                                                         <i class="ti-file btn-icon-prepend"></i>
                                                         Details
                                                     </button>
-                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#receptionModal">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
+                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${inventaire.id}"	data-toggle="modal" data-target="#articlemodifieModal">Modifier</a>
+                                                    <a type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${inventaire.id}"	data-toggle="modal" data-target="#removeModal">Supprimer</a>
                                                 </td>
                                             </tr>
-
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -124,29 +123,46 @@
 
 
             </div>
-
-
-
-
-            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+            <!-- detail inventaire -->
+            <div class="modal fade" id="inventairedetailModal" tabindex="-1" role="dialog" aria-labelledby="inventairedetailModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                            <h5 class="modal-title" id="inventairedetailModalLabel">Détail de l'inventaire</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Voulez vous vraiment supprimer ce bon de reception ?
+                            <table class="table table-bordered">
+                                <thead>
+
+                                <tr>
+                                    <th scope="col">Article</th>
+                                    <th scope="col">Quantité systéme</th>
+                                    <th scope="col">Quantité en stock</th>
+                                    <th scope="col">Ecart</th>
+                                </tr>
+                                </thead>
+                                <tbody id="zips">
+
+                                </tbody >
+
+                            </table>
+
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <button type="button" class="btn btn-primary">Oui</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+                            <button type="button" class="btn btn-primary">
+                                Télécharger</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!--  Ajouter inventaire    -->
+
             <div class="modal fade" id="receptionModal" tabindex="-1" role="dialog" aria-labelledby="receptionModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg " role="document">
                     <div class="modal-content m-lg-4">
@@ -157,56 +173,62 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            <form action="#" th:action="@{/ajouterinventaire}" th:object="${newinventaire} "   method="POST" th:target="_self">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="row">
                                         <div class="col-md-12 grid-margin ">
                                             <div class="row">
-                                                <div class="col-md-5 grid-margin ">
+                                                <div class="col-md-4 grid-margin ">
                                                     <div class="card">
-                                                        <div class="form-group">
-                                                            <label>Sélectionner le client</label>
-                                                            <select class="js-example-basic-single w-100">
-                                                                <option value="AL">hamza</option>
-                                                                <option value="WY">mohamed</option>
-                                                                <option value="AM">America</option>
-                                                                <option value="CA">Canada</option>
-                                                                <option value="RU">Russia</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Référence</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text">BR-</span>
-                                                                </div>
-                                                                <input type="text" class="form-control" placeholder="1111" aria-label="Username">
+                                                   <!-- --------      -->
+                                                            <div class="form-group">
+                                                                <label for="user1">Utilisateur</label>
+                                                                <input id="user1" th:field="*{user.name}"  readonly="readonly" class="form-control" th:value="${newinventaire.user.name}"/>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputdate">date de livraison</label>
-                                                            <input class="form-control" placeholder="dd/mm/yyyy">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Nb palettes</label>
-                                                            <input type="number" class="form-control" placeholder="1">
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label>Référence</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text">INV-</span>
+                                                                    </div>
+                                                                    <input th:field="*{reference}" type="text" class="form-control" placeholder="1111" aria-label="Username">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputdate1">date de l'inventaire</label>
+                                                                <input type="date" th:field="*{date}" class="form-control" placeholder="dd/mm/yyyy" id="exampleInputdate1" name="date" value="">
+                                                            </div>
+                                                        <!----- -->
 
                                                     </div>
                                                 </div>
-                                                <div class="col-md-7 grid-margin">
+                                                <div class="col-md-8 grid-margin">
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <p class="card-title mb-0">Article </p>
                                                             <br>
                                                             <div class="table-responsive">
-                                                                <table class="table table-borderless" id="demo-2">
+                                                                <table class="table" id="table_id1">
+                                                                    <thead>
+                                                                    <tr >
+                                                                        <th>Article</th>
+                                                                        <th>Quantité du systéme</th>
+                                                                        <th>Quantité en stock</th>
+
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr th:each="inventaire_composante ,itemStat : *{inventaire_composantes}">
+                                                                        <td> <input  id="composante_name" th:field="*{inventaire_composantes[__${itemStat.index}__].composante.name}" th:value="${inventaire_composante.composante.name}"  readonly="readonly" class="form-control"/></td>
+                                                                        <td> <input id="inputqte" th:value="${inventaire_composante.composante.quantity}"  readonly="readonly" class="form-control" /></td>
+                                                                        <td > <input id="inputqtestock" th:field="*{inventaire_composantes[__${itemStat.index}__].quantityInReality}" type="number"  class="form-control"  ></td>
+
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
                                                                 </table>
                                                             </div>
-
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("addRow")' class="btn btn-primary">Ajouter article </button>
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("deleteRow")' class="btn btn-primary">Supprimer dernier article</button>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -217,14 +239,46 @@
 
                                 </div>
                             </div>
-
-
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Enregistrer</button>
-                        </div>
+
                     </div>
+                </div>
+            </div>
+
+            <!-- modifier -->
+
+            <!-- supprimer -->
+
+            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="#" th:action="@{/supprimerinventaire}" th:object="${inventaire_id}" method="POST" th:target="_self">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>Voulez vous vraiment supprimer cet inventaire ?</p>
+                                <input type="hidden" th:field="*{id}" id="delete_id" >
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                <button  type="submit" class="btn btn-primary" >Oui</button>
+                            </div>
+
+                        </div>
+                    </form>
+
                 </div>
             </div>
 
@@ -248,7 +302,45 @@
 <script src="js/select2.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script>
+<script th:inline="javascript">
+
+
+
+    $('#inventairedetailModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('detait_id');
+        var url =[[@{'/ligneinventaire'}]] +'?id='+id;
+
+        $.ajax({
+            type: 'GET',
+            url:url,
+            success : function(data) {
+                $('#zips').html(data) ;
+                console.log(data);
+            }
+        });
+        //var modal = $(this);
+        //console.log(detait_id);
+        //modal.find('.modal-body #detait_inv').val(detait_inv);
+    });
+    $('#removeModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var delete_id = button.data('delete_id')
+        var modal = $(this)
+        modal.find('.modal-body #delete_id').val(delete_id);
+    });
+
+    $('#inputqte').on('change', function(event) {
+        var qtestock = document.querySelector('inputqtestock')
+        var qte = document.getElementById('inputqte');
+        var ecart = document.getElementById('inputecart');
+
+        qtestock.addEventListener('change', updateValue);
+        function updateValue(e) {
+            ecart.textContent = e.target.value;
+        }
+    })
+
     $(document).on("click", ".hamza", function () {
         var reff = $(this).data('id');
         $(".input-hamza").val( reff );
@@ -502,7 +594,7 @@
 <script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
 <script src="vendors/select2/select2.min.js"></script>
 <script src="dist/js/tabular-input.js"></script>
-<script>
+<script >
     jQuery('#demo-2').tabularInput({
         'rows': 1,
         'columns':4,

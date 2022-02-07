@@ -20,23 +20,26 @@ import lombok.Data;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@Data
+import javax.transaction.Transactional;
+
+@Transactional
 @Service
 public class UsersServices {
 
     @Autowired
     private UsersRepository usersRepository;
 
+
     public Users getUserByID(final Long id) {
         return usersRepository.findByID(id);
     }
 
     public Users getUserByName(final String name) {
-        Users user = usersRepository.findByName(name);
-        if (user == null) {
-            return  null ;
-        }
-        return  user;
+        return usersRepository.findByName(name);
+
+    }
+    public Users getUserByMail(String mail){
+        return  usersRepository.findByEmail(mail);
     }
 
 

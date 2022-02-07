@@ -2,6 +2,7 @@ package com.wms.model.stock;
 
 
 import com.wms.model.operation.Commande;
+import com.wms.model.operation.Inventaire;
 import com.wms.model.operation.LigneCommande;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @Builder(toBuilder = true)
@@ -42,7 +44,9 @@ public class Composante {
     private Categorie categorie;
 
     @OneToMany(mappedBy = "composante", fetch = FetchType.EAGER)
-    private Collection<LigneCommande> ligneCommandes = new ArrayList<>() ;
+    private List<LigneCommande> ligneCommandes = new ArrayList<>() ;
+
+
 
 
 

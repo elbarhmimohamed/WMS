@@ -14,6 +14,7 @@
 	<name>wms</name>
 	<description>Warehouse Management System</description>
 	<properties>
+
 		<java.version>11</java.version>
 	</properties>
 
@@ -100,3 +101,4 @@
 	</build>
 
 </project>
+

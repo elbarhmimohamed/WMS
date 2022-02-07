@@ -3,6 +3,7 @@ package com.wms.model.personne;
 import com.wms.model.operation.Commande;
 import com.wms.model.operation.Inventaire;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder(toBuilder = true)
 @Table(name = "users")
 public class Users {
 
