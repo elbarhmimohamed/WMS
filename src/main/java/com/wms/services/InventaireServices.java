@@ -28,7 +28,6 @@ public class InventaireServices {
 
     public Inventaire getInventaireById(final long id) {
 
-
         return inventaireRepository.findInventaireByID(Long.valueOf(id));
     }
 
@@ -40,9 +39,9 @@ public class InventaireServices {
 
 
     public void deleteById(final long id) {
-
         inventaireRepository.deleteById(id);
     }
+
 
     public void saveInventaire(Inventaire inventaire) {
 

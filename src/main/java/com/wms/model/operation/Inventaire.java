@@ -40,7 +40,7 @@ public class Inventaire {
     @ManyToOne
     private Users user;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.DETACH)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "inventaire_id")
     private List<Inventaire_composante> inventaire_composantes;
 
