@@ -3,19 +3,24 @@ package com.wms;
 
 import com.wms.model.emplacement.Emplacement;
 import com.wms.model.operation.Commande;
+import com.wms.model.operation.Inventaire;
 import com.wms.model.operation.Transport;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
 
 import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
+import com.wms.model.stock.Inventaire_composante;
 import com.wms.repository.PersonRepository;
+import com.wms.repository.UsersRepository;
 import com.wms.services.*;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,7 +42,8 @@ public class WmsApplication implements CommandLineRunner {
 	private EmplacementServices emplacementServices;
 
 	@Autowired
-	private PersonRepository personRepository;
+	private UsersRepository usersRepository;
+
 
 
 	@Autowired
@@ -45,6 +51,11 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Autowired
 	private CommandeServices commandeServices;
+	@Autowired
+	private InventaireServices inventaireServices;
+
+	@Autowired
+	private  Inventaire_composanteServices inventaireComposanteRepository;
 
 
 
@@ -178,6 +189,44 @@ public class WmsApplication implements CommandLineRunner {
 		cmd.setComposantes(composantes);
 		cmd.setUser(usersServices.getUserByName("mohamed"));
 		//commandeServices.saveReceptionCmd(cmd);
+/*
+		Inventaire_composante invc1 = new Inventaire_composante();
+		invc1.setComposante(composantServices.getComposanteById(Long.valueOf(1)));
+		invc1.setQuantityInReality(290);
+
+		Inventaire_composante invc2 = new Inventaire_composante();
+		invc2.setComposante(composantServices.getComposanteById(Long.valueOf(2)));
+		invc2.setQuantityInReality(200);
+		List<Inventaire_composante> inventaireComposanteList = new ArrayList<Inventaire_composante>();
+		inventaireComposanteList.add(invc1);
+		inventaireComposanteList.add(invc2);
+		//--------------------
+		Inventaire inventaire = new Inventaire();
+		//inventaire.setDate(LocalDateTime.now());
+		inventaire.setReference("INV-001");
+		inventaire.setInventaire_composantes(inventaireComposanteList);
+		inventaire.setUser(usersServices.getUserByName("mohamed"));
+		System.out.println("--------------");
+		System.out.println("--------------");
+		System.out.println("--------------");
+		System.out.println("--------------");
+		System.out.println(inventaire.getUser().getRole());
+		//inventaireComposanteRepository.saveInvComp(invc1);
+		//inventaireComposanteRepository.saveInvComp(invc2);
+		//inventaireServices.saveInventaire(inventaire);
+
+*/
+		//Inventaire inventaire = inventaireServices.getInventaireById(1);
+
+		System.out.println("--------------");
+		System.out.println("--------------");
+		//for (int i = 0 ; i < inventaire.getInventaire_composantes().size() )
+		//System.out.println(inventaire.getInventaire_composantes().size());
+
+		System.out.println("--------------");
+		System.out.println("--------------");
+
+		//inventaireServices.deleteById(Long.valueOf(3));
 
 	}
 

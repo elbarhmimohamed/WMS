@@ -13,40 +13,33 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 @Builder(toBuilder = true)
 @Transactional
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "composante")
-
-public class Composante {
+@Table(name = "inventaire_composante")
+public class Inventaire_composante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inventaire_composante_id")
     private long id;
-    @Column(name="name")
-    private String name;
-    @Column(name="seuil")
-    private long seuil;
-    @Column(name="quantity")
-    private long quantity;
-    @Column(name="type")
-    private boolean type;   // type == 0 => matiere 1ere   // type == 1 => produit fini
+
+    @OneToOne
+    private Composante composante;
+
+    @Column(name="quantityInReality")
+    private long quantityInReality;
+
+    @Column(name="Ecart")
+    private long Ecart;
 
 
-
-    @ManyToOne
-    private Categorie categorie;
-
-    @ManyToMany(mappedBy = "composantes", fetch = FetchType.EAGER)
-    private Collection<Commande> commandes = new ArrayList<>() ;
-
-
-
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "inventaire_id")
+    private Inventaire inventaire;
 
 
 }

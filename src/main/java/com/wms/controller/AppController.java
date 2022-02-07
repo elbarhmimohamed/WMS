@@ -18,6 +18,7 @@ public class AppController {
         return "page/index";
     }
 
+
     @GetMapping("/receptions")
     public String ReceptionPage() {
         return "/page/reception";
@@ -53,6 +54,7 @@ public class AppController {
 
     @GetMapping("/admin/dashboard")
     public String dashboardAdminPage() {
+
         return "/page/dashboard-admin";
     }
 
@@ -70,11 +72,13 @@ public class AppController {
     public String livraisonPage() {
         return "/page/livraison";
     }
-
+/*
     @GetMapping("/inventaire")
     public String inventairePage() {
         return "/page/inventaire";
     }
+    */
+
 /*
     @GetMapping("/clients")
     public String clientPage() {
@@ -93,9 +97,9 @@ public class AppController {
         return "/page/utlilisateurmotdepass";
     }
 
-    @GetMapping("/403")
+    @GetMapping("/404")
     public String view403Page() {
-        return "page/403";
+        return "/page/404";
     }
 
 

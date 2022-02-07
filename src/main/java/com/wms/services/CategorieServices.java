@@ -51,9 +51,6 @@ public class CategorieServices {
                     categoriesRepository.updateDescofCat(id,desc);
                 }
 
-
-
-
         } else {
             System.out.println( "Error de modification ");
 

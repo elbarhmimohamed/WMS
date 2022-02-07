@@ -32,7 +32,14 @@
               <div class="brand-logo">
                 <img src="images/logo.svg" alt="logo">
               </div>
+              <h4 th:if="${param.error}" style="color: red">
+                Nom d'utilisateur ou mot de passe invalide.
+              </h4>
+              <div th:if="${param.logout}" style="color: #a94442">
+                Vous avez été déconnecté.
+              </div>
               <h4>Bonjour !</h4>
+
               <h6 class="font-weight-light">Connectez-vous pour continuer</h6>
               <form  th:action="@{/login}" method="post" class="pt-3">
                 <div class="form-group">
