@@ -59,10 +59,7 @@ public class AppController {
 
 
 
-    @GetMapping("/livraison")
-    public String livraisonPage() {
-        return "/page/livraison";
-    }
+
 /*
     @GetMapping("/inventaire")
     public String inventairePage() {

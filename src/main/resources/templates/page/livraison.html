@@ -56,15 +56,16 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Tableau de board : Livraison<img  src="images/cargo.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de livraison</span>!</span></h6>
+                                <h3 class="font-weight-bold">Tableau de board : Livraison<img  src="images/exp.png"></h3>
+                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de livraison
+</span>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
                                     <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
-                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#receptionModal">
-                                            <i class="icon-head "></i>
+                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#ReceptionModal">
+                                            <i class="mdi mdi-book-plus "></i>
                                             Ajouter un bon de livraison
                                         </button>
                                     </div>
@@ -86,29 +87,35 @@
                                             <tr >
                                                 <th>Id</th>
                                                 <th>Référence</th>
-                                                <th>Fournisseur</th>
-                                                <th>Date de réception </th>
-                                                <th>Total TTC</th>
+                                                <th>Bon de commande </th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>BR-11111</td>
-                                                <td>Hamza</td>
 
-                                                <td>14/20/2022</td>
-                                                <td>1452dh</td>
+                                            <tr th:each="re : ${livraisonList}">
+
+                                                <td th:text="${re.id}"></td>
+                                                <td th:text="FS-+${re.reference}"></td>
+                                                <td th:text="PC-+${re.preparationCommande.reference}"></td>
+
                                                 <td>
-                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3">
+                                                    <button type="button"
+                                                            class="btn btn-primary btn-icon-text p-lg-3">
                                                         <i class="ti-file btn-icon-prepend"></i>
                                                         Details
                                                     </button>
-                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#receptionModal">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
+                                                    <button type="button" class="btn btn-warning p-lg-3"
+                                                            data-toggle="modal" data-target="#CommandeModal">
+                                                        Modifier
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${re.id}"
+                                                            data-toggle="modal" data-target="#removeconfigModal">
+                                                        Supprimer
+                                                    </button>
                                                 </td>
                                             </tr>
+
 
 
 
@@ -127,108 +134,121 @@
 
 
 
-
-            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="removeconfigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    <form action="#" th:action="@{/supprimerlivraison}" th:object="${livraisonRemove}" method="POST" th:target="_self">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>Voulez vous vraiment supprimer cette bon de livraison ?</p>
+                                <input type="hidden" th:field="*{id}" id="delete_id" >
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                <button  type="submit" class="btn btn-primary" >Oui</button>
+                            </div>
+
                         </div>
-                        <div class="modal-body">
-                            Voulez vous vraiment supprimer ce bon de reception ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <button type="button" class="btn btn-primary">Oui</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-            <div class="modal fade" id="receptionModal" tabindex="-1" role="dialog" aria-labelledby="receptionModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg " role="document">
+
+
+            <div class="modal fade" id="ReceptionModal" tabindex="-1" role="dialog" aria-labelledby="ReceptionModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="receptionModalLabel">Ajouter un bon de reception</h5>
+                            <h5 class="modal-title" id="CommandeModalLabel">Ajouter un bon de livraison</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <div class="input-group">
+                        <form action="#" th:action="@{/ajouterLivraison}"
+                              th:object="${livraison}" method="POST"
+                              th:target="_self">
+                            <div class="modal-body">
+                                <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-12 grid-margin ">
-                                            <div class="row">
-                                                <div class="col-md-5 grid-margin ">
-                                                    <div class="card">
-                                                        <div class="form-group">
-                                                            <label>Sélectionner le client</label>
-                                                            <select class="js-example-basic-single w-100">
-                                                                <option value="AL">hamza</option>
-                                                                <option value="WY">mohamed</option>
-                                                                <option value="AM">America</option>
-                                                                <option value="CA">Canada</option>
-                                                                <option value="RU">Russia</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Référence</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text">BR-</span>
-                                                                </div>
-                                                                <input type="text" class="form-control" placeholder="1111" aria-label="Username">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputdate">date de livraison</label>
-                                                            <input class="form-control" placeholder="dd/mm/yyyy">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Nb palettes</label>
-                                                            <input type="number" class="form-control" placeholder="1">
+                                        <div class="col-md-12">
+                                            <div class="card">
+
+                                                <div class="form-group">
+                                                    <label>Sélectionner le bon de commande</label>
+                                                    <select id="hamza1" th:field="*{preparationCommande}"
+                                                            class="form-control form-control-lg">
+                                                        <option value="">--Veuillez choisir la commande--</option>
+                                                        <div th:each="co :${preparationCommande}">
+
+                                                            <option th:value="${co.id}"
+                                                                    th:text="PC-+${co.reference}"></option>
+
                                                         </div>
 
+
+                                                    </select>
+
+
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Référence</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">BL-</span>
+                                                        </div>
+                                                        <input th:field="*{reference}" type="text" class="form-control"
+                                                               placeholder="1111"
+                                                               aria-label="Username">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-7 grid-margin">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <p class="card-title mb-0">Article </p>
-                                                            <br>
-                                                            <div class="table-responsive">
-                                                                <table class="table table-borderless" id="demo-2">
-                                                                </table>
-                                                            </div>
 
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("addRow")' class="btn btn-primary">Ajouter article </button>
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("deleteRow")' class="btn btn-primary">Supprimer dernier article</button>
-
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputdate">Date de Livraison</label>
+                                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="exampleInputdate"  th:field="*{date}">
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="transport">Transport </label>
+                                                    <input id="transport" th:field="*{transport}"  type="text" class="form-control">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="hamza">Description </label>
+                                                    <input id="hamza" th:field="*{description}"  type="text" class="form-control">
+                                                </div>
+
+
+
                                             </div>
-
                                         </div>
+
+
+
                                     </div>
+
+
 
                                 </div>
                             </div>
 
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Enregistrer</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
-
-
 
 
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
@@ -516,7 +536,7 @@
 
 
 </script>
-<script type="text/javascript">
+<script th:inline="javascript">
 
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-36251023-1']);
@@ -528,6 +548,36 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
+
+    $('#hamza').on('change', function() {
+
+        var id = $('#hamza1').val();
+        var numberpalette = this.value;
+        var url ='/lignepalette' +'?id='+id +'&nb=' +numberpalette;
+
+        $.ajax({
+            type: 'GET',
+            url:url,
+            success : function(data) {
+                $('#zips').html(data);
+
+            }
+        });
+
+
+
+
+
+    });
+
+
+
+    $('#removeconfigModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var delete_id = button.data('delete_id')
+        var modal = $(this)
+        modal.find('.modal-body #delete_id').val(delete_id);
+    });
 
 </script>
 <!-- End custom js for this page-->
