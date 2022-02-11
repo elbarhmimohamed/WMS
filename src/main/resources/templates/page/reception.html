@@ -99,11 +99,11 @@
                                                 <td th:text="${re.date}"></td>
 
                                                 <td>
-                                                    <button type="button"
-                                                            class="btn btn-primary btn-icon-text p-lg-3">
-                                                        <i class="ti-file btn-icon-prepend"></i>
-                                                        Details
-                                                    </button>
+
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#receptiondetailModal">
+                                                    <i class="ti-file btn-icon-prepend"></i>
+                                                    Details
+                                                </button>
                                                     <button type="button" class="btn btn-warning p-lg-3"
                                                             data-toggle="modal" data-target="#CommandeModal">
                                                         Modifier
@@ -210,10 +210,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="exampleInputdate">Date de reception</label>
+                                                                <label for="exampleInputdate1">Date de reception</label>
                                                                 <input th:field="*{date}"  type="date" class="form-control"
                                                                       placeholder="dd/mm/yyyy"
-                                                                       id="exampleInputdate">
+                                                                       id="exampleInputdate1">
                                                             </div>
                                                         </div>
                                             </div>
@@ -240,20 +240,9 @@
                                                                     </thead>
                                                                     <tbody id="zips">
 
-
-
-
                                                                     </tbody>
                                                                 </table>
                                                                 </div>
-
-
-
-
-
-
-
-
 
                                                             </div>
                                                         </div>
@@ -272,6 +261,42 @@
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                             </div>
                         </form>
+                    </div>
+
+                </div>
+            </div>
+            <!-- detail reception -->
+            <div class="modal fade" id="receptiondetailModal" tabindex="-1" role="dialog" aria-labelledby="receptiondetailModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="receptiondetailModalLabel">Ajouter un bon de reception</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <div class="row" id="zips1">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <form action="#" th:action="@{/receptionPdf}"th:object="${recpdf}" method="POST" th:target="_self">
+                                    <input type="hidden" th:field="*{id}" id="detail_id" >
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Telecharger</button>
+                                </form>
+                            </div>
+
+
+
+
                     </div>
 
                 </div>
@@ -295,7 +320,11 @@
 <script src="js/select2.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script>
+<script >
+
+
+
+
     $(document).on("click", ".hamza", function () {
         var reff = $(this).data('id');
         $(".input-hamza").val( reff );
@@ -564,6 +593,25 @@
 
 </script>
 <script th:inline="javascript">
+
+                $('#receptiondetailModal').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget);
+                    var id = button.data('detail_id');
+                    var modal = $(this);
+                    modal.find('.modal-footer #detail_id').val(id);
+                    var url = [[@{'/detailreception'}]] + '?id=' + id;
+
+                    $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                    $('#zips1').html(data);
+                    console.log(data);
+                    }
+                    });
+
+
+                });
 
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-36251023-1']);

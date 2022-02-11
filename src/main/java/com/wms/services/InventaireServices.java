@@ -1,5 +1,8 @@
 package com.wms.services;
 
+import com.lowagie.text.*;
+import com.lowagie.text.Font;
+import com.lowagie.text.pdf.PdfWriter;
 import com.wms.model.operation.Inventaire;
 import com.wms.model.personne.Users;
 import com.wms.model.stock.Inventaire_composante;
@@ -8,8 +11,10 @@ import com.wms.repository.Inventaire_composanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +55,7 @@ public class InventaireServices {
            inventaire_composanteList.get(i).setEcart(inventaire_composanteList.get(i).getQuantityInReality() - inventaire_composanteList.get(i).getComposante().getQuantity());
            inventaireComposanteRepository.save(inventaire_composanteList.get(i));
        }
+
         inventaireRepository.save(inventaire);
 
 
@@ -81,6 +87,8 @@ public class InventaireServices {
         }
 
     }
+
+
 
 
 

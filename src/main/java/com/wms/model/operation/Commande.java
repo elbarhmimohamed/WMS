@@ -35,7 +35,8 @@ public class Commande{
     @JoinColumn(name = "fournisseur_id")
     private Person fournisseur;
 
-    @OneToMany(mappedBy="commande" ,cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy="commande" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<LigneCommande> ligneCommande;
 
     private double total;

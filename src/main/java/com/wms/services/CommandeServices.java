@@ -38,6 +38,10 @@ public class CommandeServices {
         return commandeRepository.findAll();
     }
 
+    public Commande findCommandeById(int id){
+        return commandeRepository.findCommandeBy(id);
+    }
+
     public void saveCommande(Commande commande) {
 
         for (LigneCommande ligneCommande : commande.getLigneCommande()) {

@@ -28,7 +28,7 @@ public class LigneCommande {
     @JoinColumn(name = "commande_id")
     private Commande commande;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "composante_id")
     private Composante composante;
 

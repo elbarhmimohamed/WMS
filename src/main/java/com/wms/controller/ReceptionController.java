@@ -1,10 +1,12 @@
 package com.wms.controller;
 
+import com.lowagie.text.DocumentException;
 import com.wms.model.emplacement.ConfigEmplacement;
 import com.wms.model.emplacement.Emplacement;
 import com.wms.model.operation.*;
 import com.wms.repository.*;
 import com.wms.services.CommandeServices;
+import com.wms.services.ReceptionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +53,7 @@ public class ReceptionController {
         model.addAttribute("reception",receptionList);
         model.addAttribute("receptionAdd",receptionAdd);
         model.addAttribute("receptionremove", new Reception());
+        model.addAttribute("recpdf",new Reception());
         return "/page/reception";
     }
 
@@ -247,6 +254,82 @@ resultat +=
     public String supprimerfichierStock(FichierStock fichierStock, BindingResult result, Model model) {
         this.fichierStockRepository.deleteById(fichierStock.getId());
         return "redirect:/stockage";
+    }
+
+    @Autowired
+    ReceptionServices receptionServices;
+    //**** details
+    @GetMapping("/detailreception")
+    @ResponseBody
+    public String ReceptionDetail(@RequestParam int id) {
+        System.out.println(id);
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Reception reception = receptionServices.findReceptionById(id);
+        String datereception = dateFormatter.format(reception.getDate());
+        String resultat = "";
+        resultat = resultat +
+                "<div class='col-md-12' >\n"+
+                "<div class='card' > \n"+
+               " <h4>Référence de réception : BC"+ reception.getReference() + "</h4> \n"+
+                " <h4>Référence de Commande : BR"+ reception.getCommande().getReference() + " </h4> \n" +
+                " <h4>Date de reception     : "+ datereception +"</h4>\n" +
+                "</div> \n"+
+                "</div> \n"+
+                " <div class='col-md-12 '> \n"+
+                " <div class='card'> <div class='card-body'> <div class='card-title'>\n"+
+                " Controle qualité </div>\n"+
+                "<div class='table-responsive'> <table class='table  table-bordered'>\n"+
+                "<thead> <tr>  \n" +
+                "<th>Article</th>\n"+
+                  " <th>Prix</th>\n"+
+                    "<th>Quantité demandée </th>"+
+                "<th>Quantité réelle</th>"+
+                "<th>échantillon</th>"+
+                "<th>defectueux</th>"+
+                "<th>Accepter</th>"+
+                "</tr> </thead>"+
+                "<tbody > </tbody> </table> </div> </div> </div> </div> \n";
+
+        ;
+        // resultat = resultat + "<td colspan='2'> Commande "+ reception.getCommande().getReference()+"</td>\n";
+        /*
+        for (LigneCommande ligneCommande:commande.getLigneCommande()) {
+            resultat += "         <tr>\n" +
+                    " <td >"+ligneCommande.getComposante().getName()+" </td>\n" +
+                    " <td >"+ligneCommande.getQuantite()+" </td>\n" +
+                    " <td >"+ligneCommande.getPrix()+"</td>\n" +
+                    "  </tr>";
+        }
+        */
+
+
+
+        return resultat;
+
+    }
+
+
+
+    @PostMapping("/receptionPdf")
+    public void exportToPDF(Reception recpdf, HttpServletResponse response) throws DocumentException, IOException {
+        Reception reception = receptionServices.findReceptionById(recpdf.getId());
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateTime = dateFormatter.format(reception.getDate());
+        String receptionDate = dateFormatter.format(reception.getDate());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Réception_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+        ReceptionPDFGenerateur receptionPDFGenerateur = new ReceptionPDFGenerateur();
+        receptionPDFGenerateur.setRef(reception.getReference());
+        receptionPDFGenerateur.setDate(receptionDate);
+        receptionPDFGenerateur.setCmd(reception.getCommande());
+        //receptionPDFGenerateur.setControleQualiteList(reception.getControleQualiteList());
+
+        receptionPDFGenerateur.export(response);
+
+
     }
 
 

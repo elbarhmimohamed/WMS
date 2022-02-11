@@ -2,9 +2,7 @@ package com.wms;
 
 
 import com.wms.model.emplacement.Emplacement;
-import com.wms.model.operation.Commande;
-import com.wms.model.operation.Inventaire;
-import com.wms.model.operation.Transport;
+import com.wms.model.operation.*;
 import com.wms.model.personne.Person;
 import com.wms.model.personne.Users;
 
@@ -12,6 +10,7 @@ import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
 import com.wms.model.stock.Inventaire_composante;
 import com.wms.repository.PersonRepository;
+import com.wms.repository.ReceptionRepository;
 import com.wms.repository.UsersRepository;
 import com.wms.services.*;
 import org.hibernate.Session;
@@ -55,7 +54,7 @@ public class WmsApplication implements CommandLineRunner {
 	private InventaireServices inventaireServices;
 
 	@Autowired
-	private  Inventaire_composanteServices inventaireComposanteRepository;
+	private ReceptionServices receptionServices;
 
 
 
@@ -214,15 +213,30 @@ public class WmsApplication implements CommandLineRunner {
 */
 		//Inventaire inventaire = inventaireServices.getInventaireById(1);
 
-		System.out.println("--------------");
-		System.out.println("--------------");
+
 		//for (int i = 0 ; i < inventaire.getInventaire_composantes().size() )
 		//System.out.println(inventaire.getInventaire_composantes().size());
 
-		System.out.println("--------------");
-		System.out.println("--------------");
+
 
 		//inventaireServices.deleteById(Long.valueOf(3));
+
+		Reception rec = new Reception();
+
+		rec = receptionServices.findReceptionById(1);
+		Commande cmd = commandeServices.findCommandeById(1);
+		System.out.println("--------------");
+		//System.out.println(rec.getReference());
+		//System.out.println(rec.getDate());
+		//System.out.println("reference commande"+rec.getCommande().getReference());
+
+		//System.out.println("size of liste : " + cmd.getLigneCommande().size());
+
+
+
+
+		System.out.println("--------------");
+		System.out.println("--------------");
 
 	}
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Transactional
 @Table(name = "Reception")
 public class Reception {
     @Id
@@ -38,7 +40,7 @@ public class Reception {
     @OneToOne(cascade = CascadeType.ALL)
     private FichierStock fichierStock;
 
-    @OneToMany(mappedBy="reception",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="reception",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<ControleQualite> controleQualiteList;
 
 

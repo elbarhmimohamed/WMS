@@ -98,16 +98,16 @@
                                                 <td th:text="${inventaire.id}">Inventaire Ref</td>
                                                 <td th:text="${inventaire.reference}">Inventaire ID</td>
                                                 <td th:text="${inventaire.user.name}"> Utilisateur</td>
-                                                <td th:text="${inventaire.date}">Date</td>
+                                                <td th:text="${#dates.format(inventaire.date, 'dd-MM-yyyy')}">Date</td>
 
 
 
                                                 <td >
-                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detait_id="${inventaire.id}"	data-toggle="modal" data-target="#inventairedetailModal">
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${inventaire.id}"	data-toggle="modal" data-target="#inventairedetailModal">
                                                         <i class="ti-file btn-icon-prepend"></i>
                                                         Details
                                                     </button>
-                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${inventaire.id}"	data-toggle="modal" data-target="#articlemodifieModal">Modifier</a>
+                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${inventaire.id}"	data-toggle="modal" data-target="#inventairemodifieModal">Modifier</a>
                                                     <a type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${inventaire.id}"	data-toggle="modal" data-target="#removeModal">Supprimer</a>
                                                 </td>
                                             </tr>
@@ -133,7 +133,9 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <form action="#" th:action="@{/inventarePdf}" th:object="${invpdf}"   method="POST" th:target="_self">
                         <div class="modal-body">
+                            <input type="hidden" th:field="*{id}" id="detail_id" >
                             <table class="table table-bordered">
                                 <thead>
 
@@ -152,12 +154,16 @@
 
 
                         </div>
+
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
-                            <button type="button" class="btn btn-primary">
+                            <button id="download"   type="submit" class="btn btn-primary" >
                                 Télécharger</button>
                         </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
 
@@ -167,7 +173,7 @@
                 <div class="modal-dialog modal-lg " role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="receptionModalLabel">Ajouter un bon de reception</h5>
+                            <h5 class="modal-title" id="receptionModalLabel">Ajouter un inventaire</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -251,6 +257,42 @@
             </div>
 
             <!-- modifier -->
+            <div class="modal fade" id="inventairemodifieModal" tabindex="-1" role="dialog" aria-labelledby="inventairemodifieModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="inventairemodifieModalLabel">Modifier inventaire</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" th:action="@{/ajouterinventaire}" th:object="${inv} "   method="POST" th:target="_self">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="row">
+                                            <div class="col-md-12 grid-margin ">
+                                                <div class="row" id="zips3">
+                                                    <!-- --------      -->
+
+                                                    <!----- -->
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
             <!-- supprimer -->
 
@@ -304,11 +346,13 @@
 <!-- Plugin js for this page -->
 <script th:inline="javascript">
 
-
+            var i = 0;
 
     $('#inventairedetailModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
-        var id = button.data('detait_id');
+        var id = button.data('detail_id');
+        var modal = $(this);
+        modal.find('.modal-body #detail_id').val(id);
         var url =[[@{'/ligneinventaire'}]] +'?id='+id;
 
         $.ajax({
@@ -319,10 +363,29 @@
                 console.log(data);
             }
         });
-        //var modal = $(this);
-        //console.log(detait_id);
-        //modal.find('.modal-body #detait_inv').val(detait_inv);
+
     });
+
+            $('#inventairemodifieModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('update_id');
+                //var modal = $(this);
+                //modal.find('.modal-body #detail_id').val(id);
+                var url =[[@{'/affichemodifierform'}]] +'?id='+id;
+
+                $.ajax({
+                    type: 'GET',
+                    url:url,
+                    success : function(data) {
+                        $('#zips3').html(data) ;
+                        console.log(data);
+                    }
+                });
+
+            });
+
+
+
     $('#removeModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
         var delete_id = button.data('delete_id')

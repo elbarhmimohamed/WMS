@@ -3,9 +3,11 @@ package com.wms.controller;
 import com.wms.model.emplacement.ConfigEmplacement;
 import com.wms.model.operation.Commande;
 import com.wms.model.operation.FichierStock;
+import com.wms.model.operation.Inventaire;
 import com.wms.model.operation.LigneCommande;
 import com.wms.model.personne.Person;
 import com.wms.model.stock.Composante;
+import com.wms.model.stock.Inventaire_composante;
 import com.wms.repository.CommandeRepository;
 import com.wms.repository.LigneCommandeRepository;
 import com.wms.services.CommandeServices;
@@ -15,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -88,6 +88,24 @@ public class CommandeController {
     public String commanderemove(Commande commande, BindingResult result, Model model) {
         this.commandeRepository.deleteById(commande.getId());
         return "redirect:/stockage";
+    }
+
+    @GetMapping("/lignecommandedetail")
+    @ResponseBody
+    public String CommandeDetail(@RequestParam int id) {
+
+        String resultat = "";
+        Commande commande = commandeServices.findCommandeById(id);
+
+        for (LigneCommande ligneCommande:commande.getLigneCommande()) {
+            resultat += "         <tr>\n" +
+                    " <td >"+ligneCommande.getComposante().getName()+" </td>\n" +
+                    " <td >"+ligneCommande.getQuantite()+" </td>\n" +
+                    " <td >"+ligneCommande.getPrix()+"</td>\n" +
+                    "  </tr>";
+        }
+        return resultat;
+
     }
 
 
