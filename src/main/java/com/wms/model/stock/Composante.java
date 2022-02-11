@@ -40,10 +40,10 @@ public class Composante {
 
 
 
-    @ManyToOne
+    @ManyToOne()
     private Categorie categorie;
 
-    @OneToMany(mappedBy = "composante", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "composante")
     private List<LigneCommande> ligneCommandes = new ArrayList<>() ;
 
 

@@ -23,5 +23,8 @@ public class Emplacement {
     @OneToOne
     private Palette palette;
 
+    @OneToOne
+    private Emplacement emplacement;
+
 
 }
