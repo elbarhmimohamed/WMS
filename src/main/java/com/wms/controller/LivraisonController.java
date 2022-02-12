@@ -196,7 +196,7 @@ public class LivraisonController {
 
     @GetMapping("/detaillivraison")
     @ResponseBody
-    public String LivraisonDetail(@RequestParam int id) {
+    public String livraisonDetail(@RequestParam int id) {
 
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         Livraison ll = livraisonRepository.getById(id);
@@ -205,11 +205,11 @@ public class LivraisonController {
         resultat = resultat +
                 "<div class='col-md-12' >\n"+
                 "<div class='card' > \n"+
-                " <h4>Référence de réception : BC"+ ll.getReference() + "</h4> \n"+
-                " <h4>Référence de Commande : BR"+ ll.getPreparationCommande().getReference() + " </h4> \n" +
-                " <h4>Date de reception     : "+ datelivraison +"</h4>\n" +
-                " <h4>Date de reception     : "+ "transport" +"</h4>\n" +
-                " <h4>Date de reception     : "+ ll.getTransport() +"</h4>\n" +
+                " <h4>Référence de réception : BL"+ ll.getReference() + "</h4> \n"+
+                " <h4>Référence de Commande : PC"+ ll.getPreparationCommande().getReference() + " </h4> \n" +
+                " <h4>Date de livraison     : "+ datelivraison +"</h4>\n" +
+                " <h4>Date de préparation de commande     : "+ dateFormatter.format(ll.getPreparationCommande().getDate()) +"</h4>\n" +
+                " <h4>Transport     : T"+ ll.getTransport().getReference() +"</h4>\n" +
                 "</div> \n"+
                 "</div> \n"+
                 " <div class='col-md-12 '> \n"+
@@ -245,29 +245,30 @@ public class LivraisonController {
         return resultat;
 
     }
-/*
+
     @PostMapping("/livraisonPdf")
-    public void exportToPDF(Reception recpdf, HttpServletResponse response) throws DocumentException, IOException {
-        Reception reception = receptionServices.findReceptionById(recpdf.getId());
+    public void exportToPDF(Livraison livpdf, HttpServletResponse response) throws DocumentException, IOException {
+        Livraison livraison = livraisonRepository.getById(livpdf.getId());
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDateTime = dateFormatter.format(reception.getDate());
-        String receptionDate = dateFormatter.format(reception.getDate());
+        String currentDateTime = dateFormatter.format(livraison.getDate());
+        String livraisonDate = dateFormatter.format(livraison.getDate());
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Réception_" + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=Livraison_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
-        ReceptionPDFGenerateur receptionPDFGenerateur = new ReceptionPDFGenerateur();
-        receptionPDFGenerateur.setRef(reception.getReference());
-        receptionPDFGenerateur.setDate(receptionDate);
-        receptionPDFGenerateur.setCmd(reception.getCommande());
-        receptionPDFGenerateur.setControleQualiteList(reception.getControleQualiteList());
+        LivraisonPDFGenerateur livraisonPDFGenerateur = new LivraisonPDFGenerateur();
+        livraisonPDFGenerateur.setRef(livraison.getReference());
+        livraisonPDFGenerateur.setDate(livraisonDate);
+        livraisonPDFGenerateur.setDescreption(livraison.getDescription());
+        livraisonPDFGenerateur.setTransport(livraison.getTransport());
+        livraisonPDFGenerateur.setPreparationCommande(livraison.getPreparationCommande());
 
-        receptionPDFGenerateur.export(response);
+        livraisonPDFGenerateur.export(response);
 
 
     }
-    */
+
 
 
 

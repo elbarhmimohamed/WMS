@@ -59,17 +59,7 @@
                                 <h3 class="font-weight-bold">Tableau de board : Journal<img  src="images/Journal.png"></h3>
                                 <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de reception</span>!</span></h6>
                             </div>
-                            <div class="col-12 col-xl-4">
-                                <div class="justify-content-end d-flex">
-                                    <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
-                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#receptionModal">
-                                            <i class="icon-head "></i>
-                                            Ajouter un bon de reception
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,31 +76,62 @@
                                             <tr >
                                                 <th>Id</th>
                                                 <th>Référence</th>
-                                                <th>Fournisseur</th>
-                                                <th>Date de réception </th>
-                                                <th>Total TTC</th>
+                                                <th>Date d'opération </th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>BR-11111</td>
-                                                <td>Hamza</td>
+                                            <tr th:each="re : ${livraisons}">
 
-                                                <td>14/20/2022</td>
-                                                <td>1452dh</td>
+                                                <td th:text="${re.id}"></td>
+                                                <td th:text="BL-+${re.reference}"></td>
+                                                <td th:text="${#dates.format(re.date, 'dd-MM-yyyy')}"></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3">
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#DetailModal">
                                                         <i class="ti-file btn-icon-prepend"></i>
                                                         Details
                                                     </button>
-                                                    <button type="button" class="btn btn-warning p-lg-3" data-toggle="modal" data-target="#receptionModal">Modifier</button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" data-toggle="modal" data-target="#removeModal">Supprimer</button>
                                                 </td>
                                             </tr>
+                                            <tr th:each="re : ${receptions}">
 
+                                                <td th:text="${re.id}"></td>
+                                                <td th:text="BR-+${re.reference}"></td>
+                                                <td th:text="${#dates.format(re.date, 'dd-MM-yyyy')}"></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#DetailModalrec">
+                                                        <i class="ti-file btn-icon-prepend"></i>
+                                                        Details
+                                                    </button>
+                                                </td>
 
+                                            </tr>
+                                            <tr th:each="re : ${cmd}">
+
+                                                <td th:text="${re.id}"></td>
+                                                <td th:text="BC-+${re.reference}"></td>
+                                                <td th:text="${#dates.format(re.date, 'dd-MM-yyyy')}"></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#commandedetailModal">
+                                                        <i class="ti-file btn-icon-prepend"></i>
+                                                        Details
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                            <tr th:each="re : ${pc}">
+
+                                                <td th:text="${re.id}"></td>
+                                                <td th:text="PC-+${re.reference}"></td>
+                                                <td th:text="${#dates.format(re.date, 'dd-MM-yyyy')}"></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#DetailCommandeModal">
+                                                        <i class="ti-file btn-icon-prepend"></i>
+                                                        Details
+                                                    </button>
+                                                </td>
+
+                                            </tr>
 
                                             </tbody>
                                         </table>
@@ -128,107 +149,161 @@
 
 
 
-            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Voulez vous vraiment supprimer ce bon de reception ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                            <button type="button" class="btn btn-primary">Oui</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="receptionModal" tabindex="-1" role="dialog" aria-labelledby="receptionModalLabel" aria-hidden="true">
+            <div class="modal fade" id="DetailModal" tabindex="-1" role="dialog" aria-labelledby="DetailModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-lg " role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="receptionModalLabel">Ajouter un bon de reception</h5>
+                            <h5 class="modal-title" id="DetailModalLabel">Détail d'oparation</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                         <div class="modal-body">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="row">
-                                        <div class="col-md-12 grid-margin ">
-                                            <div class="row">
-                                                <div class="col-md-5 grid-margin ">
-                                                    <div class="card">
-                                                        <div class="form-group">
-                                                            <label>Sélectionner le fournisseur</label>
-                                                            <select class="js-example-basic-single w-100">
-                                                                <option value="AL">hamza</option>
-                                                                <option value="WY">mohamed</option>
-                                                                <option value="AM">America</option>
-                                                                <option value="CA">Canada</option>
-                                                                <option value="RU">Russia</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Référence</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text">BR-</span>
-                                                                </div>
-                                                                <input type="text" class="form-control" placeholder="1111" aria-label="Username">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Date de réception</label>
-                                                            <input class="form-control" placeholder="dd/mm/yyyy">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Nb palettes</label>
-                                                            <input type="number" class="form-control" placeholder="1">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7 grid-margin">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <p class="card-title mb-0">Article </p>
-                                                            <br>
-                                                            <div class="table-responsive">
-                                                                <table class="table table-borderless" id="demo-2">
-                                                                </table>
-                                                            </div>
-
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("addRow")' class="btn btn-primary">Ajouter article </button>
-                                                            <button type='button' onClick='javascript:$("#demo-2").tabularInput("deleteRow")' class="btn btn-primary">Supprimer dernier article</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
+                                <div class="row" id="zips">
                                 </div>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="DetailModalrec" tabindex="-1" role="dialog" aria-labelledby="DetailModalrecLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="DetailModalrecLabel">Détail d'oparation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="row" id="zips1">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- detail        -->
+            <div class="modal fade" id="commandedetailModal" tabindex="-1" role="dialog" aria-labelledby="commandedetailModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="commandedetailModalLabel">Détail d'un bon de Commande</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="modal-body">
+
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                    <tr>
+                                        <th scope="col">Article</th>
+                                        <th scope="col">Quantité</th>
+                                        <th scope="col">Prix</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="zips2">
+
+                                    </tbody >
+
+                                </table>
+
+
                             </div>
 
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Enregistrer</button>
                         </div>
+
                     </div>
+
                 </div>
             </div>
+            <!-- detail preparation de commande : -->
+            <div class="modal fade" id="DetailCommandeModal" tabindex="-1" role="dialog" aria-labelledby="DetailCommandeModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="DetailCommandeModalLabel">Preparation commande livraison</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="card">
+
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    Détail de commande
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table  table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Article</th>
+                                                            <th>quantité disponible</th>
+                                                            <th>quantite demandée</th>
+                                                            <th>prix</th>
+                                                            <th>Emplacement</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="zips4">
+
+                                                        </tbody>
 
 
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
 
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
@@ -248,7 +323,72 @@
 <script src="js/select2.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script>
+<script th:inline="javascript">
+    $('#DetailModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('detail_id');
+        var modal = $(this);
+        modal.find('.modal-footer #detail_id').val(id);
+        var url = [[@{'/detaillivraison'}]] + '?id=' + id;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#zips').html(data);
+                console.log(data);
+            }
+        });
+
+
+    });
+    $('#DetailModalrec').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('detail_id');
+        var modal = $(this);
+        modal.find('.modal-footer #detail_id').val(id);
+        var url = [[@{'/detailreception'}]] + '?id=' + id;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#zips1').html(data);
+                console.log(data);
+            }
+        });
+
+
+    });
+    $('#commandedetailModal').on('show.bs.modal', function(event) {
+
+        var button = $(event.relatedTarget);
+        var id = button.data('detail_id');
+
+        var url =[[@{'/lignecommandedetail'}]] +'?id='+id;
+
+        $.ajax({
+            type: 'GET',
+            url:url,
+            success : function(data) {
+                $('#zips2').html(data) ;
+                console.log(data);
+            }
+        });
+    });
+    $('#DetailCommandeModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('detail_id');
+        var url =[[@{'/lignedepreparationdecommande'}]] +'?id='+id;
+        $.ajax({
+            type: 'GET',
+            url:url,
+            success : function(data) {
+                $('#zips4').html(data) ;
+                console.log(data);
+            }
+        });
+    });
     $(document).on("click", ".hamza", function () {
         var reff = $(this).data('id');
         $(".input-hamza").val( reff );

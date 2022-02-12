@@ -144,6 +144,7 @@ public class ReceptionController {
         model.addAttribute("fichierStockList",fichierStockRepository.findAll());
         model.addAttribute("receptionList",receptionList);
         model.addAttribute("fichierStock",fichierStock);
+        model.addAttribute("detailF",new FichierStock());
         model.addAttribute("fichierStockRemove", new FichierStock());
 
 
@@ -342,6 +343,66 @@ resultat +=
 
         receptionPDFGenerateur.export(response);
 
+
+    }
+
+    @GetMapping("/detailfichierstock")
+    @ResponseBody
+    public String FSDetail(@RequestParam int id) {
+
+        FichierStock fs = fichierStockRepository.getById(id);
+        String resultat = "";
+        resultat = resultat +
+               " <div class=\"col-md-12\">\n" +
+                "                                            <div class=\"card\">\n" +
+                "                                                <h4>Référence : FS"+ fs.getReference() +"</h4>\n" +
+                "                                                <h4>Bon de reception : BR"+ fs.getReception().getReference() +"</h4>\n" +
+                "                                                <h4>Nomber de palette : "+ fs.getPalettes().size() +"</h4>\n" +
+                "                                            </div>\n" +
+                "                                        </div>\n" +
+                "\n" +
+                "                                        <div class=\"col-md-12 \">\n" +
+                "                                            <div class=\"card\">\n" +
+                "\n" +
+                "                                                <div class=\"card-body\">\n" +
+                "                                                    <div class=\"card-title\">\n" +
+                "                                                        fichier de stock\n" +
+                "                                                    </div>\n" +
+                "                                                    <div class=\"table-responsive\">\n" +
+                "                                                        <table class=\"table  table-bordered\">\n" +
+                "                                                            <thead>\n" +
+                "                                                            <tr>\n" +
+                "                                                                <th>Palette</th>\n" +
+                "                                                                <th>Article</th>\n" +
+                "                                                                <th>Emplacement</th>\n" +
+                "                                                            </tr>\n" +
+                "                                                            </thead>\n" +
+                "                                                            <tbody >\n" ;
+
+
+
+        ;
+        // resultat = resultat + "<td colspan='2'> Commande "+ reception.getCommande().getReference()+"</td>\n";
+
+        for (Palette pl :fs.getPalettes()) {
+            resultat += "         <tr>\n" +
+                    " <td >"+pl.getReference()+" </td>\n" +
+                    " <td >"+pl.getComposante().getName()+" </td>\n" +
+                    " <td >"+pl.getEmplacement().getRefemplacement()+" </td>\n" +
+                    "  </tr>";
+        };
+        resultat = resultat +  "                                                            </tbody>\n" +
+                "                                                        </table>\n" +
+                "                                                    </div>\n" +
+                "\n" +
+                "                                                </div>\n" +
+                "                                            </div>\n" +
+                "                                        </div>";
+
+
+
+
+        return resultat;
 
     }
 
