@@ -25,6 +25,12 @@ public class ComposantServices {
         return composantRepository.findAll();
     }
 
+    public int numberOfArticle(){
+        return composantRepository.countArticle();
+    }
+    public int numberOfProducte(){
+        return composantRepository.countProduct();
+    }
     public Composante getComposanteById(final Long id){ return composantRepository.findComposanteById(id);}
 
     public Optional<Composante> getComposanteByName(final String name){ return composantRepository.findComposanteByName(name);}

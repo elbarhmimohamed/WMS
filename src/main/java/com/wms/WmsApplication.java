@@ -235,7 +235,13 @@ public class WmsApplication implements CommandLineRunner {
 
 
 
-		System.out.println("--------------");
+		System.out.println("nombre des categorie : "+categorieServices.getNumberOfCat());
+		System.out.println("nombre des comande : "+commandeServices.getNumberOfCommande());
+		System.out.println("nombre des clients : "+personServices.numberOfCustomer());
+		System.out.println("nombre des fournisseur : "+personServices.numberOfSupplier());
+		System.out.println("nombre des Article : "+composantServices.numberOfArticle());
+		System.out.println("nombre des Produit : "+composantServices.numberOfProducte());
+		System.out.println("nombre des Invantaire : "+inventaireServices.numberOfInvantaire());
 		System.out.println("--------------");
 
 	}

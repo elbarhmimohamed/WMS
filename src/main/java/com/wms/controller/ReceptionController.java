@@ -288,19 +288,24 @@ resultat +=
                 "<th>defectueux</th>"+
                 "<th>Accepter</th>"+
                 "</tr> </thead>"+
-                "<tbody > </tbody> </table> </div> </div> </div> </div> \n";
+                "<tbody >  \n";
 
         ;
         // resultat = resultat + "<td colspan='2'> Commande "+ reception.getCommande().getReference()+"</td>\n";
-        /*
-        for (LigneCommande ligneCommande:commande.getLigneCommande()) {
+
+        for (ControleQualite ctr :reception.getControleQualiteList()) {
             resultat += "         <tr>\n" +
-                    " <td >"+ligneCommande.getComposante().getName()+" </td>\n" +
-                    " <td >"+ligneCommande.getQuantite()+" </td>\n" +
-                    " <td >"+ligneCommande.getPrix()+"</td>\n" +
+                    " <td >"+ctr.getLigneCommande().getComposante().getName()+" </td>\n" +
+                    " <td >"+ctr.getLigneCommande().getPrix()+" </td>\n" +
+                    " <td >"+ctr.getLigneCommande().getQuantite()+"</td>\n" +
+                    " <td >"+ctr.getQuantiteReel()+"</td>\n" +
+                    " <td >"+ctr.getEchantillon()+"</td>\n" +
+                    " <td >"+ctr.getDefectueux()+"</td>\n" +
+                    " <td >"+ctr.isAccepter()+"</td>\n" +
                     "  </tr>";
-        }
-        */
+        };
+        resultat = resultat + "</tbody> </table> </div> </div> </div> </div>\n";
+
 
 
 
@@ -325,7 +330,7 @@ resultat +=
         receptionPDFGenerateur.setRef(reception.getReference());
         receptionPDFGenerateur.setDate(receptionDate);
         receptionPDFGenerateur.setCmd(reception.getCommande());
-        //receptionPDFGenerateur.setControleQualiteList(reception.getControleQualiteList());
+        receptionPDFGenerateur.setControleQualiteList(reception.getControleQualiteList());
 
         receptionPDFGenerateur.export(response);
 

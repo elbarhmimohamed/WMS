@@ -47,6 +47,9 @@ public class InventaireServices {
         inventaireRepository.deleteById(id);
     }
 
+    public int numberOfInvantaire(){
+        return Math.toIntExact(inventaireRepository.count());
+    }
 
     public void saveInventaire(Inventaire inventaire) {
 

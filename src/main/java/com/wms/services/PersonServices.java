@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,13 @@ public class PersonServices {
     }
     public List<Person> getFournisseurs() {
         return personRepository.findAllSuppliers();
+    }
+
+    public  int  numberOfCustomer(){
+        return personRepository.countCustomers();
+    }
+    public  int  numberOfSupplier(){
+        return personRepository.countSupllierss();
     }
 
     //------- find by id ------------

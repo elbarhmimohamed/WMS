@@ -49,11 +49,7 @@ public class AppController {
         return "/page/journal";
     }
 
-    @GetMapping("/admin/dashboard")
-    public String dashboardAdminPage() {
 
-        return "/page/dashboard-admin";
-    }
 
 
 

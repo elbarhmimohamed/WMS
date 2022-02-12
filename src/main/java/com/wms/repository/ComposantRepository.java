@@ -21,6 +21,12 @@ public interface ComposantRepository extends JpaRepository<Composante, Long> {
     @Query("SELECT u FROM Composante u WHERE u.id = ?1")
     public Composante findComposanteById(Long id);
 
+    @Query("SELECT count(u) FROM Composante u WHERE u.type  = false ")
+    public int countArticle();
+
+    @Query("SELECT count(u) FROM Composante u WHERE u.type = true ")
+    public int countProduct();
+
     @Modifying
     @Query("UPDATE Composante u SET u.name = ?2 WHERE u.id = ?1  ")
     public void updateNameofComposante( Long id , String name );

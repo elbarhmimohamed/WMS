@@ -19,6 +19,9 @@ public class CategorieServices {
         return categoriesRepository.findAll();
     }
 
+    public int getNumberOfCat(){
+        return Math.toIntExact(categoriesRepository.count());
+    }
 
     public Categorie getCategorieById(final Long id){ return categoriesRepository.findCategorieById(id);}
     public Categorie getCategorieByName(final String name){ return categoriesRepository.findCategorieByName(name);}

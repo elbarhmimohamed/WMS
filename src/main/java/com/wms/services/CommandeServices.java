@@ -29,6 +29,9 @@ public class CommandeServices {
         return personServices.getFournisseurs();
     }
 
+    public int getNumberOfCommande(){
+        return Math.toIntExact(commandeRepository.count());
+    }
 
     public List<Composante> findAllcomposant() {
         return composantRepository.findAll();

@@ -21,6 +21,12 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT u FROM Person u WHERE u.id = ?1 ")
     public Person findPersonByID(long id);
 
+    @Query("SELECT count(u) FROM Person u WHERE u.role = true ")
+    public int countCustomers();
+
+    @Query("SELECT COUNT(u) FROM Person u WHERE u.role = false ")
+    public int countSupllierss();
+
     @Query("SELECT u FROM Person u WHERE u.role = true ")
     public Iterable<Person> findAllCustomers();
 

@@ -26,6 +26,9 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Query("SELECT u FROM Users u WHERE u.name = ?1")
     public Users findByName(String name);
 
+    @Query("SELECT count(u) FROM Composante u WHERE u.type  = false ")
+    public int countArticle();
+
 
     @Modifying
     @Query("UPDATE Users u SET u.name = ?2 WHERE u.id = ?1 ")

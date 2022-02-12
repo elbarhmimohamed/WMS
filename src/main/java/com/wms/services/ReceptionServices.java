@@ -17,4 +17,8 @@ public class ReceptionServices {
     public Reception findReceptionById(int id){
         return  receptionRepository.findReceptionByiD(id);
     }
+
+    public int numberOfReception(){
+        return Math.toIntExact(receptionRepository.count());
+    }
 }
