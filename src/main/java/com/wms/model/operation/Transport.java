@@ -19,6 +19,9 @@ public class Transport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="reference")
+    private String reference;
     @Column(name="matricule")
     private String matricule;
 

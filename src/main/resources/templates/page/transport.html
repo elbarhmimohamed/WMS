@@ -7,7 +7,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tableau de bord: Livraison</title>
+    <title>Tableau de bord: Article</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -17,23 +17,16 @@
     <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="vendors/select2/select2.min.css">
-    <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
-    <!-- End plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="css/vertical-layout-light/style.css">
     <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
-    <link href="dist/css/tabular-input.css" rel="stylesheet" type="text/css">
-
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.css"/>
 
 
     <!-- endinject -->
     <link rel="shortcut icon" href="images/favicon.ico" />
-
 
 </head>
 <body>
@@ -56,17 +49,16 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Tableau de board : Livraison<img  src="images/exp.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de livraison
-</span>!</span></h6>
+                                <h3 class="font-weight-bold">Tableau de board : Transport <img  src="images/transport.png"></h3>
+                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les Transports dans votre entreport</entrport>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
                                     <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
-                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#ReceptionModal">
-                                            <i class="mdi mdi-book-plus "></i>
-                                            Ajouter un bon de livraison
+                                        <button type="button" class="btn btn-primary btn-md btn-block"  data-toggle="modal" data-target="#articleModal">
+                                            <i class="mdi mdi-bus "></i>
+                                            Ajouter un Transport
                                         </button>
                                     </div>
                                 </div>
@@ -86,38 +78,22 @@
                                             <thead>
                                             <tr >
                                                 <th>Id</th>
-                                                <th>Référence</th>
-                                                <th>Bon de commande </th>
+                                                <th>Reference</th>
+                                                <th>matricule</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <tr th:each="transport: ${transports}">
+                                                <td th:text="${transport.id}">Article ID</td>
+                                                <td th:text="T-+${transport.reference}"> reference</td>
+                                                <td th:text="${transport.matricule}">matricule</td>
 
-                                            <tr th:each="re : ${livraisonList}">
-
-                                                <td th:text="${re.id}"></td>
-                                                <td th:text="FS-+${re.reference}"></td>
-                                                <td th:text="PC-+${re.preparationCommande.reference}"></td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#receptiondetailModal">
-                                                        <i class="ti-file btn-icon-prepend"></i>
-                                                        Details
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning p-lg-3"
-                                                            data-toggle="modal" data-target="#CommandeModal">
-                                                        Modifier
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${re.id}"
-                                                            data-toggle="modal" data-target="#removeconfigModal">
-                                                        Supprimer
-                                                    </button>
+                                                <td >
+                                                    <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${transport.id}"	data-toggle="modal" data-target="#articlemodifieModal">Modifier</a>
+                                                    <a type="button" class="btn btn-danger p-lg-3" th:data-delete_id="${transport.id}"	data-toggle="modal" data-target="#removeModal">Supprimer</a>
                                                 </td>
                                             </tr>
-
-
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -130,12 +106,110 @@
 
 
             </div>
-
-
-
-            <div class="modal fade" id="removeconfigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <!-- Button trigger modal -->
+            <!-- Modal ajouter article-->
+            <div class="modal fade" id="articleModal" tabindex="-1" role="dialog" aria-labelledby="articleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="#" th:action="@{/supprimerlivraison}" th:object="${livraisonRemove}" method="POST" th:target="_self">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un article</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form action="#" th:action="@{/saveTrnasport}" th:object="${transport} "   method="POST" th:target="_self">
+
+
+
+                                <div class="form-group">
+                                    <label>Référence</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">T-</span>
+                                        </div>
+                                        <input th:field="*{reference}" type="text" class="form-control"
+                                               placeholder="1111"
+                                               aria-label="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="matricule">matricule</label>
+                                    <input th:field="*{matricule}" type="text" class="form-control" id="matricule" placeholder="1000">
+                                </div>
+
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-primary" >Ajouter</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end Modal -->
+            <!-- Modal modifier article-->
+            <!--  <div class="modal fade" id="articlemodifieModal" tabindex="-1" role="dialog" aria-labelledby="articlemodifieModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel1">Modifier un article</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form action="#" th:action="@{/modifierarticle}" th:object="${transportremove} "   method="POST" th:target="_self">
+                                <input type="hidden" th:field="*{id}" id="update_id" >
+                                <div class="form-group">
+                                    <label for="categorie1">Catégorie</label>
+                                    <select  th:field="*{categorie.categorie_name}" id="categorie1" class="form-control" aria-label="Default select example" placeholder="Selectionner une catégories">
+                                        <option selected>Selectionner une catégories</option>
+                                        <option th:each="i : ${categories}" th:value="${i.categorie_name}" th:text="${i.categorie_name}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name1">Référence</label>
+                                    <input th:field="*{name}" type="text" VALUE=""  class="form-control" id="name1" placeholder="AB1234">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="quantity1">Quantité</label>
+                                    <input th:field="*{quantity}" type="number"  class="form-control" id="quantity1" placeholder="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seuil1">Seuil</label>
+                                    <input th:field="*{seuil}" type="number"  class="form-control" id="seuil1" placeholder="30">
+                                </div>
+
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-primary" >Modifier</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <!-------   modal supprimer article -->
+            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="#" th:action="@{/transportremove}" th:object="${transportremove}" method="POST" th:target="_self">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="removeModalLabel">Attention !</h5>
@@ -145,7 +219,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <p>Voulez vous vraiment supprimer cette bon de livraison ?</p>
+                                <p>Voulez vous vraiment supprimer cette transport  ?</p>
                                 <input type="hidden" th:field="*{id}" id="delete_id" >
 
 
@@ -161,186 +235,34 @@
             </div>
 
 
-            <div class="modal fade" id="ReceptionModal" tabindex="-1" role="dialog" aria-labelledby="ReceptionModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content m-lg-4">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="CommandeModalLabel">Ajouter un bon de livraison</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="#" th:action="@{/ajouterLivraison}"
-                              th:object="${livraison}" method="POST"
-                              th:target="_self">
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="card">
-
-                                                <div class="form-group">
-                                                    <label>Sélectionner le bon de commande</label>
-                                                    <select id="hamza1" th:field="*{preparationCommande}"
-                                                            class="form-control form-control-lg">
-                                                        <option value="">--Veuillez choisir la commande--</option>
-                                                        <div th:each="co :${preparationCommande}">
-
-                                                            <option th:value="${co.id}"
-                                                                    th:text="PC-+${co.reference}"></option>
-
-                                                        </div>
-
-
-                                                    </select>
-
-
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Référence</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">BL-</span>
-                                                        </div>
-                                                        <input th:field="*{reference}" type="text" class="form-control"
-                                                               placeholder="1111"
-                                                               aria-label="Username">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="exampleInputdate">Date de Livraison</label>
-                                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="exampleInputdate"  th:field="*{date}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Sélectionner le bon de commande</label>
-
-                                                <select id="transport" th:field="*{transport}"
-                                                        class="form-control form-control-lg">
-                                                    <option value="">--Veuillez choisir Transport--</option>
-                                                    <div th:each="co :${transportlist}">
-
-                                                        <option th:value="${co.id}"
-                                                                th:text="T-+${co.reference}"></option>
-
-                                                    </div>
-
-
-                                                </select>
-                                                </div>
-
-
-                                                </select>
-
-
-
-                                                <div class="form-group">
-                                                    <label for="hamza">Description </label>
-                                                    <input id="hamza" th:field="*{description}"  type="text" class="form-control">
-                                                </div>
-
-
-
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- detail livraison  -->
-            <div class="modal fade" id="receptiondetailModal" tabindex="-1" role="dialog" aria-labelledby="receptiondetailModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-lg " role="document">
-                    <div class="modal-content m-lg-4">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="receptiondetailModalLabel">Détail d'un bon de livraison</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-
-                            <div class="form-group">
-                                <div class="row" id="zips11">
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <form action="#" th:action="@{/livraisonPdf}"th:object="${livpdf}" method="POST" th:target="_self">
-                                <input type="hidden" th:field="*{id}" id="detail_id" >
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn btn-primary">Telecharger</button>
-                            </form>
-                        </div>
-
-
-
-
-                    </div>
-
-                </div>
-            </div>
-
-
+            <!-- end of modal -->
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
 
         </div>
-
-
-
-
+        <!-- page-body-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- container-scroller -->
 </div>
-<!-- container-scroller -->
-
 <!-- plugins:js -->
 <script src="vendors/js/vendor.bundle.base.js"></script>
-<script src="js/select2.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script th:inline="javascript">
+<script>
 
+    $('#articlemodifieModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var update_id = button.data('update_id')
+        var modal = $(this)
+        modal.find('.modal-body #update_id').val(update_id);
+    })
 
-    $('#receptiondetailModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var id = button.data('detail_id');
-        var modal = $(this);
-        modal.find('.modal-footer #detail_id').val(id);
-        var url = [[@{'/detaillivraison'}]] + '?id=' + id;
+    $('#removeModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var delete_id = button.data('delete_id')
+        var modal = $(this)
+        modal.find('.modal-body #delete_id').val(delete_id);
+    })
 
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (data) {
-                $('#zips11').html(data);
-                console.log(data);
-            }
-        });
-
-
-    });
     $(document).on("click", ".hamza", function () {
         var reff = $(this).data('id');
         $(".input-hamza").val( reff );
@@ -580,79 +502,18 @@
 <!-- End plugin js for this page -->
 <!-- inject:js -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/r-2.2.9/datatables.min.js"></script>
-<script src="js/tabular-input.js"></script>
-
 
 <script src="js/off-canvas.js"></script>
 <script src="js/hoverable-collapse.js"></script>
 <script src="js/template.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/todolist.js"></script>
-
+<!-- endinject -->
+<!-- Custom js for this page-->
 <script src="js/dashboard.js"></script>
 <script src="js/Chart.roundedBarCharts.js"></script>
-<script src="vendors/typeahead.js/typeahead.bundle.min.js"></script>
-<script src="vendors/select2/select2.min.js"></script>
-<script src="dist/js/tabular-input.js"></script>
-<script>
-    jQuery('#demo-2').tabularInput({
-        'rows': 1,
-        'columns':4,
-        'animate': true,
-        'columnHeads': ['Référence article', 'nom' ,'quantité', 'prix unitaire']
-    });
-    $("#demo-2").tabularInput("addRow");			// Add a row at the end
-    $("#demo-2").tabularInput("deleteRow");			// Delete the last row
-    $("#demo-2").tabularInput("deleteRow", 2);		// Delete row at index 2// Add a column at the end
-    // Delete the last column
-
-
-</script>
-<script th:inline="javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36251023-1']);
-    _gaq.push(['_setDomainName', 'jqueryscript.net']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-    $('#hamza').on('change', function() {
-
-        var id = $('#hamza1').val();
-        var numberpalette = this.value;
-        var url ='/lignepalette' +'?id='+id +'&nb=' +numberpalette;
-
-        $.ajax({
-            type: 'GET',
-            url:url,
-            success : function(data) {
-                $('#zips').html(data);
-
-            }
-        });
-
-
-
-
-
-    });
-
-
-
-    $('#removeconfigModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var delete_id = button.data('delete_id')
-        var modal = $(this)
-        modal.find('.modal-body #delete_id').val(delete_id);
-    });
-
-</script>
 <!-- End custom js for this page-->
+
 </body>
 
 </html>

@@ -49,7 +49,6 @@ public class emplacementController {
         List<String> nbrrangee=this.configEmplacementRepository.findallrangee();
         model.addAttribute("rangee",nbrrangee);
 
-
         model.addAttribute("niveau",5);
         model.addAttribute("rack",5);
         model.addAttribute("position",3);
