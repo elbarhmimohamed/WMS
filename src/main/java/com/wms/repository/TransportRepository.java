@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TransportRepository extends JpaRepository<Transport, Long> {
+public interface TransportRepository extends JpaRepository<Transport, Integer> {
 
     @Query("SELECT u FROM Transport u WHERE u.matricule = ?1 ")
     public Transport findTransportByMatricule(String matricule);

@@ -45,6 +45,8 @@ public class LivraisonController {
     PreparationCommandeRepository preparationCommandeRepository;
     @Autowired
     LivraisonRepository livraisonRepository;
+    @Autowired
+    TransportRepository transportRepository;
 
     @GetMapping("/preparationCommande")
     public String preparationCommande(Model model) {
@@ -62,6 +64,7 @@ public class LivraisonController {
         model.addAttribute("preparationCommandeAdd", new PreparationCommande());
         model.addAttribute("composants", composantes);
         model.addAttribute("emplacementRepository", emplacementRepository);
+
         return "/page/preparationCommande";
     }
 
@@ -74,6 +77,8 @@ public class LivraisonController {
         model.addAttribute("livraison",new Livraison());
         model.addAttribute("preparationCommande",preparationCommandeRepository.findAll());
         model.addAttribute("livraisonRemove", new Livraison());
+        model.addAttribute("transportlist",transportRepository.findAll());
+
 
         return "/page/livraison";
     }
@@ -128,7 +133,9 @@ public class LivraisonController {
                 ligneadd.setPrix(Double.parseDouble(prix[i]));
                 ligneadd.setQuantite(Integer.parseInt(quantite[i]));
                 lignelivraisons.add(ligneadd);
+
                 lignelivraisonRepository.save(ligneadd);
+                ligneadd.getComposante().setQuantity(ligneadd.getComposante().getQuantity()-ligneadd.getQuantite());
 
             }
         }

@@ -42,6 +42,7 @@ public class ReceptionController {
     @Autowired
     PaletteRepository paletteRepository;
 
+
     @GetMapping("/reception")
     public String ReceptionPage(Model model) {
         List<Commande> commandeList = commandeServices.findAllCommande();
@@ -80,12 +81,18 @@ public class ReceptionController {
                 ligneadd.setAccepter(true);
             }
 
+            ligneadd.getLigneCommande().getComposante().setQuantity( ligneadd.getLigneCommande().getComposante().getQuantity()+ligneadd.getQuantiteReel());
 
-                 controleQualites.add(ligneadd);
+
+
+            controleQualites.add(ligneadd);
 
         }
 
+
+
         reception.setControleQualiteList(controleQualites);
+
         receptionRepository.save(reception);
         return "redirect:/reception";
     }
@@ -125,6 +132,7 @@ public class ReceptionController {
             fichierStockRepository.deleteById(reception.getFichierStock().getId());
         }
         this.receptionRepository.deleteById(reception.getId());
+
         return "redirect:/reception";
     }
 

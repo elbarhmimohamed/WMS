@@ -116,7 +116,7 @@
                                         th:data-niveau="${ni}"
                                         th:data-rack="${ra}"
                                         th:data-position="${po}"
-                                        th:data-quantite="${emplacementRepository.existsByRefemplacement(reff)} ? ${emplacementRepository.findByrefemplacement(reff).getPalette().getQuantite()} : 'rein' "
+                                        th:data-quantite="${emplacementRepository.existsByRefemplacement(reff)} ? ${ emplacementRepository.findByrefemplacement(reff).getPalette().getComposante().getQuantity()} : 'rein' "
                                         th:data-fichier="${emplacementRepository.existsByRefemplacement(reff)} ? BR-+${ emplacementRepository.findByrefemplacement(reff).getPalette().getFichierStock().getReception().getReference()} : 'rein' "
                                         th:data-palete="${emplacementRepository.existsByRefemplacement(reff)} ? RF-+${emplacementRepository.findByrefemplacement(reff).getPalette().getReference()} : 'rein' "
                                         th:data-article="${emplacementRepository.existsByRefemplacement(reff)} ? ${emplacementRepository.findByrefemplacement(reff).getPalette().getComposante().getName()} : 'rein' "

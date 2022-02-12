@@ -20,7 +20,7 @@ public class TransportServices {
 
 
 
-    public Transport getTransportById(final Long id) {
+    public Transport getTransportById(final int id) {
         return transportRepository.findTransportById(id);
     }
 
@@ -36,7 +36,7 @@ public class TransportServices {
         return null;
     }
 
-    public void deletetransport(final Long id) {
+    public void deletetransport(final int id) {
         transportRepository.deleteById(id);
     }
 

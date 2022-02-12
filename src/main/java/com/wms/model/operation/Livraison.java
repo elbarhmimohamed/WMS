@@ -28,8 +28,9 @@ public class Livraison {
 
     private Date date;
 
-
-    private  String transport;
+    @OneToOne
+    @JoinColumn(name="transport")
+    private  Transport transport;
 
     private  String description;
 
