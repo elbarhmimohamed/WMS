@@ -1,5 +1,6 @@
 package com.wms.controller;
 
+import com.lowagie.text.DocumentException;
 import com.wms.model.operation.*;
 import com.wms.model.personne.Person;
 import com.wms.model.stock.Composante;
@@ -17,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +79,7 @@ public class LivraisonController {
         model.addAttribute("livraison",new Livraison());
         model.addAttribute("preparationCommande",preparationCommandeRepository.findAll());
         model.addAttribute("livraisonRemove", new Livraison());
+        model.addAttribute("livpdf",new Livraison());
 
         return "/page/livraison";
     }
@@ -157,6 +163,106 @@ public class LivraisonController {
         this.livraisonRepository.deleteById(livraison.getId());
         return "redirect:/livraison";
     }
+
+
+    @GetMapping("/lignedepreparationdecommande")
+    @ResponseBody
+    public String peparationCommandeDetail(@RequestParam int id) {
+        System.out.println("yyyyyyyyyyyyy");
+        System.out.println("yyyyyyyyyyyyy");
+        String resultat = "";
+        PreparationCommande pc = preparationCommandeRepository.getById(id);
+
+        for (Lignelivraison ll : pc.getLignelivraisons()) {
+            resultat += "         <tr>\n" +
+                    " <td >"+ll.getComposante().getName()+" </td>\n" +
+                    " <td >"+ll.getComposante().getQuantity()+" </td>\n" +
+                    " <td >"+ll.getQuantite()+" </td>\n" +
+                    " <td >"+ll.getPrix()+"</td>\n" +
+                    " <td >"+ll.getEmplacement().getRefemplacement()+"</td>\n" +
+                    "  </tr>";
+        }
+        System.out.println("yyyyyyyyyyyyy");
+        System.out.println("yyyyyyyyyyyyy");
+        return resultat;
+
+    }
+
+    @GetMapping("/detaillivraison")
+    @ResponseBody
+    public String LivraisonDetail(@RequestParam int id) {
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Livraison ll = livraisonRepository.getById(id);
+        String datelivraison = dateFormatter.format(ll.getDate());
+        String resultat = "";
+        resultat = resultat +
+                "<div class='col-md-12' >\n"+
+                "<div class='card' > \n"+
+                " <h4>Référence de réception : BC"+ ll.getReference() + "</h4> \n"+
+                " <h4>Référence de Commande : BR"+ ll.getPreparationCommande().getReference() + " </h4> \n" +
+                " <h4>Date de reception     : "+ datelivraison +"</h4>\n" +
+                " <h4>Date de reception     : "+ "transport" +"</h4>\n" +
+                " <h4>Date de reception     : "+ ll.getTransport() +"</h4>\n" +
+                "</div> \n"+
+                "</div> \n"+
+                " <div class='col-md-12 '> \n"+
+                " <div class='card'> <div class='card-body'> <div class='card-title'>\n"+
+                " Commande </div>\n"+
+                "<div class='table-responsive'> <table class='table  table-bordered'>\n"+
+                "<thead> <tr>  \n" +
+                "<th>Article</th>\n"+
+                "<th>Quantité disponible</th>"+
+                "<th>Quantité demandée </th>"+
+                " <th>Prix</th>\n"+
+                "<th>Emplacement</th>\n"+
+                "</tr> </thead>\n"+
+                "<tbody >  \n";
+
+        ;
+        // resultat = resultat + "<td colspan='2'> Commande "+ reception.getCommande().getReference()+"</td>\n";
+
+        for (Lignelivraison llv :ll.getPreparationCommande().getLignelivraisons()) {
+            resultat += "         <tr>\n" +
+                    " <td >"+llv.getComposante().getName()+" </td>\n" +
+                    " <td >"+llv.getComposante().getQuantity()+" </td>\n" +
+                    " <td >"+llv.getQuantite()+" </td>\n" +
+                    " <td >"+llv.getPrix()+" </td>\n" +
+                    " <td >"+llv.getEmplacement().getRefemplacement()+" </td>\n" +
+                    "  </tr>";
+        };
+        resultat = resultat + "</tbody> </table> </div> </div> </div> </div>\n";
+
+
+
+
+        return resultat;
+
+    }
+/*
+    @PostMapping("/livraisonPdf")
+    public void exportToPDF(Reception recpdf, HttpServletResponse response) throws DocumentException, IOException {
+        Reception reception = receptionServices.findReceptionById(recpdf.getId());
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateTime = dateFormatter.format(reception.getDate());
+        String receptionDate = dateFormatter.format(reception.getDate());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Réception_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+        ReceptionPDFGenerateur receptionPDFGenerateur = new ReceptionPDFGenerateur();
+        receptionPDFGenerateur.setRef(reception.getReference());
+        receptionPDFGenerateur.setDate(receptionDate);
+        receptionPDFGenerateur.setCmd(reception.getCommande());
+        receptionPDFGenerateur.setControleQualiteList(reception.getControleQualiteList());
+
+        receptionPDFGenerateur.export(response);
+
+
+    }
+    */
+
 
 
 

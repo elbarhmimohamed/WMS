@@ -100,8 +100,7 @@
                                                 <td th:text="PC-+${re.preparationCommande.reference}"></td>
 
                                                 <td>
-                                                    <button type="button"
-                                                            class="btn btn-primary btn-icon-text p-lg-3">
+                                                    <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#receptiondetailModal">
                                                         <i class="ti-file btn-icon-prepend"></i>
                                                         Details
                                                     </button>
@@ -250,6 +249,43 @@
                 </div>
             </div>
 
+            <!-- detail livraison  -->
+            <div class="modal fade" id="receptiondetailModal" tabindex="-1" role="dialog" aria-labelledby="receptiondetailModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg " role="document">
+                    <div class="modal-content m-lg-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="receptiondetailModalLabel">Détail d'un bon de livraison</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <div class="row" id="zips11">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <form action="#" th:action="@{/livraisonPdf}"th:object="${livpdf}" method="POST" th:target="_self">
+                                <input type="hidden" th:field="*{id}" id="detail_id" >
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Telecharger</button>
+                            </form>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
 
             <div th:replace="../templates/components/footer-admin :: footer-admin"></div>
 
@@ -268,7 +304,27 @@
 <script src="js/select2.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script>
+<script th:inline="javascript">
+
+
+    $('#receptiondetailModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('detail_id');
+        var modal = $(this);
+        modal.find('.modal-footer #detail_id').val(id);
+        var url = [[@{'/detaillivraison'}]] + '?id=' + id;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#zips11').html(data);
+                console.log(data);
+            }
+        });
+
+
+    });
     $(document).on("click", ".hamza", function () {
         var reff = $(this).data('id');
         $(".input-hamza").val( reff );
