@@ -51,7 +51,7 @@
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                 <h3 class="font-weight-bold">Tableau de board : Utilisateur <img  src="images/user.png"></h3>
-                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les utilisateurs de votre entreport</entrport>!</span></h6>
+                <h6 class="font-weight-normal mb-0">Cette view offre un tableau de board pour  <span class="text-primary">gérer les utilisateurs de votre entrepôt</entrport>!</span></h6>
               </div>
               <div class="col-12 col-xl-4">
                 <div class="justify-content-end d-flex">
@@ -81,7 +81,7 @@
                         <th>Id</th>
                         <th>Nom</th>
                         <th>Email</th>
-                        <th>Role</th>
+                        <th>Rôle</th>
                         <th>Action</th>
                       </tr>
                       </thead>
@@ -130,7 +130,7 @@
               <form action="#" th:action="@{/ajouterutilisateur}" th:object="${newuser} "   method="POST" th:target="_self">
 
                 <div class="form-group">
-                  <label for="Role">Role</label>
+                  <label for="Role">Rôle</label>
                   <select  th:field="*{role}" id="role" class="form-control" aria-label="Default select example" placeholder="Selectionner une role">
 
                     <option th:each="i : ${roles}" th:value="${i}" th:text="${i}">
@@ -175,7 +175,7 @@
                 <input type="hidden" th:field="*{id}" id="update_id" >
 
                 <div class="form-group">
-                  <label for="role1">Role</label>
+                  <label for="role1">Rôle</label>
                   <select  th:field="*{role}" id="role1" class="form-control" aria-label="Default select example" placeholder="Selectionner une role">
 
                     <option th:each="i : ${roles}" th:value="${i}" th:text="${i}">

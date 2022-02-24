@@ -51,7 +51,7 @@
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                                 <h3 class="font-weight-bold">Tableau de board : Fournisseur<img  src="images/fournisseur.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les fournisseurs de votre entreport</entrport>!</span></h6>
+                                <h6 class="font-weight-normal mb-0">Cette view offre un tableau de board pour  <span class="text-primary">gérer les fournisseurs de votre entrepôt</entrport>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
@@ -82,9 +82,9 @@
                                                 <th>Nom</th>
                                                 <!-- <th>Prénom</th> -->
                                                 <th>Adresse</th>
-                                                <th>Telephone</th>
+                                                <th>Téléphone</th>
                                                 <th>Email</th>
-                                                <th>Status</th>
+
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -95,7 +95,7 @@
                                                 <td th:text="${fournisseur.adress}">Adress</td>
                                                 <td th:text="${fournisseur.phone}">phone</td>
                                                 <td th:text="${fournisseur.mail}">E-mail</td>
-                                                <td th:text="${fournisseur.status}">status</td>
+
                                                 <!-- <td th:text="${clients.image}">image</td> -->
                                                 <td >
                                                     <a type="button" class="btn btn-warning p-lg-3" th:data-update_id="${fournisseur.id}"	data-toggle="modal" data-target="#fournisseurmodifieModal">Modifier</a>
@@ -143,7 +143,7 @@
                                     <input th:field="*{adress}" type="text" class="form-control" id="Adresse" placeholder="Adresse">
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Telephone</label>
+                                    <label for="phone">Téléphone</label>
                                     <input  th:field="*{phone}" type="tel" class="form-control" id="phone" placeholder="Telephone">
                                 </div>
                                 <div class="form-group">
@@ -187,7 +187,7 @@
                                         <input th:field="*{adress}" type="text" class="form-control" id="Adresse1" placeholder="Adresse">
                                     </div>
                                     <div class="form-group">
-                                        <label for="phone1">Telephone</label>
+                                        <label for="phone1">Téléphone</label>
                                         <input  th:field="*{phone}" type="tel" class="form-control" id="phone1" placeholder="Telephone">
                                     </div>
                                     <div class="form-group">

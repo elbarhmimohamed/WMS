@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
                 .antMatchers("process_register","updateUserProcess/**","/updateUser/**","/deleteUser/**","/listofUsers","/register","/process_register").hasAuthority("Admin")
-                .antMatchers( "/Clients","/inventaireee","/gestionStock").hasAnyAuthority("Admin","Opérateur")
+                .antMatchers( "/Clientss","/inventaireee","/gestionStock").hasAnyAuthority("Admin","Opérateur")
                 .antMatchers("/expeditionee","/receptionee").hasAnyAuthority("Admin","Agent Expédition/Réception")
 
                 .antMatchers("/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")

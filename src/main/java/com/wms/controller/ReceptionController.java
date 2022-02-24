@@ -356,7 +356,7 @@ resultat +=
                " <div class=\"col-md-12\">\n" +
                 "                                            <div class=\"card\">\n" +
                 "                                                <h4>Référence : FS"+ fs.getReference() +"</h4>\n" +
-                "                                                <h4>Bon de reception : BR"+ fs.getReception().getReference() +"</h4>\n" +
+                "                                                <h4>Bon de réception : BR"+ fs.getReception().getReference() +"</h4>\n" +
                 "                                                <h4>Nomber de palette : "+ fs.getPalettes().size() +"</h4>\n" +
                 "                                            </div>\n" +
                 "                                        </div>\n" +

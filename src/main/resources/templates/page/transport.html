@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                                 <h3 class="font-weight-bold">Tableau de board : Transport <img  src="images/transport.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les Transports dans votre entreport</entrport>!</span></h6>
+                                <h6 class="font-weight-normal mb-0">Cette view offre un tableau de board pour  <span class="text-primary">gérer les Transports dans votre entrepôt</entrport>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
@@ -78,7 +78,7 @@
                                             <thead>
                                             <tr >
                                                 <th>Id</th>
-                                                <th>Reference</th>
+                                                <th>Référence</th>
                                                 <th>matricule</th>
                                                 <th>Action</th>
                                             </tr>
@@ -86,7 +86,7 @@
                                             <tbody>
                                             <tr th:each="transport: ${transports}">
                                                 <td th:text="${transport.id}">Article ID</td>
-                                                <td th:text="T-+${transport.reference}"> reference</td>
+                                                <td th:text="T-+${transport.reference}"> Référence</td>
                                                 <td th:text="${transport.matricule}">matricule</td>
 
                                                 <td >
