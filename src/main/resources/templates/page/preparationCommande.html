@@ -58,10 +58,10 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Tableau de board : Preparation de commande livraison<img src="images/livraison.png">
+                                <h3 class="font-weight-bold">Tableau de board : Préparation de commande livraison<img src="images/livraison.png">
                                 </h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour <span
-                                        class="text-primary">gérer les bons de Commande livraison</span>!</span></h6>
+                                <h6 class="font-weight-normal mb-0">Cette view offre un tableau de board pour <span
+                                        class="text-primary">gérer la Préparation des commandes</span>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
@@ -71,7 +71,7 @@
                                                 data-toggle="modal" data-target="#CommandeModal">
                                             <i class="
 mdi mdi-book-plus  "></i>
-                                            Preparation Commande
+                                            Préparation Commande
                                         </button>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@ mdi mdi-book-plus  "></i>
                                                         <th>Id</th>
                                                         <th>Référence</th>
                                                         <th>Client</th>
-                                                        <th>Date de creation</th>
+                                                        <th>Date de création</th>
                                                         <th>Action</th>
                                                     </tr>
 
@@ -117,7 +117,7 @@ mdi mdi-book-plus  "></i>
                                                         <td>
                                                             <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${co.id}"	data-toggle="modal" data-target="#DetailCommandeModal">
                                                                 <i class="ti-file btn-icon-prepend"></i>
-                                                                Details
+                                                                Détails
                                                             </button>
                                                             <button type="button" class="btn btn-warning p-lg-3"
                                                                     data-toggle="modal" data-target="#CommandeModal">
@@ -160,7 +160,7 @@ mdi mdi-book-plus  "></i>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Voulez vous vraiment supprimer ce bon de Commande ?
+                                Voulez vous vraiment supprimer cette Commande ?
                                 <input type="hidden" th:field="*{id}" id="delete_id" >
 
                             </div>
@@ -178,7 +178,7 @@ mdi mdi-book-plus  "></i>
                 <div class="modal-dialog modal-lg " role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="CommandeModalLabel">Preparation commande livraison</h5>
+                            <h5 class="modal-title" id="CommandeModalLabel">Préparation commande livraison</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -241,7 +241,7 @@ mdi mdi-book-plus  "></i>
                                                             <tr>
                                                                 <th>Article</th>
                                                                 <th>quantité disponible</th>
-                                                                <th>quantite demandée</th>
+                                                                <th>quantité demandée</th>
                                                                 <th>prix</th>
                                                                 <th>Emplacement</th>
                                                             </tr>
@@ -334,7 +334,7 @@ mdi mdi-book-plus  "></i>
                 <div class="modal-dialog modal-lg " role="document">
                     <div class="modal-content m-lg-4">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="DetailCommandeModalLabel">Preparation commande livraison</h5>
+                            <h5 class="modal-title" id="DetailCommandeModalLabel">Préparation commande livraison</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -355,7 +355,7 @@ mdi mdi-book-plus  "></i>
                                                             <tr>
                                                                 <th>Article</th>
                                                                 <th>quantité disponible</th>
-                                                                <th>quantite demandée</th>
+                                                                <th>quantité demandée</th>
                                                                 <th>prix</th>
                                                                 <th>Emplacement</th>
                                                             </tr>

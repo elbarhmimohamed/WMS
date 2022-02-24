@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/Clientss","/inventaireee","/gestionStock").hasAnyAuthority("Admin","Opérateur")
                 .antMatchers("/expeditionee","/receptionee").hasAnyAuthority("Admin","Agent Expédition/Réception")
 
-                .antMatchers("/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")
+                .antMatchers("/admin/dashboard1","/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

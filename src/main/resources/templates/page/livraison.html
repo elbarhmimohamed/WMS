@@ -57,7 +57,7 @@
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                                 <h3 class="font-weight-bold">Tableau de board : Livraison<img  src="images/exp.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les bons de livraison
+                                <h6 class="font-weight-normal mb-0">Cette view offre un tableau de board pour  <span class="text-primary">gérer les bons de livraison
 </span>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
@@ -102,7 +102,7 @@
                                                 <td>
                                                     <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#receptiondetailModal">
                                                         <i class="ti-file btn-icon-prepend"></i>
-                                                        Details
+                                                        Détails
                                                     </button>
                                                     <button type="button" class="btn btn-warning p-lg-3"
                                                             data-toggle="modal" data-target="#CommandeModal">
@@ -145,7 +145,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <p>Voulez vous vraiment supprimer cette bon de livraison ?</p>
+                                <p>Voulez vous vraiment supprimer ce bon de livraison ?</p>
                                 <input type="hidden" th:field="*{id}" id="delete_id" >
 
 
@@ -215,7 +215,7 @@
                                                     <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="exampleInputdate"  th:field="*{date}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Sélectionner le bon de commande</label>
+                                                    <label>Sélectionner le transport</label>
 
                                                 <select id="transport" th:field="*{transport}"
                                                         class="form-control form-control-lg">
@@ -238,7 +238,8 @@
 
                                                 <div class="form-group">
                                                     <label for="hamza">Description </label>
-                                                    <input id="hamza" th:field="*{description}"  type="text" class="form-control">
+                                                    <textarea id="hamza" th:field="*{description}"  type="text" class="form-control">
+                                                    </textarea>
                                                 </div>
 
 
@@ -290,7 +291,7 @@
                             <form action="#" th:action="@{/livraisonPdf}"th:object="${livpdf}" method="POST" th:target="_self">
                                 <input type="hidden" th:field="*{id}" id="detail_id" >
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn btn-primary">Telecharger</button>
+                                <button type="submit" class="btn btn-primary">Télécharger</button>
                             </form>
                         </div>
 

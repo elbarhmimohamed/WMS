@@ -116,7 +116,7 @@ public class ReceptionController {
                     "                                                                        <td><input type='string' name='quantite' value='"+String.valueOf(ligne.getQuantite())+"'></td>\n" +
                     "                                                                        <td><input type='string' name='quantitereel'  ></td>\n" +
                     "                                                                        <td><input type='string' name='echantillon'></td>\n" +
-                    "                                                                        <td><input type='string' name='defectueux'></td>\n" +
+                    "                                                                        <td><input type='string' name='défectueux'></td>\n" +
                     "<td><input type='radio' name='"+String.valueOf(ligne.getId())+"' id='GFG' value='1' checked>Accepter<br>" +
                     "<input type='radio' name='"+String.valueOf(ligne.getId())+"' id='GFG' value='2'>Refuser<br> </td>" ;
 
@@ -281,7 +281,7 @@ resultat +=
                 "<div class='card' > \n"+
                " <h4>Référence de réception : BC"+ reception.getReference() + "</h4> \n"+
                 " <h4>Référence de Commande : BR"+ reception.getCommande().getReference() + " </h4> \n" +
-                " <h4>Date de reception     : "+ datereception +"</h4>\n" +
+                " <h4>Date de réception     : "+ datereception +"</h4>\n" +
                 "</div> \n"+
                 "</div> \n"+
                 " <div class='col-md-12 '> \n"+
@@ -294,7 +294,7 @@ resultat +=
                     "<th>Quantité demandée </th>"+
                 "<th>Quantité réelle</th>"+
                 "<th>échantillon</th>"+
-                "<th>defectueux</th>"+
+                "<th>défectueux </th>"+
                 "<th>Accepter</th>"+
                 "</tr> </thead>"+
                 "<tbody >  \n";

@@ -205,7 +205,7 @@ public class LivraisonController {
         resultat = resultat +
                 "<div class='col-md-12' >\n"+
                 "<div class='card' > \n"+
-                " <h4>Référence de réception : BL"+ ll.getReference() + "</h4> \n"+
+                " <h4>Référence de livraison : BL"+ ll.getReference() + "</h4> \n"+
                 " <h4>Référence de Commande : PC"+ ll.getPreparationCommande().getReference() + " </h4> \n" +
                 " <h4>Date de livraison     : "+ datelivraison +"</h4>\n" +
                 " <h4>Date de préparation de commande     : "+ dateFormatter.format(ll.getPreparationCommande().getDate()) +"</h4>\n" +

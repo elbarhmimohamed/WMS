@@ -7,7 +7,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tableau de bord: Recéption</title>
+    <title>Tableau de bord: Réception</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -103,7 +103,7 @@ mdi mdi-book-plus  "></i>
 
                                                     <button type="button" class="btn btn-primary btn-icon-text p-lg-3" th:data-detail_id="${re.id}"	data-toggle="modal" data-target="#receptiondetailModal">
                                                     <i class="ti-file btn-icon-prepend"></i>
-                                                    Details
+                                                    Détails
                                                 </button>
                                                     <button type="button" class="btn btn-warning p-lg-3"
                                                             data-toggle="modal" data-target="#CommandeModal">
@@ -146,7 +146,7 @@ mdi mdi-book-plus  "></i>
                             </div>
                             <div class="modal-body">
 
-                                <p>Voulez vous vraiment supprimer ce bon de recéption ?</p>
+                                <p>Voulez vous vraiment supprimer ce bon de réception ?</p>
                                 <input type="hidden" th:field="*{id}" id="delete_id" >
 
 
@@ -211,7 +211,7 @@ mdi mdi-book-plus  "></i>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="exampleInputdate1">Date de recéption</label>
+                                                                <label for="exampleInputdate1">Date de réception</label>
                                                                 <input th:field="*{date}"  type="date" class="form-control"
                                                                       placeholder="dd/mm/yyyy"
                                                                        id="exampleInputdate1">
@@ -235,7 +235,7 @@ mdi mdi-book-plus  "></i>
                                                                         <th>Quantité demandée </th>
                                                                         <th>Quantité réelle</th>
                                                                         <th>échantillon</th>
-                                                                        <th>defectueux</th>
+                                                                        <th>défectueux</th>
                                                                         <th>Accepter</th>
                                                                     </tr>
                                                                     </thead>
@@ -291,7 +291,7 @@ mdi mdi-book-plus  "></i>
                                 <form action="#" th:action="@{/receptionPdf}"th:object="${recpdf}" method="POST" th:target="_self">
                                     <input type="hidden" th:field="*{id}" id="detail_id" >
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn btn-primary">Telecharger</button>
+                                <button type="submit" class="btn btn-primary">Télécharger</button>
                                 </form>
                             </div>
 

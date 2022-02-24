@@ -36,7 +36,7 @@ public class InventairePDFGenerator {
 
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Quantité systéme", font));
+        cell.setPhrase(new Phrase("Quantité système", font));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Quantité réelle", font));

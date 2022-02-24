@@ -6,6 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+
 @Controller
 public class DashboardController {
     @Autowired
@@ -31,7 +35,10 @@ public class DashboardController {
         model.addAttribute("nombreInventaire", inventaireServices.numberOfInvantaire());
         model.addAttribute("nombreCommande", commandeServices.getNumberOfCommande());
         model.addAttribute("nombreReception", receptionServices.numberOfReception());
-
+        LocalDateTime date = LocalDateTime.now();
+        /*DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateTime = dateFormatter.format(date1);*/
+        model.addAttribute("date", date);
         return "/page/dashboard-admin";
     }
 }

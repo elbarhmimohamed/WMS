@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                                 <h3 class="font-weight-bold">Configuration: Emplacement <img  src="images/control.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offre la possibilite  <span class="text-primary">de configure l'emplacement d'entreport</span></h6>
+                                <h6 class="font-weight-normal mb-0">Cette view offre la possibilité  <span class="text-primary">de configurer l'emplacement d'entrepôt</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
@@ -76,7 +76,7 @@
                                                         <tr>
                                                             <th class="pl-0  pb-1 border-bottom">rangée</th>
                                                             <th class="border-bottom pb-1">niveau</th>
-                                                            <th class="border-bottom pb-1">racke</th>
+                                                            <th class="border-bottom pb-1">rack</th>
                                                             <th class="border-bottom pb-1">position</th>
                                                             <th class="border-bottom pb-1">occupation</th>
                                                             <th class="border-bottom pb-1">action</th>
@@ -113,7 +113,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Emplacement action:</h4>
                                         <p class="card-description">
-                                            Gere votre entrepot <code>facilement</code> et <code>efficacement </code>.
+                                            Gérer votre entrepôt <code>facilement</code> et <code>efficacement </code>.
                                         </p>
                                         <div id="accordion">
 
@@ -123,7 +123,7 @@
                                                 <div class="card-header bg-success" id="headingOne">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-success" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                            Ajouter nouveaux rangé <i class="mdi mdi-chevron-double-down"></i>
+                                                            Ajouter une rangée <i class="mdi mdi-chevron-double-down"></i>
                                                         </button>
                                                     </h5>
                                                 </div>
@@ -131,7 +131,7 @@
                                                 <form action="#" th:action="@{/ajouterrangee}" th:object="${rangee}" method="POST" th:target="_self">
                                                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                                         <div class="form-group m-1">
-                                                            <label for="indexRangee">Sélectionner: une index pour le nouveaux rangée</label>
+                                                            <label for="indexRangee">Sélectionner: une index pour la nouvelle rangée</label>
                                                             <select th:field="*{indexRangee}" class="form-control form-control-lg" id="indexRangee" >
                                                                 <option th:value="'A'" th:text="A"></option>
                                                                 <option th:value="'B'" th:text="B"></option>
@@ -141,7 +141,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group m-1">
-                                                            <label for="numNiveau">Sélectionner:Combien des niveau </label>
+                                                            <label for="numNiveau">Sélectionner:Combien des niveaux </label>
                                                             <select th:field="*{numNiveau}" class="form-control form-control-lg" id="numNiveau" >
                                                                 <option th:value="'1'" th:text="1"></option>
                                                                 <option th:value="'2'" th:text="2"></option>
@@ -162,7 +162,7 @@
                                                         </div>
 
                                                         <div class="form-group m-1 mb-3">
-                                                            <label for="numPosition">Sélectionner: combien des position dans chaque rack </label>
+                                                            <label for="numPosition">Sélectionner: combien des positions dans chaque rack </label>
                                                             <select th:field="*{numPosition}" class="form-control form-control-lg" id="numPosition" >
                                                                 <option th:value="'1'" th:text="1"></option>
                                                                 <option th:value="'2'" th:text="2"></option>
@@ -185,7 +185,7 @@
                                                 <div class="card-header bg-warning" id="headingThree">
                                                     <h5 class="mb-0">
                                                         <button class="btn bg-warning " data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                            Libérer tous les occupations<i class="mdi mdi-chevron-double-down"></i>
+                                                            Libérer toutes les occupations<i class="mdi mdi-chevron-double-down"></i>
                                                         </button>
                                                     </h5>
                                                 </div>
@@ -193,7 +193,7 @@
 
                                                     <form action="#" th:action="@{/libérerToutRangee}"  method="POST" th:target="_self">
                                                         <div class="card-body">
-                                                            Voulez vous vraiment Libérer tous les occupations ?
+                                                            Voulez vous vraiment Libérer toutes les occupations ?
 
                                                             <button type="submit" class="btn btn-primary mr-2 mb-3">Oui</button>
                                                         </div>
@@ -220,7 +220,7 @@
 
 
                                                         <div class="card-body">
-                                                            Voulez vous vraiment supprimer touts les rangées ?
+                                                            Voulez vous vraiment supprimer toutes les rangées ?
 
 
                                                             <button type="submit" class="btn btn-primary mr-2 mb-3">Oui</button>
@@ -251,7 +251,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <p>Voulez vous vraiment supprimer cette rangé ?</p>
+                                    <p>Voulez vous vraiment supprimer cette <rangée></rangée> ?</p>
                                     <input type="hidden" th:field="*{indexRangee}" id="delete_id" >
 
 
