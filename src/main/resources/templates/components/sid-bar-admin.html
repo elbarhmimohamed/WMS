@@ -14,7 +14,7 @@
               <li class="nav-item">
                 <a class="nav-link" th:href="@{/admin/dashboard}" th:target="_self">
                   <i class="icon-grid menu-icon"></i>
-                  <span class="menu-title">Tableau de board</span>
+                  <span class="menu-title">Tableau de bord</span>
                 </a>
               </li>          
               <li class="nav-item" th:if=" (${#request.userPrincipal.principal.role == 'Admin'}) ">
@@ -38,6 +38,7 @@
                 <div class="collapse" id="ui-basic6">
                   <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" th:href="@{/article}" th:target="_self">Article</a></li>
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/categories}" th:target="_self">Catégorie</a></li>
                     <li class="nav-item"> <a class="nav-link" th:href="@{/Clients}" th:target="_self">Client</a></li>
                     <li class="nav-item"> <a class="nav-link" th:href="@{/fournisseurs}" th:target="_self">Fournisseur</a></li>
                     <li class="nav-item"> <a class="nav-link" th:href="@{/transport}" th:target="_self">Transport</a></li>
@@ -102,7 +103,7 @@
                 </a>
                 <div class="collapse" id="ui-basic">
                   <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" th:href="@{/emplacement}" th:target="_self">Tableau de board</a></li>
+                    <li class="nav-item"> <a class="nav-link" th:href="@{/emplacement}" th:target="_self">Tableau de bord</a></li>
                     <li class="nav-item"> <a class="nav-link" th:href="@{/emplacement/configuration}" th:target="_self">Configuration</a></li>
                   </ul>
                 </div>

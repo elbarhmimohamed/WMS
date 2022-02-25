@@ -50,8 +50,8 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Tableau de board : Catégorie<img  src="images/client.png"></h3>
-                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de board pour  <span class="text-primary">gérer les Catégories de votre entreport</entrport>!</span></h6>
+                                <h3 class="font-weight-bold">Tableau de bord : Catégorie<img  src="images/article.png"></h3>
+                                <h6 class="font-weight-normal mb-0">Cette view offret un tableau de bord pour  <span class="text-primary">gérer les Catégories de votre entreport</entrport>!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">
@@ -80,7 +80,7 @@
                                             <tr >
                                                 <th>Id</th>
                                                 <th>Nom</th>
-                                                <th>Déscreption</th>
+                                                <th>Description</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -88,7 +88,7 @@
                                             <tr th:each="categorie: ${categories}">
                                                 <td th:text="${categorie.id}">categorie ID</td>
                                                 <td th:text="${categorie.categorie_name}"> Name</td>
-                                                <td th:text="${categorie.categorie_description}">Déscreption</td>
+                                                <td th:text="${categorie.categorie_description}">Description</td>
 
 
 

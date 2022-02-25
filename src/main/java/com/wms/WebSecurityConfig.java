@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/utilisateur-config","/modifierutilisateur","/ajouterutilisateur","/supprimerutilisateur",
                         "/transport","/saveTrnasport","/transportremove",
-                        "/reception","/ajouterReception","/supprimerReception","/stockage","/ajouterFichierStock","/supprimerfichierStock","/detailreception","/detailfichierstock",
+                        "/reception","/supprimerReception","/stockage","/ajouterFichierStock","/supprimerfichierStock","/detailreception","/detailfichierstock",
                         "/Clients","/fournisseurs","/ajouterclient","/ajouterfournisseur","/modifierperson","/supprimerperson",
                         "/preparationCommande","/livraison","/ajouterpreparationcommmande","/supprimerPCommande","/ajouterLivraison","/supprimerlivraison","/detaillivraison",
                         "/inventaire","/ajouterinventaire","/affichemodifierform","/supprimerinventaire","/journal",
@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/inventaire","/ajouterinventaire","/affichemodifierform","/supprimerinventaire","/journal").hasAnyAuthority("Admin","Opérateur")
                 .antMatchers("/preparationCommande","/livraison","/ajouterpreparationcommmande","/supprimerPCommande","/ajouterLivraison","/supprimerlivraison","/detaillivraison",
                         "/commande","/ajouterCommande","/supprimerCommande",
-                        "/reception","/ajouterReception","/supprimerReception","/stockage","/ajouterFichierStock","/supprimerfichierStock","/detailreception","/detailfichierstock").hasAnyAuthority("Admin","Agent Expédition/Réception")
+                        "/reception","/supprimerReception","/stockage","/ajouterFichierStock","/supprimerfichierStock","/detailreception","/detailfichierstock").hasAnyAuthority("Admin","Agent Expédition/Réception")
 
                 .antMatchers("/admin/dashboard","/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")
                 .anyRequest().permitAll()
