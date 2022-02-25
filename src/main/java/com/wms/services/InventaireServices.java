@@ -36,7 +36,7 @@ public class InventaireServices {
         return inventaireRepository.findInventaireByID(Long.valueOf(id));
     }
 
-    public Iterable<Inventaire> getAllInventaire() {
+    public List<Inventaire> getAllInventaire() {
         return inventaireRepository.findAll();
     }
 

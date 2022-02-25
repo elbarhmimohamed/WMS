@@ -31,10 +31,7 @@ public class AppController {
     PreparationCommandeRepository pcrepository;
 
 
-    @GetMapping("/")
-    public String viewHomePage() {
-        return "page/index";
-    }
+
 
 
 

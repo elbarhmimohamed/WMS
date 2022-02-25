@@ -17,7 +17,7 @@
                   <span class="menu-title">Tableau de board</span>
                 </a>
               </li>          
-              <li class="nav-item">
+              <li class="nav-item" th:if=" (${#request.userPrincipal.principal.role == 'Admin'}) ">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
                   <i class="icon-head menu-icon"></i>
                   <span class="menu-title">Utilisateur</span>
@@ -26,11 +26,10 @@
                 <div class="collapse" id="ui-basic1">
                   <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" th:href="@{/utilisateur-config}" th:target="_self">Configuration</a></li>
-                    <li class="nav-item"> <a class="nav-link" th:href="@{/utilisateur/motdepasse}" th:target="_self">Mot de passe oublié</a></li>
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" th:if=" (${#request.userPrincipal.principal.role == 'Admin'}) ">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
                   <i class="icon-grid-2 menu-icon"></i>
                   <span class="menu-title">Entité</span>
@@ -45,7 +44,9 @@
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
+              <li th:if=" (${#request.userPrincipal.principal.role == 'Agent Expédition/Réception'}) or
+                        (${#request.userPrincipal.principal.role == 'Admin'})"
+                   class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#form-elementss" aria-expanded="false" aria-controls="form-elementss">
                   <i class="mdi mdi-import menu-icon"></i>
                   <span class="menu-title">Réception</span>
@@ -59,7 +60,8 @@
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" th:if=" (${#request.userPrincipal.principal.role == 'Opérateur'}) or
+                        (${#request.userPrincipal.principal.role == 'Admin'}) ">
                 <a class="nav-link" data-toggle="collapse" href="#form-elementssq" aria-expanded="false" aria-controls="form-elementssq">
                   <i class="mdi mdi-home-variant menu-icon"></i>
                   <span class="menu-title">Stock</span>
@@ -73,7 +75,8 @@
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" th:if=" (${#request.userPrincipal.principal.role == 'Agent Expédition/Réception'}) or
+                        (${#request.userPrincipal.principal.role == 'Admin'}) " >
                 <a class="nav-link" data-toggle="collapse" href="#form-elementssdf" aria-expanded="false" aria-controls="form-elementssdf">
                   <i class="mdi mdi-export  menu-icon"></i>
                   <span class="menu-title">Livraison</span>
@@ -89,7 +92,9 @@
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" th:if=" (${#request.userPrincipal.principal.role == 'Opérateur'}) or
+                        (${#request.userPrincipal.principal.role == 'Admin'})
+                        ">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                   <i class="icon-layout menu-icon"></i>
                   <span class="menu-title">Emplacement</span>

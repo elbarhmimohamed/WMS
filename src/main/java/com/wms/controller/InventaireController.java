@@ -49,7 +49,7 @@ public class InventaireController {
 
     @GetMapping("/inventaire")
     public String getInventaires(Model model) {
-        Iterable<Inventaire> inventaires = inventaireServices.getAllInventaire();
+        List<Inventaire> inventaires = inventaireServices.getAllInventaire();
         List<Composante> composantes = composantServices.getAllComposants();
         model.addAttribute("composantes",composantes);
         model.addAttribute("inventaires",inventaires);

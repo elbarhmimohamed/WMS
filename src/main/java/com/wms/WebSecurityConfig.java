@@ -50,11 +50,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 
 
-                .antMatchers("process_register","updateUserProcess/**","/updateUser/**","/deleteUser/**","/listofUsers","/register","/process_register").hasAuthority("Admin")
-                .antMatchers( "/Clientss","/inventaireee","/gestionStock").hasAnyAuthority("Admin","Opérateur")
-                .antMatchers("/expeditionee","/receptionee").hasAnyAuthority("Admin","Agent Expédition/Réception")
+                .antMatchers("/utilisateur-config","/modifierutilisateur","/ajouterutilisateur","/supprimerutilisateur",
+                        "/transport","/saveTrnasport","/transportremove",
+                        "/reception","/ajouterReception","/supprimerReception","/stockage","/ajouterFichierStock","/supprimerfichierStock","/detailreception","/detailfichierstock",
+                        "/Clients","/fournisseurs","/ajouterclient","/ajouterfournisseur","/modifierperson","/supprimerperson",
+                        "/preparationCommande","/livraison","/ajouterpreparationcommmande","/supprimerPCommande","/ajouterLivraison","/supprimerlivraison","/detaillivraison",
+                        "/inventaire","/ajouterinventaire","/affichemodifierform","/supprimerinventaire","/journal",
+                        "/emplacement","/emplacement/configuration","/supprimerEmplacement","/ajouterrangee","/supprimerToutRangee","/libérerToutRangee",
+                        "/admin/dashboard",
+                        "/article","/modifierarticle","/ajouterarticle","/supprimerarticle",
+                        "/commande","/ajouterCommande","/supprimerCommande",
+                        "/categories","/ajoutercategorie","/modifiercategorie","/supprimercategorie").hasAuthority("Admin")
+                .antMatchers( "/emplacement","/emplacement/configuration","/supprimerEmplacement","/ajouterrangee","/supprimerToutRangee","/libérerToutRangee",
+                        "/inventaire","/ajouterinventaire","/affichemodifierform","/supprimerinventaire","/journal").hasAnyAuthority("Admin","Opérateur")
+                .antMatchers("/preparationCommande","/livraison","/ajouterpreparationcommmande","/supprimerPCommande","/ajouterLivraison","/supprimerlivraison","/detaillivraison",
+                        "/commande","/ajouterCommande","/supprimerCommande",
+                        "/reception","/ajouterReception","/supprimerReception","/stockage","/ajouterFichierStock","/supprimerfichierStock","/detailreception","/detailfichierstock").hasAnyAuthority("Admin","Agent Expédition/Réception")
 
-                .antMatchers("/admin/dashboard1","/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")
+                .antMatchers("/admin/dashboard","/").hasAnyAuthority("Admin","Agent Expédition/Réception","Opérateur")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

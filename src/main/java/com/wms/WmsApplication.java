@@ -9,6 +9,7 @@ import com.wms.model.personne.Users;
 import com.wms.model.stock.Categorie;
 import com.wms.model.stock.Composante;
 import com.wms.model.stock.Inventaire_composante;
+import com.wms.repository.InventaireRepository;
 import com.wms.repository.PersonRepository;
 import com.wms.repository.ReceptionRepository;
 import com.wms.repository.UsersRepository;
@@ -29,6 +30,9 @@ public class WmsApplication implements CommandLineRunner {
 
 	@Autowired
 	private UsersServices usersServices;
+
+	@Autowired
+	private InventaireRepository inventaireRepository;
 	@Autowired
 	private PersonServices personServices;
 	@Autowired
@@ -72,17 +76,28 @@ public class WmsApplication implements CommandLineRunner {
 
 		//test of users
 		Users admin = new Users();
-		Users user = new Users();
+		Users agent = new Users();
+		Users operateur = new Users();
 
 		admin.setName("mohamed");
 		admin.setPassword("azerty");
 		admin.setRole("Admin");
 		admin.setEmail("mohamed@gmail.com");
 
-		user.setEmail("mohamed5elbarhmi@gmail.com");
-		user.setName("mohamed");
-		user.setPassword("123456");
+		agent.setName("hamza");
+		agent.setPassword("azerty");
+		agent.setRole("Agent Expédition/Réception");
+		agent.setEmail("hamza@gmail.com");
+
+		operateur.setName("hassna");
+		operateur.setPassword("azerty");
+		operateur.setRole("Opérateur");
+		operateur.setEmail("hassna@gmail.com");
+
+
 		usersServices.saveUser(admin);
+		usersServices.saveUser(agent);
+		usersServices.saveUser(operateur);
 		//usersServices.updateUser(Long.valueOf(1),user);
 
 		Emplacement emplacement = new Emplacement();
@@ -244,6 +259,12 @@ public class WmsApplication implements CommandLineRunner {
 		System.out.println("nombre des Invantaire : "+inventaireServices.numberOfInvantaire());
 		System.out.println("--------------");
 
+		Inventaire di = new Inventaire();
+		List<Inventaire> listinv = inventaireServices.getAllInventaire();
+
+		System.out.println("hhhhhhhhhh");
+		System.out.println("last inventaire : " + listinv.size());
+		System.out.println("hhhhhhhhhh");
 	}
 
 
